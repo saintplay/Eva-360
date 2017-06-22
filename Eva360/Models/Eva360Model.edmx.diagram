@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="96aec949bef642cc8f42db75bf449375" Name="Diagram1">
+        <EntityTypeShape EntityType="EVA360Model.ComunicacionInterna" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVA360Model.Empleado" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVA360Model.EmpleadoPeriodo" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVA360Model.Evaluacion" Width="1.5" PointX="6" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVA360Model.EvalucionTema" Width="1.5" PointX="8.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVA360Model.Objetivo" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVA360Model.Periodo" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVA360Model.Proveedor" Width="1.5" PointX="3.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVA360Model.Supervisor" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVA360Model.Tema" Width="1.5" PointX="5.25" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVA360Model.TipoDocumento" Width="1.5" PointX="1.5" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVA360Model.Usuario" Width="1.5" PointX="1.5" PointY="19.75" IsExpanded="true" />
+        <AssociationConnector Association="EVA360Model.FK_ComunicacionInterna_Empleado" ManuallyRouted="false" />
+        <AssociationConnector Association="EVA360Model.FK_Empleado_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="EVA360Model.FK_EmpleadoPeriodo_Empleado" ManuallyRouted="false" />
+        <AssociationConnector Association="EVA360Model.FK_Evaluacion_Empleado" ManuallyRouted="false" />
+        <AssociationConnector Association="EVA360Model.FK_EmpleadoPeriodo_Periodo" ManuallyRouted="false" />
+        <AssociationConnector Association="EVA360Model.FK_EmpleadoPeriodo_Supervisor" ManuallyRouted="false" />
+        <AssociationConnector Association="EVA360Model.FK_Evaluacion_Periodo" ManuallyRouted="false" />
+        <AssociationConnector Association="EVA360Model.FK_Evaluacion_Proveedor" ManuallyRouted="false" />
+        <AssociationConnector Association="EVA360Model.FK_Evaluacion_Supervisor" ManuallyRouted="false" />
+        <AssociationConnector Association="EVA360Model.FK_EvalucionTema_Evaluacion" ManuallyRouted="false" />
+        <AssociationConnector Association="EVA360Model.FK_EvalucionTema_Tema" ManuallyRouted="false" />
+        <AssociationConnector Association="EVA360Model.FK_Objetivo_Periodo" ManuallyRouted="false" />
+        <AssociationConnector Association="EVA360Model.FK_Tema_Objetivo" ManuallyRouted="false" />
+        <AssociationConnector Association="EVA360Model.FK_Proveedor_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="EVA360Model.FK_Supervisor_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="EVA360Model.FK_Usuario_TipoDocumento" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
