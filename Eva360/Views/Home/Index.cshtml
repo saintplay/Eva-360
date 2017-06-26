@@ -9,24 +9,37 @@
     <p class="lead">Bienvenido al sistema de Gestión de Proyectos EVA 360</p>
 </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <h2>Lista de Usuarios</h2>
-        <table class="table">
-            <tr>
-                <th>UsuarioId</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-            </tr>
-            @foreach (var usuario in Model.LstUsuario)
-            {
+<div id="vueapp">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Lista de Usuarios</h2>
+            <h2>{{mensaje}}</h2>
+            <table class="table">
                 <tr>
-                    <td>@usuario.UsuarioId</td>
-                    <td>@usuario.Nombre</td>
-                    <td>@usuario.Apellido</td>
-                    
+                    <th>UsuarioId</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
                 </tr>
-            }
-        </table>
+                <tr v-for="usuario in usuarios">
+                    <td>{{ usuario.Nombre }}</td>
+                    <td>{{ usuario.Apellido }}</td>
+                    <td>{{ usuario.Email }}</td>
+                </tr>
+            </table>
+        </div>
     </div>
-</div>
+</div>  
+
+@section scripts{
+    <script>
+        var usuarios = @(new HtmlString(Json.Encode(Model.LstUsuario)));
+        var app = new Vue({
+            el: "#vueapp",
+            data: {
+                mensaje: "La app ya es reactiva!",
+                usuarios: usuarios
+            }
+        });
+    </script>
+    
+}
