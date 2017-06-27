@@ -7,9 +7,10 @@
     @Styles.Render("Content/font-awesome.min.css")
     @Styles.Render("Content/bulma.min.css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("Content/Site.css")
 </head>
 <body>
-    <nav class="nav">
+    <nav class="nav has-shadow">
         <div class="nav-left">
             @Html.ActionLink("EVA360", "Index", "Home", new { @class = "nav-item" })
         </div>
@@ -32,16 +33,28 @@
             @Html.ActionLink("Inicio", "Index", "Home", new { @class = "nav-item" })
             @Html.ActionLink("Usuarios", "About", "Home", new { @class = "nav-item" })
             @Html.ActionLink("Acerca De", "About", "Home", new { @class = "nav-item" })
-            
             @Html.Partial("_LoginPartial")
             
         </div>
     </nav>
 
+    <aside id="rightbar-vue">
+        <div id="right-mask" @@click="cerrar()"></div>
+        <div id="right-wrapper" class="section">
+            <div class="container is-paddingless width-auto">
+                <div class="columns">
+                    <div class="column is-12">
+                        <component :datos="datos" :is="componente_activo" @@close="cerrar()"></component>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
+        <footer class="footer">
             <p>&copy; @DateTime.Now.Year - Eva360 - UPC 2017</p>
         </footer>
     </div>
@@ -49,5 +62,15 @@
     @Scripts.Render("Scripts/vue.js")
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
+    <script>
+        rightbar.cerrar = function() {
+            $('#rightbar-vue').removeClass('active');
+            this.componente_activo = 'componente-vacio';
+            this.datos = {};
+        }
+        rightbar.mostrar = function() {
+            $('#rightbar-vue').addClass('active');
+        }
+    </script>
 </body>
 </html>

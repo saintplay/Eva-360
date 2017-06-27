@@ -4,80 +4,119 @@
     ViewBag.Title = "Inicio";
 }
 
-<div class="jumbotron">
-    <h1>EVA360</h1>
-    <p class="lead">Bienvenido al sistema de Gestión de Proyectos EVA 360</p>
-</div>
+<section class="hero">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">EVA360</h1>
+            <h2 class="subtitle">Bienvenido al sistema de Gestión de Proyectos EVA 360</h2>
+        </div>
+    </div>
+</section>
 
 <div id="usuarios-vue">
-    <div class="row">
-        <div class="col-md-12">
-            <h2>Lista de Usuarios</h2>
+    <div class="columns">
+        <div class="column">
+            <h2 class="title is-3">Lista de Usuarios</h2>
+        </div>
+        <div class="column">
+            <button class="button is-success is-pulled-right" @@click="agregar()">Agregar</button>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column">
             <table class="table">
                 <tr>
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Email</th>
+                    <th colspan="2">Acciones</th>
                 </tr>
-                <tr v-for="usuario in usuarios">
+                <tr v-for="(usuario, index) in usuarios" key="usuario.UsuarioId">
                     <td>{{ usuario.Nombre }}</td>
                     <td>{{ usuario.Apellido }}</td>
                     <td>{{ usuario.Email }}</td>
+                    <td><button class="button is-warning" @@click="ver(usuario)">Editar</button></td>
+                    <td><button class="button is-danger">Eliminar</button></td>
                 </tr>
             </table>
         </div>
     </div>
 </div>
 
-<div id="rightbar-vue">
-    <div class="title">{{mensaje}}</div>
-    <component :is="current_right"></component>
-</div>
-
-<script type="text/x-template" id="editar-usuario">
-    <form>
-        <div class="field">
-            <label class="label">Nombre</label>
-            <p class="control">
-                <input class="input" type="text">
-            </p>
-        </div>
-        <div class="field">
-            <label class="label">Apellido</label>
-            <p class="control">
-                <input class="input" type="text">
-            </p>
-        </div>
-        <div class="field">
-            <label class="label">Email</label>
-            <p class="control">
-                <input class="input" type="email">
-            </p>
-        </div>
-    </form>
+<script type="text/x-template" id="crud-usuario">
+    <div>
+        <button id="right-close" class="delete is-danger is-medium is-pulled-right" @@click="$emit('close')"></button>
+        <h1 class="title">{{ datos.titulo }}</h1>
+        <form class="form">
+            <div class="field is-narrow">
+                <label class="label">Nombre</label>
+                <p class="control is-expanded">
+                    <input name="Nombre" class="input" type="text" v-model="datos.Nombre">
+                </p>
+            </div>
+            <div class="field is-narrow">
+                <label class="label">Apellido</label>
+                <p class="control is-expanded">
+                    <input name="Apellido" class="input" type="text" v-model="datos.Apellido">
+                </p>
+            </div>
+            <div class="field is-narrow">
+                <label class="label">Email</label>
+                <p class="control is-expanded">
+                    <input name="Email" class="input" type="email" v-model="datos.Email">
+                </p>
+            </div>
+        </form>
+    </div>
 </script>
 
 @section scripts{
     <script>
-        var usuarios = @(new HtmlString(Json.Encode(Model.LstUsuario)));
+        var usuarios = @(new HtmlString(Json.Encode(Model.LstUsuario.Select(x => new
+            {    
+                x.UsuarioId,
+                x.Nombre,
+                x.Apellido,
+                x.Email
+            }
+        ))));
+        
         var app = new Vue({
             el: "#usuarios-vue",
             data: {
                 usuarios: usuarios
+            },
+            methods: {
+                agregar: function() {
+                    rightbar.componente_activo = "crud-usuario";
+                    rightbar.datos.titulo = "Agregar Usuario";
+                    rightbar.mostrar();
+                },
+                ver: function(usuario) {
+                    rightbar.componente_activo = "crud-usuario";
+                    rightbar.datos = usuario;
+                    rightbar.datos.titulo = "Editar Usuario";
+                    rightbar.mostrar();
+                },
+                eliminar: function(usuario) {
+
+                }
             }
         });
 
-        var rightbar = new Vue({
+        window.rightbar = new Vue({
             el: "#rightbar-vue",
             data: {
-                mensaje: "MEnsaje del rightvart",
-                current_right: "vacio"
+                datos: {},
+                mensaje: "Mensaje del Rightbar",
+                componente_activo: "componente-vacio"
             },
             components: {
-                'editar-usuario': {
-                    template: '#editar-usuario'
+                'crud-usuario': {
+                    props: ['datos', 'titulo'],
+                    template: '#crud-usuario'
                 },
-                'vacio': {template: '<div></div>'}
+                'componente-vacio': {template: '<div></div>'}
             }
         });
 

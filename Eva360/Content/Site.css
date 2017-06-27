@@ -1,24 +1,36 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿#rightbar-vue.active #right-wrapper{
+    transform: translateX(-380px);
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+#rightbar-vue.active #right-mask{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 30;
+    width: calc(100vw);
+    height: calc(100vh);
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: background-color .6s;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+#right-wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: -380px;
+    z-index: 30;
+    width: 380px;
+    overflow-y: auto;
+    padding-top: 24px;
+    background-color: white;
+    transition: transform .6s ease;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+#right-wrapper .container {
+    max-width: none;
+    width: auto;
+}
+
+#right-close {
+    background-color: red;
 }
