@@ -9,16 +9,15 @@
     <p class="lead">Bienvenido al sistema de Gestión de Proyectos EVA 360</p>
 </div>
 
-<div id="vueapp">
+<div id="usuarios-vue">
     <div class="row">
         <div class="col-md-12">
             <h2>Lista de Usuarios</h2>
-            <h2>{{mensaje}}</h2>
             <table class="table">
                 <tr>
-                    <th>UsuarioId</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
+                    <th>Email</th>
                 </tr>
                 <tr v-for="usuario in usuarios">
                     <td>{{ usuario.Nombre }}</td>
@@ -28,18 +27,42 @@
             </table>
         </div>
     </div>
-</div>  
+</div>
+
+<div id="rightbar-vue">
+    <div class="title">{{mensaje}}</div>
+    <component :is="current_right"></component>
+</div>
+
+<script type="text/x-template" id="editar-usuario">
+    <div class="checkbox-wrapper">
+        <div class="title">DIEGO</div>
+        <div class="title">JARA</div>
+    </div>
+</script>
 
 @section scripts{
     <script>
         var usuarios = @(new HtmlString(Json.Encode(Model.LstUsuario)));
         var app = new Vue({
-            el: "#vueapp",
+            el: "#usuarios-vue",
             data: {
-                mensaje: "La app ya es reactiva!",
                 usuarios: usuarios
             }
         });
+
+        var rightbar = new Vue({
+            el: "#rightbar-vue",
+            data: {
+                mensaje: "MEnsaje del rightvart",
+                current_right: "editar-usuario"
+            },
+            components: {
+                'editar-usuario': {
+                    template: '#editar-usuario'
+                }
+            }
+        });
+
     </script>
-    
 }

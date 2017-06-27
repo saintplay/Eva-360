@@ -15,8 +15,24 @@
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+    <div class="nav-item">
+        <div class="field is-grouped">
+            <p class="control">
+                <a class="button" id="registerLink" href="@Url.Action("Login", "Account")>">
+                    <span class="icon">
+                        <i class="fa fa-user"></i>
+                    </span>
+                    <span>Ingresa</span>
+                </a>
+            </p>
+            <p class="control">
+                <a class="button is-primary" href="@Url.Action("Register", "Account")>">
+                    <span class="icon">
+                        <i class="fa fa-user-plus"></i>
+                    </span>
+                    <span>Registrate</span>
+                </a>
+            </p>
+        </div>
+    </div>
 }

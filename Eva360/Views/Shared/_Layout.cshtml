@@ -4,31 +4,40 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Eva360 - UPC 2017</title>
-    @Styles.Render("~/Content/css")
+    @Styles.Render("Content/font-awesome.min.css")
+    @Styles.Render("Content/bulma.min.css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("EVA360", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Usuarios", "About", "Home")</li>
-                    <li>@Html.ActionLink("Acerca De", "About", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+    <nav class="nav">
+        <div class="nav-left">
+            @Html.ActionLink("EVA360", "Index", "Home", new { @class = "nav-item" })
         </div>
-    </div>
+
+        <div class="nav-center">
+            <a class="nav-item">
+                <span class="icon">
+                    <i class="fa fa-github"></i>
+                </span>
+            </a>
+        </div>
+
+        <span class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+
+        <div class="nav-right nav-menu">
+            @Html.ActionLink("Inicio", "Index", "Home", new { @class = "nav-item" })
+            @Html.ActionLink("Usuarios", "About", "Home", new { @class = "nav-item" })
+            @Html.ActionLink("Acerca De", "About", "Home", new { @class = "nav-item" })
+            
+            @Html.Partial("_LoginPartial")
+            
+        </div>
+    </nav>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -39,7 +48,6 @@
 
     @Scripts.Render("Scripts/vue.js")
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>
