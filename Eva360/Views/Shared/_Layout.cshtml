@@ -4,10 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Eva360 - UPC 2017</title>
-    @Styles.Render("Content/font-awesome.min.css")
-    @Styles.Render("Content/bulma.min.css")
+    @Styles.Render("~/Content/font-awesome.min.css")
+    @Styles.Render("~/Content/bulma.min.css")
     @Scripts.Render("~/bundles/modernizr")
-    @Styles.Render("Content/Site.css")
+    @Styles.Render("~/Content/Site.css")
 </head>
 <body>
     <nav class="nav has-shadow">
@@ -59,8 +59,12 @@
         </footer>
     </div>
 
-    @Scripts.Render("Scripts/vue.js")
+    @Scripts.Render("~/Scripts/vue.js")
+    @Scripts.Render("~/Scripts/axios.min.js")
     @Scripts.Render("~/bundles/jquery")
+    <script>
+        Vue.prototype.$http = axios;
+    </script>
     @RenderSection("scripts", required: false)
     <script>
         rightbar.cerrar = function() {

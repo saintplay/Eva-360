@@ -47,7 +47,7 @@
     <div>
         <button id="right-close" class="delete is-danger is-medium is-pulled-right" @@click="$emit('close')"></button>
         <h1 class="title">{{ datos.titulo }}</h1>
-        <form class="form">
+        <form id="rightbar-form" class="form">
             <div class="field is-narrow">
                 <label class="label">Nombre</label>
                 <p class="control is-expanded">
@@ -65,6 +65,14 @@
                 <p class="control is-expanded">
                     <input name="Email" class="input" type="email" v-model="datos.Email">
                 </p>
+            </div>
+            <div class='field'>
+                <div class='control'>
+                    <a class="button is-primary" @@click="actualizar()">
+                        <span class="icon"><i class="fa fa-plus"></i></span>
+                        <span class="submit-text">Guardar</span>
+                    </a>
+                </div>
             </div>
         </form>
     </div>
@@ -111,12 +119,44 @@
                 mensaje: "Mensaje del Rightbar",
                 componente_activo: "componente-vacio"
             },
+            methods: {
+                actualizar: function() {
+                    if (datos.UsuarioId) { // Editar
+                        var $form = $('#rightbar-form');
+                        var datos_serializados = $form.serialize();
+
+                        $http.post('/Usuario/editar', {
+                            params: datos_serializados
+                        })
+                        .then(function(response) {
+                            console.log(response);   
+                        })
+                        .catch(function(error) {
+                            console.log(error);
+                        });
+                    }
+                    else { // Crear
+                        var $form = $('#rightbar-form');
+                        var datos_serializados = $form.serialize();
+
+                        $http.post('/Usuario/crear', {
+                            params: datos_serializados
+                        })
+                        .then(function(response) {
+                            console.log(response);   
+                        })
+                        .catch(function(error) {
+                            console.log(error);
+                        });
+                    }
+                }
+            },
             components: {
+                'componente-vacio': {template: '<div></div>'},
                 'crud-usuario': {
                     props: ['datos', 'titulo'],
                     template: '#crud-usuario'
-                },
-                'componente-vacio': {template: '<div></div>'}
+                }
             }
         });
 
