@@ -5,33 +5,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace Eva360.Controllers
 {
     public class HomeController : BaseController
     {
-        public class CustomUser {
-            public string Nombre { get; set; }
-            public string Apellido { get; set; }
-            public string Email { get; set; }
-
-            public CustomUser(string Nombre, string Apellido, string Email) {
-                this.Nombre = Nombre;
-                this.Apellido= Apellido;
-                this.Email = Email;
-            }
-        }
-
         public ActionResult Index()
         {
             var context = new EVA360Entities();
             var viewModel = new IndexViewModel();
-            viewModel.LstUsuario = context.Usuario.AsEnumerable().Select(x => new CustomUser(
-                    x.Nombre,
-                    x.Apellido,
-                    x.Email
-                )
-            ).ToList();
+            viewModel.LstUsuario = context.Usuario.ToList();
       
             return View(viewModel);
         }

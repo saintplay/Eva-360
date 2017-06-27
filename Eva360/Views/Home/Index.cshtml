@@ -1,85 +1,43 @@
 ﻿@model Eva360.ViewModel.Home.IndexViewModel
 
 @{
-    ViewBag.Title = "Inicio";
+    ViewBag.Title = "Home";
 }
 
 <div class="jumbotron">
     <h1>EVA360</h1>
-    <p class="lead">Bienvenido al sistema de Gestión de Proyectos EVA 360</p>
+    <p class="lead">Bienvenido al sistema de Gestión de Reportes</p>
 </div>
 
-<div id="usuarios-vue">
-    <div class="row">
-        <div class="col-md-12">
-            <h2>Lista de Usuarios</h2>
-            <table class="table">
+<div class="row">
+    <div class="col-md-12">
+        <h2>Lista de Usuarios</h2>
+        <table class="table">
+            <tr>
+                <th>UsuarioId</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Fecha Nacimiento</th>
+                <th>Sexo</th>
+                <th>TipoDocumento</th>
+                <th>Numero</th>
+                <th>Email</th>
+                <th>Codigo</th>
+            </tr>
+            @foreach (var usuario in Model.LstUsuario)
+            {
                 <tr>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Email</th>
+                    <td>@usuario.UsuarioId</td>
+                    <td>@usuario.Nombre</td>
+                    <td>@usuario.Apellido</td>
+                    <td>@usuario.FechaNacimiento.ToShortDateString()</td>
+                    <td>@usuario.Sexo</td>
+                    <td>@usuario.TipoDocumento.Sigla</td>
+                    <td>@usuario.NroDocumento</td>
+                    <td>@usuario.Email</td>
+                    <td>@usuario.Codigo</td>
                 </tr>
-                <tr v-for="usuario in usuarios">
-                    <td>{{ usuario.Nombre }}</td>
-                    <td>{{ usuario.Apellido }}</td>
-                    <td>{{ usuario.Email }}</td>
-                </tr>
-            </table>
-        </div>
+            }
+        </table>
     </div>
 </div>
-
-<div id="rightbar-vue">
-    <div class="title">{{mensaje}}</div>
-    <component :is="current_right"></component>
-</div>
-
-<script type="text/x-template" id="editar-usuario">
-    <form>
-        <div class="field">
-            <label class="label">Nombre</label>
-            <p class="control">
-                <input class="input" type="text">
-            </p>
-        </div>
-        <div class="field">
-            <label class="label">Apellido</label>
-            <p class="control">
-                <input class="input" type="text">
-            </p>
-        </div>
-        <div class="field">
-            <label class="label">Email</label>
-            <p class="control">
-                <input class="input" type="email">
-            </p>
-        </div>
-    </form>
-</script>
-
-@section scripts{
-    <script>
-        var usuarios = @(new HtmlString(Json.Encode(Model.LstUsuario)));
-        var app = new Vue({
-            el: "#usuarios-vue",
-            data: {
-                usuarios: usuarios
-            }
-        });
-
-        var rightbar = new Vue({
-            el: "#rightbar-vue",
-            data: {
-                mensaje: "MEnsaje del rightvart",
-                current_right: "vacio"
-            },
-            components: {
-                'editar-usuario': {
-                    template: '#editar-usuario'
-                },
-                'vacio': {template: '<div></div>'}
-            }
-        });
-
-    </script>
-}

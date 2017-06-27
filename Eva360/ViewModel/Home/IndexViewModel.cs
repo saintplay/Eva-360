@@ -9,6 +9,6 @@ namespace Eva360.ViewModel.Home
 {
     public class IndexViewModel
     {
-        public List<CustomUser> LstUsuario { get; set; }
+        public List<Usuario> LstUsuario { get; set; }
     }
 }
