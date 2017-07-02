@@ -13,10 +13,7 @@ namespace Eva360.Controllers
     {
         public ActionResult Index()
         {
-            var context = new EVA360Entities();
             var viewModel = new IndexViewModel();
-            viewModel.LstUsuario = context.Usuario.ToList();
-      
             return View(viewModel);
         }
 

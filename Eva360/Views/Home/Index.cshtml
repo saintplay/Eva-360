@@ -19,7 +19,7 @@
             <h2 class="title is-3">Lista de Usuarios</h2>
         </div>
         <div class="column">
-            <button class="button is-success is-pulled-right" @@click="agregar()">Agregar</button>
+            <button class="button is-success is-pulled-right" @@click="nuevo()">Agregar</button>
         </div>
     </div>
     <div class="columns">
@@ -28,14 +28,22 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Apellido</th>
+                    <th>Codigo</th>
                     <th>Email</th>
+                    <th>F. Nac</th>
+                    <th>Sexo</th>
+                    <th>Nro Doc</th>
                     <th colspan="2">Acciones</th>
                 </tr>
                 <tr v-for="(usuario, index) in usuarios" key="usuario.UsuarioId">
                     <td>{{ usuario.Nombre }}</td>
                     <td>{{ usuario.Apellido }}</td>
+                    <td>{{ usuario.Codigo }}</td>
                     <td>{{ usuario.Email }}</td>
-                    <td><button class="button is-warning" @@click="ver(usuario)">Editar</button></td>
+                    <td>{{ parseFormatNetDate(usuario.FechaNacimiento) }}</td>
+                    <td>{{ usuario.Sexo }}</td>
+                    <td>{{ usuario.NroDocumento }}</td>
+                    <td><button class="button is-warning" @@click="editar(usuario)">Editar</button></td>
                     <td><button class="button is-danger">Eliminar</button></td>
                 </tr>
             </table>
@@ -51,19 +59,40 @@
             <div class="field is-narrow">
                 <label class="label">Nombre</label>
                 <p class="control is-expanded">
-                    <input name="Nombre" class="input" type="text" v-model="datos.Nombre">
+                    <input name="Nombre" class="input" type="text" v-model="datos.usuario.Nombre">
                 </p>
             </div>
             <div class="field is-narrow">
                 <label class="label">Apellido</label>
                 <p class="control is-expanded">
-                    <input name="Apellido" class="input" type="text" v-model="datos.Apellido">
+                    <input name="Apellido" class="input" type="text" v-model="datos.usuario.Apellido">
                 </p>
             </div>
             <div class="field is-narrow">
                 <label class="label">Email</label>
                 <p class="control is-expanded">
-                    <input name="Email" class="input" type="email" v-model="datos.Email">
+                    <input name="Email" class="input" type="email" v-model="datos.usuario.Email">
+                </p>
+            </div>
+            <div class="field is-narrow">
+                <label class="label">Fecha de Nacimiento</label>
+                <p class="control is-expanded">
+                    <input name="FechaNacimiento" class="input" type="date" v-model="datos.usuario.FechaNacimiento">
+                </p>
+            </div>
+            <div class="field is-narrow">
+                <label class="label">Sexo</label>
+                <p class="control is-expanded">
+                    <select name="Sexo" class="input" v-model="datos.usuario.Sexo">
+                        <option value="M">Hombre</option>
+                        <option value="F">Mujer</option>
+                    </select>
+                </p>
+            </div>
+            <div class="field is-narrow">
+                <label class="label">Número de Documento</label>
+                <p class="control is-expanded">
+                    <input name="NroDocumento" class="input" type="text" v-model="datos.usuario.NroDocumento">
                 </p>
             </div>
             <div class='field'>
@@ -79,35 +108,62 @@
 </script>
 
 @section scripts{
-    <script>
-        var usuarios = @(new HtmlString(Json.Encode(Model.LstUsuario.Select(x => new
-            {    
-                x.UsuarioId,
-                x.Nombre,
-                x.Apellido,
-                x.Email
-            }
-        ))));
-        
+    <script>      
         var app = new Vue({
             el: "#usuarios-vue",
             data: {
-                usuarios: usuarios
+                usuarios: []
+            },
+            created: function() {
+                this.fetchData();
             },
             methods: {
-                agregar: function() {
-                    rightbar.componente_activo = "crud-usuario";
-                    rightbar.datos.titulo = "Agregar Usuario";
-                    rightbar.mostrar();
+                fetchData: function() {
+                    var vm = this;
+                    axios.get('/Usuario/ListarUsuario')
+                      .then(function (response) {
+                          vm.usuarios = response.data.usuarios;
+                      })
+                      .catch(function (error) {
+                          console.log(error);
+                      });
                 },
-                ver: function(usuario) {
-                    rightbar.componente_activo = "crud-usuario";
-                    rightbar.datos = usuario;
-                    rightbar.datos.titulo = "Editar Usuario";
+                nuevo: function() {
+                    rightbar.datos = {
+                        titulo: "Agregar Usuario",
+                        usuario: {
+                            Nombre: '',
+                            Apellido: '',
+                            Codigo: '',
+                            Email: '',
+                            FechaNacimiento: moment().add(-20, 'years').format("YYYY-MM-DD"),
+                            Sexo: 'M',
+                            NroDocumento: ''
+                        }
+                    };
                     rightbar.mostrar();
+                    rightbar.componente_activo = "crud-usuario";
+                },
+                editar: function(usuario) {
+                    var usuario_clone = _.clone(usuario);
+                    usuario_clone.FechaNacimiento = this.parseNetDate(usuario.FechaNacimiento);
+                    rightbar.datos = {
+                        titulo: "Editar Usuario",
+                        usuario: usuario_clone
+                    };
+                    rightbar.mostrar();
+                    rightbar.componente_activo = "crud-usuario";
                 },
                 eliminar: function(usuario) {
 
+                },
+                parseNetDate: function (date) {
+                    var timestamp = date.replace(NETDATE_REGEX, "$1");
+                    return moment(parseInt(timestamp)).format("YYYY-MM-DD");
+                },
+                parseFormatNetDate: function (date) {
+                    var timestamp = date.replace(NETDATE_REGEX, "$1");
+                    return moment(parseInt(timestamp)).format("DD-MM-YYYY");
                 }
             }
         });
@@ -121,11 +177,11 @@
             },
             methods: {
                 actualizar: function() {
-                    if (datos.UsuarioId) { // Editar
+                    if (datos.usuario.UsuarioId) { // Editar
                         var $form = $('#rightbar-form');
                         var datos_serializados = $form.serialize();
 
-                        $http.post('/Usuario/editar', {
+                        axios.post('/Usuario/editar', {
                             params: datos_serializados
                         })
                         .then(function(response) {
@@ -139,7 +195,7 @@
                         var $form = $('#rightbar-form');
                         var datos_serializados = $form.serialize();
 
-                        $http.post('/Usuario/crear', {
+                        axios.post('/Usuario/crear', {
                             params: datos_serializados
                         })
                         .then(function(response) {

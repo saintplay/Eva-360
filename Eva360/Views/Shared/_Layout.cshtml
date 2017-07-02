@@ -61,12 +61,15 @@
 
     @Scripts.Render("~/Scripts/vue.js")
     @Scripts.Render("~/Scripts/axios.min.js")
+    @Scripts.Render("~/Scripts/moment.min.js")
+    @Scripts.Render("~/Scripts/lodash.min.js")
     @Scripts.Render("~/bundles/jquery")
-    <script>
-        Vue.prototype.$http = axios;
-    </script>
+
     @RenderSection("scripts", required: false)
     <script>
+
+        var NETDATE_REGEX = /\/Date\((.*)\)\//;
+
         rightbar.cerrar = function() {
             $('#rightbar-vue').removeClass('active');
             this.componente_activo = 'componente-vacio';
