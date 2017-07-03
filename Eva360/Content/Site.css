@@ -34,3 +34,24 @@
 #right-close {
     background-color: red;
 }
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+ol li.scale-enter-active, ol li.scale-move, ol li.scale-leave-active {
+  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+}
+ol li.scale-enter {
+  opacity: 0;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+ol li.scale-leave-active {
+  opacity: 0;
+  position: absolute;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}

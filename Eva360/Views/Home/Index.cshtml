@@ -16,6 +16,16 @@
 <div id="usuarios-vue">
     <div class="columns">
         <div class="column">
+            <transition-group name="scale" tag="ol">
+                <li v-for="(error, e_index) in errores" :key="error" class="notification is-danger">
+                    <button class="delete" @@click="ocultarError(e_index)"></button>
+                    <span>{{ error }}</span>
+                </li>
+            </transition-group>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column">
             <h2 class="title is-3">Lista de Usuarios</h2>
         </div>
         <div class="column">
@@ -27,22 +37,23 @@
             <table class="table">
                 <tr>
                     <th>Nombre</th>
-                    <th>Apellido</th>
                     <th>Codigo</th>
                     <th>Email</th>
-                    <th>F. Nac</th>
+                    <th>F. Nacimiento</th>
                     <th>Sexo</th>
-                    <th>Nro Doc</th>
+                    <th>Doc. Indentidad</th>
                     <th colspan="2">Acciones</th>
                 </tr>
-                <tr v-for="(usuario, index) in usuarios" key="usuario.UsuarioId">
-                    <td>{{ usuario.Nombre }}</td>
-                    <td>{{ usuario.Apellido }}</td>
+                <tr v-for="(usuario, index) in usuarios" :key="usuario.UsuarioId">
+                    <td>{{ usuario.Nombre + " " + usuario.Apellido }}</td>
                     <td>{{ usuario.Codigo }}</td>
                     <td>{{ usuario.Email }}</td>
                     <td>{{ parseFormatNetDate(usuario.FechaNacimiento) }}</td>
-                    <td>{{ usuario.Sexo }}</td>
-                    <td>{{ usuario.NroDocumento }}</td>
+                    <td>{{ getGenero(usuario.Sexo) }}</td>
+                    <td>
+                        <strong>{{ getTipoDocumentoSigla(usuario.TipoDocumentoId) }}</strong><br />
+                        <span>{{ usuario.NroDocumento }}</span>
+                    </td>
                     <td><button class="button is-warning" @@click="editar(usuario)">Editar</button></td>
                     <td><button class="button is-danger">Eliminar</button></td>
                 </tr>
@@ -56,22 +67,29 @@
         <button id="right-close" class="delete is-danger is-medium is-pulled-right" @@click="$emit('close')"></button>
         <h1 class="title">{{ datos.titulo }}</h1>
         <form id="rightbar-form" class="form">
+            <input name="UsuarioId" type="hidden" v-model.number="datos.usuario.UsuarioId">
             <div class="field is-narrow">
                 <label class="label">Nombre</label>
                 <p class="control is-expanded">
-                    <input name="Nombre" class="input" type="text" v-model="datos.usuario.Nombre">
+                    <input name="Nombre" class="input" type="text" v-model.trim="datos.usuario.Nombre">
                 </p>
             </div>
             <div class="field is-narrow">
                 <label class="label">Apellido</label>
                 <p class="control is-expanded">
-                    <input name="Apellido" class="input" type="text" v-model="datos.usuario.Apellido">
+                    <input name="Apellido" class="input" type="text" v-model.trim="datos.usuario.Apellido">
+                </p>
+            </div>
+            <div class="field is-narrow">
+                <label class="label">Codigo</label>
+                <p class="control is-expanded">
+                    <input name="Codigo" class="input" type="text" v-model.trim="datos.usuario.Codigo">
                 </p>
             </div>
             <div class="field is-narrow">
                 <label class="label">Email</label>
                 <p class="control is-expanded">
-                    <input name="Email" class="input" type="email" v-model="datos.usuario.Email">
+                    <input name="Email" class="input" type="email" v-model.trim="datos.usuario.Email">
                 </p>
             </div>
             <div class="field is-narrow">
@@ -83,16 +101,25 @@
             <div class="field is-narrow">
                 <label class="label">Sexo</label>
                 <p class="control is-expanded">
-                    <select name="Sexo" class="input" v-model="datos.usuario.Sexo">
-                        <option value="M">Hombre</option>
-                        <option value="F">Mujer</option>
-                    </select>
+                    <span class="select">
+                        <select name="Sexo" v-model="datos.usuario.Sexo">
+                            <option value="M">Hombre</option>
+                            <option value="F">Mujer</option>
+                        </select>
+                    </span>
                 </p>
             </div>
-            <div class="field is-narrow">
-                <label class="label">Número de Documento</label>
+            <label class="label">Documento de Indentidad</label>
+            <div class="field is-grouped">
+                <p class="control">
+                    <span class="select">
+                        <select name="TipoDocumentoId" v-model.number="datos.usuario.TipoDocumentoId">
+                            <option v-for="t in datos.tipodocumentos" :value="t.TipoDocumentoId">{{t.Sigla}}</option>
+                        </select>
+                    </span>
+                </p>
                 <p class="control is-expanded">
-                    <input name="NroDocumento" class="input" type="text" v-model="datos.usuario.NroDocumento">
+                    <input name="NroDocumento" class="input" type="text" v-model.trim="datos.usuario.NroDocumento">
                 </p>
             </div>
             <div class='field'>
@@ -109,10 +136,12 @@
 
 @section scripts{
     <script>      
-        var app = new Vue({
+        var eva360 = new Vue({
             el: "#usuarios-vue",
             data: {
-                usuarios: []
+                errores: [],
+                usuarios: [],
+                tipodocumentos: []
             },
             created: function() {
                 this.fetchData();
@@ -123,6 +152,7 @@
                     axios.get('/Usuario/ListarUsuario')
                       .then(function (response) {
                           vm.usuarios = response.data.usuarios;
+                          vm.tipodocumentos = response.data.tipodocumentos;
                       })
                       .catch(function (error) {
                           console.log(error);
@@ -131,12 +161,14 @@
                 nuevo: function() {
                     rightbar.datos = {
                         titulo: "Agregar Usuario",
+                        tipodocumentos: eva360.tipodocumentos,
                         usuario: {
                             Nombre: '',
                             Apellido: '',
                             Codigo: '',
                             Email: '',
                             FechaNacimiento: moment().add(-20, 'years').format("YYYY-MM-DD"),
+                            TipoDocumentoId: eva360.tipodocumentos[0] ? eva360.tipodocumentos[0].TipoDocumentoId : 0,
                             Sexo: 'M',
                             NroDocumento: ''
                         }
@@ -148,6 +180,7 @@
                     var usuario_clone = _.clone(usuario);
                     usuario_clone.FechaNacimiento = this.parseNetDate(usuario.FechaNacimiento);
                     rightbar.datos = {
+                        tipodocumentos: eva360.tipodocumentos,
                         titulo: "Editar Usuario",
                         usuario: usuario_clone
                     };
@@ -156,6 +189,15 @@
                 },
                 eliminar: function(usuario) {
 
+                },
+                getGenero: function(sexo) {
+                    return sexo == "F" ? "Mujer" : sexo == "M" ? "Hombre" : "-";
+                },
+                getTipoDocumentoSigla: function (TipoDocumentoId) {
+                    return this.tipodocumentos.find(t => t.TipoDocumentoId == TipoDocumentoId).Sigla;
+                },
+                ocultarError: function(index) {
+                    this.errores.splice(index, 1);
                 },
                 parseNetDate: function (date) {
                     var timestamp = date.replace(NETDATE_REGEX, "$1");
@@ -172,46 +214,64 @@
             el: "#rightbar-vue",
             data: {
                 datos: {},
-                mensaje: "Mensaje del Rightbar",
                 componente_activo: "componente-vacio"
-            },
-            methods: {
-                actualizar: function() {
-                    if (datos.usuario.UsuarioId) { // Editar
-                        var $form = $('#rightbar-form');
-                        var datos_serializados = $form.serialize();
-
-                        axios.post('/Usuario/editar', {
-                            params: datos_serializados
-                        })
-                        .then(function(response) {
-                            console.log(response);   
-                        })
-                        .catch(function(error) {
-                            console.log(error);
-                        });
-                    }
-                    else { // Crear
-                        var $form = $('#rightbar-form');
-                        var datos_serializados = $form.serialize();
-
-                        axios.post('/Usuario/crear', {
-                            params: datos_serializados
-                        })
-                        .then(function(response) {
-                            console.log(response);   
-                        })
-                        .catch(function(error) {
-                            console.log(error);
-                        });
-                    }
-                }
             },
             components: {
                 'componente-vacio': {template: '<div></div>'},
                 'crud-usuario': {
                     props: ['datos', 'titulo'],
-                    template: '#crud-usuario'
+                    template: '#crud-usuario',
+                    methods: {
+                        actualizar: function () {
+                            var vm = this;
+
+                            if (vm.datos.usuario.UsuarioId) { // Editar
+                                var $form = $('#rightbar-form');
+                                var datos_serializados = $form.serialize();
+
+                                axios({
+                                    method: "POST",
+                                    url: '/Usuario/ActualizarUsuario', 
+                                    data: datos_serializados
+                                })
+                                .then(function (response) {
+                                    eva360.usuarios = response.data.usuarios;
+                                    eva360.tipodocumentos = response.data.tipodocumentos;
+                                    rightbar.cerrar();
+                                })
+                                .catch(function (error) {
+                                    if (error.response.data.errores) {
+                                        eva360.errores.push(...error.response.data.errores);
+                                    }
+                                    else {
+                                        eva360.errores.push(error.message);
+                                    }
+
+                                    rightbar.cerrar();
+                                })
+                            }
+                            else { // Crear
+                                var $form = $('#rightbar-form');
+                                var datos_serializados = $form.serialize();
+
+                                axios({
+                                    method: "POST",
+                                    url: '/Usuario/ActualizarUsuario', 
+                                    data: datos_serializados
+                                })
+                                .then(function (response) {
+                                    vm.usuarios = response.data.usuarios;
+                                    vm.tipodocumentos = response.data.tipodocumentos;
+                                    rightbar.close();
+                                })
+                                .catch(function (error) {
+                                    eva360.errores.push(...error.response.data.error_list);
+                                    rightbar.close();
+                                })
+                            }
+                        } 
+
+                    }
                 }
             }
         });

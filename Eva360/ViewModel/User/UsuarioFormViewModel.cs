@@ -21,5 +21,13 @@ namespace Eva360.ViewModel.User
 
         [Required]
         public string Email { get; set; } = String.Empty;
+
+        public DateTime FechaNacimiento { get; set; }
+
+        public string Sexo { get; set; }
+
+        public Int32 TipoDocumentoId { get; set; }
+
+        public string NroDocumento { get; set; }
     }
 }
