@@ -25,7 +25,10 @@ namespace Eva360.Controllers
             return Json(new { periodos = LstPeriodos, }, JsonRequestBehavior.AllowGet);
         }
 
-
+        public ActionResult Index()
+        {
+            return View();
+        }
 
         [HttpGet]
         public ActionResult ListarPeriodos()
@@ -61,7 +64,10 @@ namespace Eva360.Controllers
         //    {
         //        using(var transactin = new TransactionScope())
         //        {
+        //            periodo.FechaInicio = FechaInicio;
+
         //            periodo.Nombre = Nombre;
+
         //        }
         //    }
         //}
