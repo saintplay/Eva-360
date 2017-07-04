@@ -94,8 +94,8 @@
         var eva360 = new Vue({
             el: "#periodos-vue",
             data: {
-                periodos: [],
-                tipodocumentos: []
+                errores: [],
+                periodos: []
             },
             created: function() {
                 this.fetchData();
@@ -117,8 +117,8 @@
                         periodo: {
                             Nombre: '',
                             Estado: '',
-                            FechaInicio: '',
-                            FechaFin: ''
+                            FechaInicio: moment().format("YYYY-MM-DD"),
+                            FechaFin: moment().add(1, year).format("YYYY-MM-DD")
                         }
                     };
                     rightbar.mostrar();
@@ -175,7 +175,7 @@
                         actualizar: function () {
                             var vm = this;
 
-                            if (vm.datos.periodos.PeriodoId) { // Editar
+                            if (vm.datos.periodo.PeriodoId) { // Editar
                                 var $form = $('#rightbar-form');
                                 var datos_serializados = $form.serialize();
 

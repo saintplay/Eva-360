@@ -7,7 +7,7 @@ using System.Data.Entity.Validation;
 using System.Transactions;
 using Eva360.Models;
 using System.Net;
-
+using Eva360.ViewModel.Periodo;
 
 namespace Eva360.Controllers
 {
@@ -36,41 +36,48 @@ namespace Eva360.Controllers
             return getData();
         }
 
-        //[HttpPost]
-        //public ActionResult ActualizarPeriodo(
-        //    int? PeriodoId,
-        //    DateTime FechaInicio,
-        //    DateTime FechaFin,
-        //    string Nombre,
-        //    string Estado
-        //    )
-        //{
-        //    var context = new EVA360Entities();
-        //    Periodo periodo;
+        [HttpPost]
+        public ActionResult ActualizarPeriodo(PeriodoForm periodomodel)
+        {
+            var context = new EVA360Entities();
+            Periodo periodo;
 
-        //    if (PeriodoId.HasValue)
-        //    {
-        //        periodo = new Periodo();
-        //        periodo.Estado = PeriodoEstado.Activo;
-        //        context.Periodo.Add(periodo);
-        //    }
-        //    else
-        //    {
-        //        periodo = context.Periodo
-        //                         .FirstOrDefault(p => p.PeriodoId == PeriodoId);
-        //    }
+            if (periodomodel.PeriodoId.HasValue == false) { // Crear nuevo
+                periodo = new Periodo();
+                context.Periodo.Add(periodo);
+            }
+            else { // Editar exsistente
+                periodo = context.Periodo
+                    .FirstOrDefault(p => p.PeriodoId == periodomodel.PeriodoId);
+            }
 
-        //    try
-        //    {
-        //        using(var transactin = new TransactionScope())
-        //        {
-        //            periodo.FechaInicio = FechaInicio;
+            try {
+                using(var Transaction = new TransactionScope()) {
+                    periodo.Nombre = periodomodel.Nombre;
+                    periodo.Estado = periodomodel.Estado;
+                    periodo.FechaInicio = periodomodel.FechaInicio;
+                    periodo.FechaFin = periodomodel.FechaFin;
 
-        //            periodo.Nombre = Nombre;
+                    context.SaveChanges();
+                    Transaction.Complete();
+                }
+            }
+            catch (DbEntityValidationException e) {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
-        //        }
-        //    }
-        //}
+                List<String> errores = new List<String>();
+
+                foreach (var eve in e.EntityValidationErrors) {
+                    foreach (var ve in eve.ValidationErrors) {
+                        errores.Add(ve.ErrorMessage);
+                    }
+                }
+
+                return Json(new { errores = errores });
+            }
+
+            return getData();
+        }
 
     }
 }

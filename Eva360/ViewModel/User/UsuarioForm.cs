@@ -8,7 +8,7 @@ namespace Eva360.ViewModel.User
 {
     public class UsuarioFormViewModel
     {
-        public Int32 ? UsuarioId { get; set; }
+        public int ? UsuarioId { get; set; }
 
         [Required]
         public string Nombre { get; set; } = String.Empty;
@@ -26,7 +26,7 @@ namespace Eva360.ViewModel.User
 
         public string Sexo { get; set; }
 
-        public Int32 TipoDocumentoId { get; set; }
+        public int TipoDocumentoId { get; set; }
 
         public string NroDocumento { get; set; }
     }
