@@ -1,0 +1,228 @@
+﻿@model Eva360.ViewModel.Home.IndexViewModel
+@{
+    ViewBag.Title = "Periodos";
+}
+<div id="periodos-vue">
+    <div class="columns">
+        <div class="column">
+            <transition-group name="scale" tag="ol">
+                <li v-for="(error, e_index) in errores" key="error" class="notification is-danger">
+                    <button class="delete" @@click="ocultarError(e_index)"></button>
+                    <span>{{ error }}</span>
+                </li>
+            </transition-group>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column">
+            <h2 class="title is-3">Lista de Periodos</h2>
+        </div>
+        <div class="column">
+            <button class="button is-success is-pulled-right" @@click="nuevo()">Agregar</button>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column">
+            <table class="table">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Estado</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th colspan="2">Acciones</th>
+                </tr>
+                <tr v-for="(periodo, index) in periodos" key="periodo.PeriodoId">
+                    <td>{{ periodo.Nombre }}</td>
+                    <td>{{ getEstado(periodo.Estado) }}</td>
+                    <td>{{ parseFormatNetDate(periodo.FechaInicio) }}</td>
+                    <td>{{ parseFormatNetDate(periodo.FechaFin) }}</td>
+                    <td><button class="button is-warning" @@click="editar(periodo)">Editar</button></td>
+                    <td><button class="button is-danger">Eliminar</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/x-template" id="crud-periodos">
+    <div>
+        <button id="right-close" class="delete is-danger is-medium is-pulled-right" @@click="$emit('close')"></button>
+        <h1 class="title">{{ datos.titulo }}</h1>
+        <form id="rightbar-form" class="form">
+            <input name="PeriodoId" type="hidden" v-model.number="datos.periodo.PeriodoId">
+            <div class="field is-narrow">
+                <label class="label">Nombre</label>
+                <p class="control is-expanded">
+                    <input name="Nombre" class="input" type="text" v-model.trim="datos.periodo.Nombre">
+                </p>
+            </div>
+            <div class="field is-narrow">
+                <label class="label">Estado</label>
+                <p class="control is-expanded">
+                    <span class="select">
+                        <select name="Estado" v-model="datos.periodo.Estado">
+                            <option value="ACT">Activo</option>
+                            <option value="INA">Inactivo</option>
+                        </select>
+                    </span>
+                </p>
+            </div>
+            <div class="field is-narrow">
+                <label class="label">Fecha de Inicio</label>
+                <p class="control is-expanded">
+                    <input name="FechaInicio" class="input" type="date" v-model="datos.periodo.FechaInicio">
+                </p>
+            </div>
+            <div class="field is-narrow">
+                <label class="label">Fecha de Fin</label>
+                <p class="control is-expanded">
+                    <input name="FechaFin" class="input" type="date" v-model="datos.periodo.FechaFin">
+                </p>
+            </div>
+            <div class='field'>
+                <div class='control'>
+                    <a class="button is-primary" @@click="actualizar()">
+                        <span class="icon"><i class="fa fa-plus"></i></span>
+                        <span class="submit-text">Guardar</span>
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+@section scripts{
+    <script>
+        var eva360 = new Vue({
+            el: "#periodos-vue",
+            data: {
+                periodos: [],
+                tipodocumentos: []
+            },
+            created: function() {
+                this.fetchData();
+            },
+            methods: {
+                fetchData: function() {
+                    var vm = this;
+                    axios.get('/Periodo/ListarPeriodos')
+                      .then(function (response) {
+                          vm.periodos = response.data.periodos;
+                      })
+                      .catch(function (error) {
+                          console.log(error);
+                      });
+                },
+                nuevo: function() {
+                    rightbar.datos = {
+                        titulo: "Agregar ¨Periodo",
+                        periodo: {
+                            Nombre: '',
+                            Estado: '',
+                            FechaInicio: '',
+                            FechaFin: ''
+                        }
+                    };
+                    rightbar.mostrar();
+                    rightbar.componente_activo = "crud-periodo";
+                },
+                editar: function(periodo) {
+                    var periodo_clone = _.clone(periodo);
+                    periodo_clone.FechaInicio = this.parseNetDate(periodo.FechaInicio);
+                    periodo_clone.FechaFin = this.parseNetDate(periodo.FechaFin);
+                    rightbar.datos = {
+                        titulo: "Editar Periodo",
+                        periodo: periodo_clone
+                    };
+                    rightbar.mostrar();
+                    rightbar.componente_activo = "crud-periodo";
+                },
+                eliminar: function(periodo) {
+
+                },
+                getEstado: function (estado) {
+                    switch (estado) {
+                        case 'ACT':
+                            return "Activo";
+                        case 'INA':
+                            return "Inactivo";
+                    }
+                },
+                ocultarError: function(index) {
+                    this.errores.splice(index, 1);
+                },
+                parseNetDate: function (date) {
+                    var timestamp = date.replace(NETDATE_REGEX, "$1");
+                    return moment(parseInt(timestamp)).format("YYYY-MM-DD");
+                },
+                parseFormatNetDate: function (date) {
+                    var timestamp = date.replace(NETDATE_REGEX, "$1");
+                    return moment(parseInt(timestamp)).format("DD-MM-YYYY");
+                }
+            }
+        });
+
+        window.rightbar = new Vue({
+            el: "#rightbar-vue",
+            data: {
+                datos: {},
+                componente_activo: "componente-vacio"
+            },
+            components: {
+                'componente-vacio': {template: '<div></div>'},
+                'crud-periodo': {
+                    props: ['datos', 'titulo'],
+                    template: '#crud-periodos',
+                    methods: {
+                        actualizar: function () {
+                            var vm = this;
+
+                            if (vm.datos.periodos.PeriodoId) { // Editar
+                                var $form = $('#rightbar-form');
+                                var datos_serializados = $form.serialize();
+
+                                axios({
+                                    method: "POST",
+                                    url: '/Periodo/ActualizarPeriodo',
+                                    data: datos_serializados
+                                })
+                                .then(function (response) {
+                                    eva360.periodos = response.data.periodos;
+                                    rightbar.cerrar();
+                                })
+                                .catch(function (error) {
+                                    if (error.response.data.errores) {
+                                        eva360.errores.push(...error.response.data.errores);
+                                    }
+                                    else {
+                                        eva360.errores.push(error.message);
+                                    }
+
+                                    rightbar.cerrar();
+                                })
+                            }
+                            else { // Crear
+                                var $form = $('#rightbar-form');
+                                var datos_serializados = $form.serialize();
+
+                                axios({
+                                    method: "POST",
+                                    url: '/Periodo/ActualizarPeriodo',
+                                    data: datos_serializados
+                                })
+                                .then(function (response) {
+                                    vm.periodos = response.data.periodos;
+                                    rightbar.close();
+                                })
+                                .catch(function (error) {
+                                    eva360.errores.push(...error.response.data.error_list);
+                                    rightbar.close();
+                                })
+                            }
+                        }
+
+                    }
+                }
+            }
+        });
+
+    </script>
+}
