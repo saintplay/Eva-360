@@ -4,6 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Eva360.Models;
+using Eva360.ViewModel.Evaluacion;
+using System.Transactions;
+using System.Data.Entity.Validation;
+using System.Net;
 
 namespace Eva360.Controllers
 {
@@ -63,6 +67,57 @@ namespace Eva360.Controllers
             return getData();
         }
 
-        
+        [HttpPost]
+        public ActionResult ActualizarEvaluacion(EvaluacionForm evaluacionModel)
+        {
+            var context = new EVA360Entities();
+            Evaluacion evaluacion;
+
+            if (!evaluacionModel.EvaluacionId.HasValue)
+            {
+                evaluacion = new Evaluacion();
+                context.Evaluacion.Add(evaluacion);
+            }
+            else
+            {
+                evaluacion = context.Evaluacion
+                    .FirstOrDefault(e => e.EvaluacionId == evaluacionModel.EvaluacionId);
+            }
+
+            try
+            {
+                using(var transaction = new TransactionScope())
+                {
+                    evaluacion.Nombre = evaluacionModel.Nombre;
+                    evaluacion.PorcentajeAvance = evaluacionModel.PorcentajeAvance;
+                    evaluacion.SupervisorId = evaluacionModel.SupervisorId;
+                    evaluacion.EmpleadoId = evaluacionModel.EmpleadoId;
+                    evaluacion.PeriodoId = evaluacionModel.PeriodoId;
+                    evaluacion.ProveedorId = evaluacionModel.ProveedorId;
+                    evaluacion.RutaInforme = evaluacionModel.RutaInforme;
+
+                    context.SaveChanges();
+                    transaction.Complete();
+                }
+            }
+            catch(DbEntityValidationException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+
+                List<String> errores = new List<String>();
+
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        errores.Add(ve.ErrorMessage);
+                    }
+                }
+
+                return Json(new { errores = errores });
+            }
+
+            return getData();
+        }
     }
 }

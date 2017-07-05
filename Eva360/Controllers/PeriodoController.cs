@@ -52,7 +52,8 @@ namespace Eva360.Controllers
             }
 
             try {
-                using(var Transaction = new TransactionScope()) {
+                using (var Transaction = new TransactionScope())
+                {
                     periodo.Nombre = periodomodel.Nombre;
                     periodo.Estado = periodomodel.Estado;
                     periodo.FechaInicio = periodomodel.FechaInicio;
@@ -75,9 +76,7 @@ namespace Eva360.Controllers
 
                 return Json(new { errores = errores });
             }
-
             return getData();
         }
-
     }
 }
