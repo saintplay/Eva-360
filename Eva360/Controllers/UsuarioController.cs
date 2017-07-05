@@ -20,12 +20,17 @@ namespace Eva360.Controllers
             context.Configuration.ProxyCreationEnabled = false;
 
             var LstUsuarios = context.Usuario.ToList();
-            var LstTipoDocumentos = context.TipoDocumento.Select(x => new {
+            var LstTipoDocumentos = context.TipoDocumento.Select(x => new
+            {
                 x.TipoDocumentoId,
                 x.Sigla
             }).ToList();
 
-            return Json(new { usuarios = LstUsuarios, tipodocumentos = LstTipoDocumentos }, JsonRequestBehavior.AllowGet);
+            return Json(new
+            {
+                usuarios = LstUsuarios,
+                tipodocumentos = LstTipoDocumentos
+            }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

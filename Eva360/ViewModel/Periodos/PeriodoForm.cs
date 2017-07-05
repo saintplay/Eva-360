@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Eva360.ViewModel.Periodo
+namespace Eva360.ViewModel.Periodos
 {
     public class PeriodoForm
     {

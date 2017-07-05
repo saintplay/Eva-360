@@ -259,8 +259,9 @@
     </Compile>
     <Compile Include="Models\UsuarioEstado.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\Evaluaciones\EvaluacionForm.cs" />
     <Compile Include="ViewModel\Home\IndexViewModel.cs" />
-    <Compile Include="ViewModel\Periodo\PeriodoForm.cs" />
+    <Compile Include="ViewModel\Periodos\PeriodoForm.cs" />
     <Compile Include="ViewModel\User\UsuarioForm.cs" />
   </ItemGroup>
   <ItemGroup>
