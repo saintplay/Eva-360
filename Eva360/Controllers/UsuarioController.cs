@@ -45,14 +45,12 @@ namespace Eva360.Controllers
             var context = new EVA360Entities();
             Usuario usuario;
 
-            if (!usuarioModel.UsuarioId.HasValue) // Crear nuevo
-            {                                      
+            if (!usuarioModel.UsuarioId.HasValue) {  // Crear nuevo                                      
                 usuario = new Usuario();
                 usuario.Estado = UsuarioEstado.Activo;
                 context.Usuario.Add(usuario);
             }
-            else // Editar exsistente
-            { 
+            else { // Editar exsistente 
                 usuario = context.Usuario
                     .FirstOrDefault(u => u.UsuarioId == usuarioModel.UsuarioId);
             }
@@ -68,21 +66,51 @@ namespace Eva360.Controllers
                     usuario.Sexo = usuarioModel.Sexo;
                     usuario.TipoDocumentoId = usuarioModel.TipoDocumentoId;
                     usuario.NroDocumento = usuarioModel.NroDocumento;
+                    usuario.FechaCreacion = DateTime.Now;
 
                     context.SaveChanges();
                     transaction.Complete();
                 }
             }
-            catch (DbEntityValidationException e)
-            {
+            catch (DbEntityValidationException e){
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
                 List<String> errores = new List<String>();
 
-                foreach (var eve in e.EntityValidationErrors)
+                foreach (var eve in e.EntityValidationErrors){
+                    foreach (var ve in eve.ValidationErrors){
+                        errores.Add(ve.ErrorMessage);
+                    }
+                }
+
+                return Json(new { errores = errores });
+            }
+
+            return getData();
+        }
+
+        [HttpPost]
+        public ActionResult EliminarUsuario(Int32 UsuarioId)
+        {
+            try{
+                using(var transaction=new TransactionScope())
                 {
-                    foreach (var ve in eve.ValidationErrors)
-                    {
+                    var context = new EVA360Entities();
+                    var usuario = context.Usuario.FirstOrDefault(u => u.UsuarioId == UsuarioId);
+
+                    usuario.Estado = UsuarioEstado.Inactivo;
+
+                    context.SaveChanges();
+                    transaction.Complete();
+                }
+            }
+            catch(DbEntityValidationException e) {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+
+                List<String> errores = new List<String>();
+
+                foreach (var eve in e.EntityValidationErrors) {
+                    foreach (var ve in eve.ValidationErrors) {
                         errores.Add(ve.ErrorMessage);
                     }
                 }
