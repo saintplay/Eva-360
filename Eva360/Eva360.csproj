@@ -205,6 +205,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Models\ComunicacionInterna.cs">
       <DependentUpon>Eva360Model.tt</DependentUpon>
     </Compile>

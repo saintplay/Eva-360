@@ -7,6 +7,7 @@ using System;
 using System.Net;
 using System.Data.Entity.Validation;
 using System.Collections.Generic;
+using Eva360.Helpers;
 
 namespace Eva360.Controllers
 {
@@ -48,6 +49,7 @@ namespace Eva360.Controllers
             if (!usuarioModel.UsuarioId.HasValue) {  // Crear nuevo                                      
                 usuario = new Usuario();
                 usuario.Estado = UsuarioEstado.Activo;
+                usuario.Salt = PasswordHelper.GetRandomSalt();
                 context.Usuario.Add(usuario);
             }
             else { // Editar exsistente 
@@ -67,6 +69,7 @@ namespace Eva360.Controllers
                     usuario.TipoDocumentoId = usuarioModel.TipoDocumentoId;
                     usuario.NroDocumento = usuarioModel.NroDocumento;
                     usuario.FechaCreacion = DateTime.Now;
+                    usuario.Password = usuarioModel.Password + usuario.Salt;
 
                     context.SaveChanges();
                     transaction.Complete();
