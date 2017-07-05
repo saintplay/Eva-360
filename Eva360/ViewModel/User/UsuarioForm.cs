@@ -6,28 +6,28 @@ using System.Web;
 
 namespace Eva360.ViewModel.User
 {
-    public class UsuarioFormViewModel
+    public class UsuarioForm
     {
-        public int ? UsuarioId { get; set; }
+        public Int32 ? UsuarioId { get; set; }
 
         [Required]
-        public string Nombre { get; set; } = String.Empty;
+        public String Nombre { get; set; } = String.Empty;
 
         [Required]
-        public string Apellido { get; set; } = String.Empty;
+        public String Apellido { get; set; } = String.Empty;
 
         [Required]
-        public string Codigo { get; set; } = String.Empty;
+        public String Codigo { get; set; } = String.Empty;
 
         [Required]
-        public string Email { get; set; } = String.Empty;
+        public String Email { get; set; } = String.Empty;
 
         public DateTime FechaNacimiento { get; set; }
 
-        public string Sexo { get; set; }
+        public String Sexo { get; set; }
 
-        public int TipoDocumentoId { get; set; }
+        public Int32 TipoDocumentoId { get; set; }
 
-        public string NroDocumento { get; set; }
+        public String NroDocumento { get; set; }
     }
 }

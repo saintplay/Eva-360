@@ -40,53 +40,49 @@ namespace Eva360.Controllers
         }
 
         [HttpPost]
-        public ActionResult ActualizarUsuario(
-            int? UsuarioId,
-            string Nombre,
-            string Apellido,
-            string Codigo,
-            string Email,
-            string FechaNacimiento,
-            string Sexo,
-            int? TipoDocumentoId,
-            string NroDocumento
-        )
+        public ActionResult ActualizarUsuario(UsuarioForm usuarioModel)  
         {
             var context = new EVA360Entities();
             Usuario usuario;
 
-            if (UsuarioId.HasValue == false) { // Crear nuevo
+            if (!usuarioModel.UsuarioId.HasValue) // Crear nuevo
+            {                                      
                 usuario = new Usuario();
                 usuario.Estado = UsuarioEstado.Activo;
                 context.Usuario.Add(usuario);
             }
-            else { // Editar exsistente
+            else // Editar exsistente
+            { 
                 usuario = context.Usuario
-                    .FirstOrDefault(u => u.UsuarioId == UsuarioId);
+                    .FirstOrDefault(u => u.UsuarioId == usuarioModel.UsuarioId);
             }
 
             try {
-                using (var Transaction = new TransactionScope()) {
-                    usuario.Nombre = Nombre;
-                    usuario.Apellido = Apellido;
-                    usuario.Codigo = Codigo;
-                    usuario.Email = Email;
-                    usuario.FechaNacimiento = DateTime.Parse(FechaNacimiento);
-                    usuario.Sexo = Sexo;
-                    usuario.TipoDocumentoId = (int)TipoDocumentoId;
-                    usuario.NroDocumento = NroDocumento;
+                using (var transaction = new TransactionScope())
+                {
+                    usuario.Nombre = usuarioModel.Nombre;
+                    usuario.Apellido = usuarioModel.Apellido;
+                    usuario.Codigo = usuarioModel.Codigo;
+                    usuario.Email = usuarioModel.Email;
+                    usuario.FechaNacimiento = usuarioModel.FechaNacimiento;
+                    usuario.Sexo = usuarioModel.Sexo;
+                    usuario.TipoDocumentoId = usuarioModel.TipoDocumentoId;
+                    usuario.NroDocumento = usuarioModel.NroDocumento;
 
                     context.SaveChanges();
-                    Transaction.Complete();
+                    transaction.Complete();
                 }
             }
-            catch (DbEntityValidationException e) {
+            catch (DbEntityValidationException e)
+            {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
                 List<String> errores = new List<String>();
 
-                foreach (var eve in e.EntityValidationErrors) {
-                    foreach (var ve in eve.ValidationErrors) {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
                         errores.Add(ve.ErrorMessage);
                     }
                 }
