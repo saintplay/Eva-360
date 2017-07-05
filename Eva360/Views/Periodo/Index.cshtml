@@ -113,12 +113,12 @@
                 },
                 nuevo: function() {
                     rightbar.datos = {
-                        titulo: "Agregar ¨Periodo",
+                        titulo: "Agregar Periodo",
                         periodo: {
                             Nombre: '',
-                            Estado: '',
+                            Estado: 'ACT',
                             FechaInicio: moment().format("YYYY-MM-DD"),
-                            FechaFin: moment().add(1, year).format("YYYY-MM-DD")
+                            FechaFin: moment().add(1, 'years').format("YYYY-MM-DD")
                         }
                     };
                     rightbar.mostrar();
@@ -213,7 +213,7 @@
                                     rightbar.close();
                                 })
                                 .catch(function (error) {
-                                    eva360.errores.push(...error.response.data.error_list);
+                                    eva360.errores.push(...error.response.data.errores);
                                     rightbar.close();
                                 })
                             }

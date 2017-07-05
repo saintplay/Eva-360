@@ -48,6 +48,7 @@ namespace Eva360.Controllers
 
             if (!usuarioModel.UsuarioId.HasValue) {  // Crear nuevo                                      
                 usuario = new Usuario();
+                usuario.FechaCreacion = DateTime.Now;
                 usuario.Estado = UsuarioEstado.Activo;
                 usuario.Salt = PasswordHelper.GetRandomSalt();
                 context.Usuario.Add(usuario);

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity.Validation;
 using System.Transactions;
@@ -44,6 +43,7 @@ namespace Eva360.Controllers
 
             if (periodomodel.PeriodoId.HasValue == false) { // Crear nuevo
                 periodo = new Periodo();
+                periodo.FechaCreacion = DateTime.Now;
                 context.Periodo.Add(periodo);
             }
             else { // Editar exsistente
