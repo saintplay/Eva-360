@@ -14,7 +14,7 @@ namespace Eva360.Helpers
             const String allowedChars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";
             var randN = new Random();
             var chars = new char[36];
-            for (int i = 0; i < 36; i++){
+            for (int i = 0; i < 36; i++) {
                 chars[i]= allowedChars[Convert.ToInt32(36 * randN.NextDouble())];
             }
 
@@ -31,7 +31,7 @@ namespace Eva360.Helpers
 
             StringBuilder strBuilder = new StringBuilder();
 
-            for (int i = 0; i < result.Length; i++){
+            for (int i = 0; i < result.Length; i++) {
                 strBuilder.Append(result[i].ToString("x2"));
             }
 

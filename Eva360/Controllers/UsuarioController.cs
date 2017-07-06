@@ -50,9 +50,7 @@ namespace Eva360.Controllers
                 usuario = new Usuario();
                 usuario.FechaCreacion = DateTime.Now;
                 usuario.Estado = UsuarioEstado.Activo;
-
-
-                //usuario.Salt = PasswordHelper.GetRandomSalt();
+                usuario.Salt = PasswordHelper.GetSalt();
                 context.Usuario.Add(usuario);
             }
             else { // Editar exsistente 
@@ -65,14 +63,15 @@ namespace Eva360.Controllers
                 {
                     usuario.Nombre = usuarioModel.Nombre;
                     usuario.Apellido = usuarioModel.Apellido;
-                    usuario.Codigo = usuarioModel.Codigo;
                     usuario.Email = usuarioModel.Email;
                     usuario.FechaNacimiento = usuarioModel.FechaNacimiento;
                     usuario.Sexo = usuarioModel.Sexo;
                     usuario.TipoDocumentoId = usuarioModel.TipoDocumentoId;
                     usuario.NroDocumento = usuarioModel.NroDocumento;
                     usuario.FechaCreacion = DateTime.Now;
-                    //usuario.Password = usuarioModel.Password + usuario.Salt;
+                    usuario.Codigo = usuarioModel.Codigo;
+                    var aux = PasswordHelper.MD5Hash(usuarioModel.Password); //Encriptamos el password
+                    usuario.Password = aux + usuario.Salt;
 
                     context.SaveChanges();
                     transaction.Complete();
