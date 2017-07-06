@@ -1,0 +1,37 @@
+{
+    "version": "0.1.0",
+    "taskSelector": "/t:",
+    "showOutput": "silent",
+    "tasks": [
+        {
+            "taskName": "build",
+            "args": [
+                // Ask msbuild to generate full paths for file names.
+                "/property:GenerateFullPaths=true"
+            ],
+            "windows": {
+                // change according your msbuild location
+                "command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\MSBuild\\15.0\\Bin\\MSBuild.exe"
+            },
+            // Show the output window only if unrecognized errors occur.
+            "showOutput": "silent",
+            // Use the standard MS compiler pattern to detect errors, warnings and infos
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "suppressTaskName": true,
+            "taskName": "iisexpress",
+            "isShellCommand": true,
+            "windows": {
+                "command": "C:\\Program Files (x86)\\IIS Express\\iisexpress.exe"
+            },
+            "args": [
+                // change according your project folder and desired port
+                "/path:${workspaceRoot}\\Eva360",
+                "/port:51714"
+            ],
+            // Show the iisexpress output always.
+            "showOutput": "always"
+        }
+    ]
+}
