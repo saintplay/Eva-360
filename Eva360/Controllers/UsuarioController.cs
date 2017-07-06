@@ -50,7 +50,7 @@ namespace Eva360.Controllers
                 usuario = new Usuario();
                 usuario.FechaCreacion = DateTime.Now;
                 usuario.Estado = UsuarioEstado.Activo;
-                usuario.Salt = PasswordHelper.GetRandomSalt();
+                //usuario.Salt = PasswordHelper.GetRandomSalt();
                 context.Usuario.Add(usuario);
             }
             else { // Editar exsistente 
@@ -70,7 +70,7 @@ namespace Eva360.Controllers
                     usuario.TipoDocumentoId = usuarioModel.TipoDocumentoId;
                     usuario.NroDocumento = usuarioModel.NroDocumento;
                     usuario.FechaCreacion = DateTime.Now;
-                    usuario.Password = usuarioModel.Password + usuario.Salt;
+                    //usuario.Password = usuarioModel.Password + usuario.Salt;
 
                     context.SaveChanges();
                     transaction.Complete();
