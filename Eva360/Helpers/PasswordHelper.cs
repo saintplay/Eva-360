@@ -9,7 +9,19 @@ namespace Eva360.Helpers
 {
     public static class PasswordHelper
     {
-        public static String MD5Hash(String password)
+        public static String GetSalt() //Generamos el salt
+        {
+            const String allowedChars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";
+            var randN = new Random();
+            var chars = new char[36];
+            for (int i = 0; i < 36; i++){
+                chars[i]= allowedChars[Convert.ToInt32(36 * randN.NextDouble())];
+            }
+
+            return new String(chars);
+        }
+                
+        public static String MD5Hash(String password) //Encriptamos el password
         {
             MD5 md5 = new MD5CryptoServiceProvider();
 
