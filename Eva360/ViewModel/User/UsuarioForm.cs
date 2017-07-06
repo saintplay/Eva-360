@@ -31,6 +31,9 @@ namespace Eva360.ViewModel.User
         [Required]
         public String NroDocumento { get; set; }
 
+        [Required]
+        public String Rol { get; set; } = String.Empty;
+
         public String Sexo { get; set; }
 
         public DateTime FechaNacimiento { get; set; }

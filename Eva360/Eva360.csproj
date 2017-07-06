@@ -237,6 +237,7 @@
     <Compile Include="Models\EvalucionTema.cs">
       <DependentUpon>Eva360Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModeloTipo.cs" />
     <Compile Include="Models\Objetivo.cs">
       <DependentUpon>Eva360Model.tt</DependentUpon>
     </Compile>

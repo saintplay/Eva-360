@@ -27,10 +27,13 @@ namespace Eva360.Controllers
                 x.Sigla
             }).ToList();
 
+            var LstRoles = ModeloTipo.Roles;
+
             return Json(new
             {
                 usuarios = LstUsuarios,
-                tipodocumentos = LstTipoDocumentos
+                tipodocumentos = LstTipoDocumentos,
+                roles = LstRoles
             }, JsonRequestBehavior.AllowGet);
         }
 
@@ -50,7 +53,10 @@ namespace Eva360.Controllers
                 usuario = new Usuario();
                 usuario.FechaCreacion = DateTime.Now;
                 usuario.Estado = UsuarioEstado.Activo;
+                usuario.Codigo = usuarioModel.Codigo;
                 usuario.Salt = PasswordHelper.GetSalt();
+                var aux = PasswordHelper.MD5Hash(usuarioModel.Password); //Encriptamos el password
+                usuario.Password = aux + usuario.Salt;
                 context.Usuario.Add(usuario);
             }
             else { // Editar exsistente 
@@ -69,9 +75,6 @@ namespace Eva360.Controllers
                     usuario.TipoDocumentoId = usuarioModel.TipoDocumentoId;
                     usuario.NroDocumento = usuarioModel.NroDocumento;
                     usuario.FechaCreacion = DateTime.Now;
-                    usuario.Codigo = usuarioModel.Codigo;
-                    var aux = PasswordHelper.MD5Hash(usuarioModel.Password); //Encriptamos el password
-                    usuario.Password = aux + usuario.Salt;
 
                     context.SaveChanges();
                     transaction.Complete();
