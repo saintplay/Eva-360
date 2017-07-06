@@ -1,0 +1,249 @@
+﻿@model Eva360.ViewModel.Home.IndexViewModel
+@{
+    ViewBag.Title = "Evaluaciones";
+}
+<div id="evaluaciones-vue">
+    <div class="columns">
+        <div class="column">
+            <transition-group name="scale" tag="ol">
+                <li v-for="(error, e_index) in errores" key="error" class="notification is-danger">
+                    <button class="delete" @@click="ocultarError(e_index)"></button>
+                    <span>{{ error }}</span>
+                </li>
+            </transition-group>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column">
+            <h2 class="title is-3">Lista de Evalaciones</h2>
+        </div>
+        <div class="column">
+            <button class="button is-success is-pulled-right" @@click="nuevo()">Agregar</button>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column">
+            <table class="table">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Avance</th>
+                    <th>Supervisor</th>
+                    <th>Emplado</th>
+                    <th>Periodo</th>
+                    <th>Proveedor</th>
+                    <th>RutaInforme</th>
+                    <th colspan="2">Acciones</th>
+                </tr>
+                <tr v-for="(evaluacion, index) in evaluaciones" key="evaluacion.EvaluacionId">
+                    <td>{{ evaluacion.Nombre }}</td>
+                    <td>{{ evaluacion.Avance }}</td>
+                    <td>{{ evaluacion.SupervisorId }}</td>
+                    <td>{{ evaluacion.EmpleadoId }}</td>
+                    <td>{{ evaluacion.PeriodoId }}</td>
+                    <td>{{ evaluacion.ProveedorId }}</td>
+                    <td>{{ evaluacion.RutaInforme }}</td>
+                    <td><button class="button is-warning" @@click="editar(evaluacion)">Editar</button></td>
+                    <td><button class="button is-danger">Eliminar</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/x-template" id="crud-evaluaciones">
+    <div>
+        <button id="right-close" class="delete is-danger is-medium is-pulled-right" @@click="$emit('close')"></button>
+        <h1 class="title">{{ datos.titulo }}</h1>
+        <form id="rightbar-form" class="form">
+            <input name="EvaluacionId" type="hidden" v-model.number="datos.evaluacion.EvaluacionId">
+            <div class="field is-narrow">
+                <label class="label">Nombre</label>
+                <p class="control is-expanded">
+                    <input name="Nombre" class="input" type="text" v-model.trim="datos.evaluacion.Nombre">
+                </p>
+            </div>
+            <div class="field is-narrow">
+                <label class="label">Supervisor</label>
+                <p class="control is-expanded">
+                    <span class="select">
+                        <select name="SupervisorId" v-model="datos.evaluacion.SupervisorId">
+                            <option v-for="supervisor in supervisores" :key="supervisor.SupervisorId" value="supervisor.SupervisorId">{{ supervisor.Nombre + ' ' + supervisor.Apellido }}</option>
+                        </select>
+                    </span>
+                </p>
+            </div>
+            <div class="field is-narrow">
+                <label class="label">Proveedor</label>
+                <p class="control is-expanded">
+                    <span class="select">
+                        <select name="ProovedorId" v-model="datos.evaluacion.ProovedorId">
+                            <option v-for="proveedor in proveedores" key="proveedor.EmpleadoId" value="proveedor.EmpleadoId">{{ proveedor.Nombre + ' ' + proveedor.Apellido }}</option>
+                        </select>
+                    </span>
+                </p>
+            </div>
+            <div class="field is-narrow">
+                <label class="label">Periodo</label>
+                <p class="control is-expanded">
+                    <span class="select">
+                        <select name="PeriodoId" v-model="datos.evaluacion.PeriodoId">
+                            <option v-for="periodo in periodos" key="periodo.PeriodoId" value="periodo.EmpleadoId">{{ periodo.Nombre }}</option>
+                        </select>
+                    </span>
+                </p>
+            </div>
+            <div class="field is-narrow">
+                <label class="label">Empleado</label>
+                <p class="control is-expanded">
+                    <span class="select">
+                        <select name="EmpleadoId" v-model="datos.evaluacion.EmpleadoId">
+                            <option v-for="empleado in empleados" :key="empleado.EmpleadoId" value="empleado.EmpleadoId">{{ empleado.Nombre + ' ' + empleado.Apellido }}</option>
+                        </select>
+                    </span>
+                </p>
+            </div>
+            <div class='field'>
+                <div class='control'>
+                    <a class="button is-primary" @@click="actualizar()">
+                        <span class="icon"><i class="fa fa-plus"></i></span>
+                        <span class="submit-text">Guardar</span>
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+@section scripts{
+    <script>
+        var eva360 = new Vue({
+            el: "#evaluaciones-vue",
+            data: {
+                errores: [],
+                evaluaciones: [],
+                supervisores: [],
+                proveedores: [],
+                empleados: [],
+                periodos: []
+            },
+            created: function() {
+                this.fetchData();
+            },
+            methods: {
+                fetchData: function() {
+                    var vm = this;
+                    axios.get('/Evaluacion/ListarEvaluaciones')
+                      .then(function (response) {
+                          vm.evaluaciones = response.data.evaluaciones;
+                          vm.supervisores = response.data.supervisores;
+                          vm.proveedores = response.data.proveedores;
+                          vm.empleados = response.data.empleados;
+                          vm.periodos = response.data.periodos;
+                      })
+                      .catch(function (error) {
+                          console.log(error);
+                      });
+                },
+                nuevo: function () {
+                    var vm = this;
+                    rightbar.datos = {
+                        titulo: "Agregar Evaluacion",
+                        evaluacion: {
+                            Nombre: '',
+                            SupervisorId: 0,
+                            EmpleadoId: 0,
+                            PeriodoId: 0,
+                            ProveedorId: 0,
+                            RutaInforme: ''
+                        }
+                    };
+                    rightbar.mostrar();
+                    rightbar.componente_activo = "crud-evaluacion";
+                },
+                editar: function(evaluacion) {
+                    var evaluacion_clone = _.clone(evaluacion);
+                    rightbar.datos = {
+                        titulo: "Editar Evaluacion",
+                        evaluacion: evaluacion_clone
+                    };
+                    rightbar.mostrar();
+                    rightbar.componente_activo = "crud-evaluacion";
+                },
+                ocultarError: function(index) {
+                    this.errores.splice(index, 1);
+                }
+            }
+        });
+
+        window.rightbar = new Vue({
+            el: "#rightbar-vue",
+            data: {
+                datos: {},
+                componente_activo: "componente-vacio"
+            },
+            components: {
+                'componente-vacio': {template: '<div></div>'},
+                'crud-evaluacion': {
+                    props: ['datos', 'titulo'],
+                    template: '#crud-evaluaciones',
+                    data: function() {
+                        return {
+                            empleados: eva360.empleados,
+                            supervisores: eva360.supervisores,
+                            periodos: eva360.periodos,
+                            proveedores: eva360.proveedores
+                        }
+                    },
+                    methods: {
+                        actualizar: function () {
+                            var vm = this;
+
+                            if (vm.datos.evaluacion.EvaluacionId) { // Editar
+                                var $form = $('#rightbar-form');
+                                var datos_serializados = $form.serialize();
+
+                                axios({
+                                    method: "POST",
+                                    url: '/Evaluacion/ActualizarEvaluacion',
+                                    data: datos_serializados
+                                })
+                                .then(function (response) {
+                                    eva360.evaluaciones = response.data.evaluaciones;
+                                    rightbar.cerrar();
+                                })
+                                .catch(function (error) {
+                                    if (error.response.data.errores) {
+                                        eva360.errores.push(...error.response.data.errores);
+                                    }
+                                    else {
+                                        eva360.errores.push(error.message);
+                                    }
+
+                                    rightbar.cerrar();
+                                })
+                            }
+                            else { // Crear
+                                var $form = $('#rightbar-form');
+                                var datos_serializados = $form.serialize();
+
+                                axios({
+                                    method: "POST",
+                                    url: '/Evaluacion/ActualizarEvaluacion',
+                                    data: datos_serializados
+                                })
+                                .then(function (response) {
+                                    vm.evaluaciones = response.data.evaluaciones;
+                                    rightbar.close();
+                                })
+                                .catch(function (error) {
+                                    eva360.errores.push(...error.response.data.errores);
+                                    rightbar.close();
+                                })
+                            }
+                        }
+
+                    }
+                }
+            }
+        });
+
+    </script>
+}
