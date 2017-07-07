@@ -13,9 +13,9 @@ namespace Eva360.Helpers
         {
             const String allowedChars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";
             var randN = new Random();
-            var chars = new char[36];
-            for (int i = 0; i < 36; i++) {
-                chars[i]= allowedChars[Convert.ToInt32(36 * randN.NextDouble())];
+            var chars = new char[5];
+            for (int i = 0; i < 5; i++) {
+                chars[i]= allowedChars[Convert.ToInt32(5 * randN.NextDouble())];
             }
 
             return new String(chars);

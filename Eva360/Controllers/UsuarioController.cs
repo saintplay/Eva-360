@@ -56,7 +56,7 @@ namespace Eva360.Controllers
                 usuario.Codigo = usuarioModel.Codigo;
                 usuario.Salt = PasswordHelper.GetSalt();
                 var aux = PasswordHelper.MD5Hash(usuarioModel.Password); //Encriptamos el password
-                usuario.Password = aux + usuario.Salt;
+                usuario.Password = usuario.Salt + aux + usuario.Salt;
 
                 String rol = usuarioModel.Rol;
 
