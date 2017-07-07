@@ -10,7 +10,7 @@ using System.Net;
 
 namespace Eva360.Controllers
 {
-    public class EvaluacionController : Controller
+    public class EvaluacionController : BaseController
     {
         [NonAction]
         public JsonResult getData()
@@ -75,6 +75,8 @@ namespace Eva360.Controllers
             if (!evaluacionModel.EvaluacionId.HasValue)
             {
                 evaluacion = new Evaluacion();
+                evaluacion.FechaCreacion = DateTime.Now;
+                evaluacion.UsuarioCreacionId = 1;//TO DO
                 context.Evaluacion.Add(evaluacion);
             }
             else

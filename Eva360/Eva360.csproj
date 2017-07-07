@@ -209,15 +209,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ComunicacionInternaController.cs" />
     <Compile Include="Controllers\EvaluacionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ObjetivoController.cs" />
     <Compile Include="Controllers\PeriodoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Filters\AccessAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\PasswordHelper.cs" />
+    <Compile Include="Helpers\PermisosHelper.cs" />
     <Compile Include="Models\Administrador.cs">
       <DependentUpon>Eva360Model.tt</DependentUpon>
     </Compile>
@@ -259,6 +263,7 @@
       <DependentUpon>Eva360Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PeriodoEstado.cs" />
+    <Compile Include="Models\Permisos.cs" />
     <Compile Include="Models\Proveedor.cs">
       <DependentUpon>Eva360Model.tt</DependentUpon>
     </Compile>
@@ -277,9 +282,11 @@
     <Compile Include="Models\UsuarioEstado.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Forms\EvaluacionForm.cs" />
-    <Compile Include="Models\Forms\LoginForm.cs" />
-    <Compile Include="Models\Forms\PeriodoForm.cs" />
-    <Compile Include="Models\Forms\UsuarioForm.cs" />
+    <Compile Include="Model\Forms\ComunicacionInternaForm.cs" />
+    <Compile Include="Model\Forms\LoginForm.cs" />
+    <Compile Include="Model\Forms\ObjetivoForm.cs" />
+    <Compile Include="Model\Forms\PeriodoForm.cs" />
+    <Compile Include="Model\Forms\UsuarioForm.cs" />
     <None Include="ViewModels\Login\checkbox.vue" />
   </ItemGroup>
   <ItemGroup>
@@ -380,6 +387,9 @@
     <Folder Include="ViewModels\Periodos\" />
     <Folder Include="ViewModels\User\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\ComunicacionInterna\" />
+    <Folder Include="Views\Login\" />
+    <Folder Include="Views\Objetivo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

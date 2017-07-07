@@ -55,6 +55,7 @@ namespace Eva360.Controllers
                 usuario.Estado = UsuarioEstado.Activo;
                 usuario.Codigo = usuarioModel.Codigo;
                 usuario.Salt = PasswordHelper.GetSalt();
+                usuario.UsuarioCreacionId = (int)Session["UsuarioId"];//REVISAR <----
                 var aux = PasswordHelper.MD5Hash(usuarioModel.Password); //Encriptamos el password
                 usuario.Password = usuario.Salt + aux + usuario.Salt;
 
@@ -90,12 +91,24 @@ namespace Eva360.Controllers
                                 admin.UsuarioCreacionId = 1; // TO DO
                                 context.Administrador.Add(admin);
                                 break;
-                            case "SUPERVISOR":
-                                break;
-                            case "EMPLEADO":
-                                break;
-                            case "PROVEEDOR":
-                                break;
+                            //case "SUPERVISOR":
+                            //    Supervisor supervisor = new Supervisor();
+                            //    supervisor.SupervisorId = usuario.UsuarioId;
+                            //    supervisor.FechaCreacion = DateTime.Now;
+                            //    supervisor.UsuarioCreacionId = 1;
+                            //    break;
+                            //case "EMPLEADO":
+                            //    Empleado empleado = new Empleado();
+                            //    empleado.EmpleadoId = usuario.UsuarioId;
+                            //    empleado.FechaCreacion = DateTime.Now;
+                            //    empleado.UsuarioCreacionId = 1;
+                            //    break;
+                            //case "PROVEEDOR":
+                            //    Proveedor proveedor = new Proveedor();
+                            //    proveedor.ProveedorId = usuario.UsuarioId;
+                            //    proveedor.FechaCreacion = DateTime.Now;
+                            //    proveedor.UsuarioCreacionId = 1;
+                            //    break;
                         }
                         context.SaveChanges();
                     }
