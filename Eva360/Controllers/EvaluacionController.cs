@@ -11,7 +11,7 @@ using System.Net;
 
 namespace Eva360.Controllers
 {
-    public class EvaluacionController : Controller
+    public class EvaluacionController : BaseController
     {
         [NonAction]
         public JsonResult getData()

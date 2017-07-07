@@ -11,7 +11,7 @@ using System.Data.Entity.Validation;
 
 namespace Eva360.Controllers
 {
-    public class ObjetivoController : Controller
+    public class ObjetivoController : BaseController
     {
         [NonAction]
         public JsonResult getData()

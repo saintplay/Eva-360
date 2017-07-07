@@ -10,7 +10,7 @@ using Eva360.ViewModel.Periodos;
 
 namespace Eva360.Controllers
 {
-    public class PeriodoController : Controller
+    public class PeriodoController : BaseController
     {
         [NonAction]
         public JsonResult getData()
