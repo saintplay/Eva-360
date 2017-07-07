@@ -18,9 +18,10 @@ namespace Eva360.Helpers
         {
             //Admin
             public const String CREAR_ROLES = "PERMISO.CREAR_ROLES";
-            public const String EDITAR_ROLES = "PERMISO.EDITAR_ROLES";
             public const String LISTAR_ROLES = "PERMISO.LISTAR_ROLES";
             public const String EDITAR_USUARIOS = "PERMISO.EDITAR_USUARIOS";
+            public const String LISTAR_USUARIOS = "PERMISO.LISTAR_USUARIOS";
+            public const String ELIMINAR_USUARIOS = "PERMISO.ELIMINAR_USUARIOS";//CAMBIA ESTADO A INACTIVO
             public const String VER_RENDIMIENTO = "PERMISO.VER_RENDIMIENTO";
 
             //Empleado
@@ -34,7 +35,7 @@ namespace Eva360.Helpers
             public const String EDITAR_PUNTAJE = "PERMISO.EDITAR_PUNTAJE";//<---EDITAR_EVALUACION??
             public const String LISTAR_PUNTAJE = "PERMISO.LISTAR_PUNTAJE";//<---LISTAR_EVALUACION??
             public const String LISTAR_EVALUACION360 = "PERMISO.LISTAR_EVALUACION360";//<---VER DETALLE DE LA EV360 DE 1 EMPLEADO
-            public const String CREAR_EMPLEADOS = "PERMISO.CREAR_EMPLEADOS";
+            public const String REGISTRAR_EMPLEADOS = "PERMISO.REGISTRAR_EMPLEADOS";
             public const String EDITAR_EMPLEADOS = "PERMISO.EDITAR_EMPLEADOS";
             public const String LISTAR_EMPLEADOS = "PERMISO.LISTAR_EMPLEADOS";
             public const String ELIMINAR_EMPLEADOS = "PERMISO.ELIMINAR_EMPLEADOS";//CAMBIAR ESTADO A INACTIVO
