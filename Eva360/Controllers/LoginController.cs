@@ -34,12 +34,29 @@ namespace Eva360.Controllers
             var context = new EVA360Entities();
             var usuario = context.Usuario
                           .FirstOrDefault(u => u.Codigo == loginModel.Usuario &&
-                            u.Password == (PasswordHelper.MD5Hash(loginModel.Password) + u.Salt));
+                            u.Password == u.Salt + (PasswordHelper.MD5Hash(loginModel.Password) + u.Salt));
 
             if (usuario != null) {
-
                 //Login exitoso
                 PostMessage(MessageType.Success, "Bienvenido" + usuario.Nombre);
+
+                 if(usuario.Administrador != null) {
+                    Session["AdministradorId"] = usuario.Administrador.AdministradorId;
+                }
+
+                if (usuario.Supervisor != null) {
+                    Session["SupervisorId"] = usuario.Supervisor.SupervisorId;
+                }
+
+                if (usuario.Proveedor != null)
+                {
+                    Session["ProveedorId"] = usuario.Proveedor.ProveedorId;
+                }
+
+                if (usuario.Empleado != null)
+                {
+                    Session["EmpleadoId"] = usuario.Empleado.EmpleadoId;
+                }
 
                 Session["UsuarioId"] = usuario.UsuarioId;
                 Session["Nombre"] = usuario.Nombre;

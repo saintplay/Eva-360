@@ -5,7 +5,7 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="EVA360Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Adminstrador">
+        <EntityType Name="Administrador">
           <Key>
             <PropertyRef Name="AdministradorId" />
           </Key>
@@ -170,14 +170,14 @@
           <Property Name="UsuarioModificacionId" Type="int" />
           <Property Name="FechaModificacion" Type="datetime" />
         </EntityType>
-        <Association Name="FK_Adminstrador_Usuario">
+        <Association Name="FK_Administrador_Usuario">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Adminstrador" Type="Self.Adminstrador" Multiplicity="0..1" />
+          <End Role="Administrador" Type="Self.Administrador" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="UsuarioId" />
             </Principal>
-            <Dependent Role="Adminstrador">
+            <Dependent Role="Administrador">
               <PropertyRef Name="AdministradorId" />
             </Dependent>
           </ReferentialConstraint>
@@ -375,7 +375,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="EVA360ModelStoreContainer">
-          <EntitySet Name="Adminstrador" EntityType="Self.Adminstrador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Administrador" EntityType="Self.Administrador" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ComunicacionInterna" EntityType="Self.ComunicacionInterna" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpleadoPeriodo" EntityType="Self.EmpleadoPeriodo" Schema="dbo" store:Type="Tables" />
@@ -388,9 +388,9 @@
           <EntitySet Name="Tema" EntityType="Self.Tema" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Adminstrador_Usuario" Association="Self.FK_Adminstrador_Usuario">
+          <AssociationSet Name="FK_Administrador_Usuario" Association="Self.FK_Administrador_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Adminstrador" EntitySet="Adminstrador" />
+            <End Role="Administrador" EntitySet="Administrador" />
           </AssociationSet>
           <AssociationSet Name="FK_ComunicacionInterna_Empleado" Association="Self.FK_ComunicacionInterna_Empleado">
             <End Role="Empleado" EntitySet="Empleado" />
@@ -462,7 +462,7 @@
     <edmx:ConceptualModels>
       <Schema Namespace="EVA360Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="EVA360Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Adminstrador" EntityType="EVA360Model.Adminstrador" />
+          <EntitySet Name="Administrador" EntityType="EVA360Model.Administrador" />
           <EntitySet Name="ComunicacionInterna" EntityType="EVA360Model.ComunicacionInterna" />
           <EntitySet Name="Empleado" EntityType="EVA360Model.Empleado" />
           <EntitySet Name="EmpleadoPeriodo" EntityType="EVA360Model.EmpleadoPeriodo" />
@@ -475,9 +475,9 @@
           <EntitySet Name="Tema" EntityType="EVA360Model.Tema" />
           <EntitySet Name="TipoDocumento" EntityType="EVA360Model.TipoDocumento" />
           <EntitySet Name="Usuario" EntityType="EVA360Model.Usuario" />
-          <AssociationSet Name="FK_Adminstrador_Usuario" Association="EVA360Model.FK_Adminstrador_Usuario">
+          <AssociationSet Name="FK_Administrador_Usuario" Association="EVA360Model.FK_Administrador_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Adminstrador" EntitySet="Adminstrador" />
+            <End Role="Administrador" EntitySet="Administrador" />
           </AssociationSet>
           <AssociationSet Name="FK_ComunicacionInterna_Empleado" Association="EVA360Model.FK_ComunicacionInterna_Empleado">
             <End Role="Empleado" EntitySet="Empleado" />
@@ -544,7 +544,7 @@
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Adminstrador">
+        <EntityType Name="Administrador">
           <Key>
             <PropertyRef Name="AdministradorId" />
           </Key>
@@ -553,7 +553,7 @@
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UsuarioModificacionId" Type="Int32" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Usuario" Relationship="EVA360Model.FK_Adminstrador_Usuario" FromRole="Adminstrador" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario" Relationship="EVA360Model.FK_Administrador_Usuario" FromRole="Administrador" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="ComunicacionInterna">
           <Key>
@@ -737,20 +737,20 @@
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UsuarioModificacionId" Type="Int32" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Adminstrador" Relationship="EVA360Model.FK_Adminstrador_Usuario" FromRole="Usuario" ToRole="Adminstrador" />
+          <NavigationProperty Name="Administrador" Relationship="EVA360Model.FK_Administrador_Usuario" FromRole="Usuario" ToRole="Administrador" />
           <NavigationProperty Name="Empleado" Relationship="EVA360Model.FK_Empleado_Usuario" FromRole="Usuario" ToRole="Empleado" />
           <NavigationProperty Name="Proveedor" Relationship="EVA360Model.FK_Proveedor_Usuario" FromRole="Usuario" ToRole="Proveedor" />
           <NavigationProperty Name="Supervisor" Relationship="EVA360Model.FK_Supervisor_Usuario" FromRole="Usuario" ToRole="Supervisor" />
           <NavigationProperty Name="TipoDocumento" Relationship="EVA360Model.FK_Usuario_TipoDocumento" FromRole="Usuario" ToRole="TipoDocumento" />
         </EntityType>
-        <Association Name="FK_Adminstrador_Usuario">
+        <Association Name="FK_Administrador_Usuario">
           <End Type="EVA360Model.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="EVA360Model.Adminstrador" Role="Adminstrador" Multiplicity="0..1" />
+          <End Type="EVA360Model.Administrador" Role="Administrador" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="UsuarioId" />
             </Principal>
-            <Dependent Role="Adminstrador">
+            <Dependent Role="Administrador">
               <PropertyRef Name="AdministradorId" />
             </Dependent>
           </ReferentialConstraint>
@@ -947,15 +947,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EVA360ModelStoreContainer" CdmEntityContainer="EVA360Entities">
-          <EntitySetMapping Name="Adminstrador">
-            <EntityTypeMapping TypeName="EVA360Model.Adminstrador">
-              <MappingFragment StoreEntitySet="Adminstrador">
+          <EntitySetMapping Name="Administrador">
+            <EntityTypeMapping TypeName="EVA360Model.Administrador">
+              <MappingFragment StoreEntitySet="Administrador">
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
                 <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
                 <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />

@@ -85,17 +85,29 @@ namespace Eva360.Controllers
                         switch (rol)
                         {
                             case "ADMIN":
-                                Adminstrador admin = new Adminstrador();
+                                Administrador admin = new Administrador();
                                 admin.AdministradorId = usuario.UsuarioId;
                                 admin.FechaCreacion = DateTime.Now;
                                 admin.UsuarioCreacionId = 1; // TO DO <-----
                                 break;
-                            case "SUPERVISOR":
-                                break;
-                            case "EMPLEADO":
-                                break;
-                            case "PROVEEDOR":
-                                break;
+                            //case "SUPERVISOR":
+                            //    Supervisor supervisor = new Supervisor();
+                            //    supervisor.SupervisorId = usuario.UsuarioId;
+                            //    supervisor.FechaCreacion = DateTime.Now;
+                            //    supervisor.UsuarioCreacionId = 1;
+                            //    break;
+                            //case "EMPLEADO":
+                            //    Empleado empleado = new Empleado();
+                            //    empleado.EmpleadoId = usuario.UsuarioId;
+                            //    empleado.FechaCreacion = DateTime.Now;
+                            //    empleado.UsuarioCreacionId = 1;
+                            //    break;
+                            //case "PROVEEDOR":
+                            //    Proveedor proveedor = new Proveedor();
+                            //    proveedor.ProveedorId = usuario.UsuarioId;
+                            //    proveedor.FechaCreacion = DateTime.Now;
+                            //    proveedor.UsuarioCreacionId = 1;
+                            //    break;
                         }
                     }
 
