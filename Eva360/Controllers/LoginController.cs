@@ -41,17 +41,17 @@ namespace Eva360.Controllers
                 PostMessage(MessageType.Success, "Bienvenido" + usuario.Nombre);
 
                  if(usuario.Administrador != null) {
-                    Session["AdministradorId"] = usuario.Administrador.AdministradorId;
                     Session["UsuarioRol"] = "ADMIN";
+                    return RedirectToAction("AdminHome","Home");
                 } else if (usuario.Supervisor != null) {
-                    Session["SupervisorId"] = usuario.Supervisor.SupervisorId;
                     Session["UsuarioRol"] = "SUPERVISOR";
+                    return RedirectToAction("SupervisorHome", "Home");
                 } else if (usuario.Proveedor != null) {
-                    Session["ProveedorId"] = usuario.Proveedor.ProveedorId;
                     Session["UsuarioRol"] = "PROVEEDOR";
+                    return RedirectToAction("ProveedorHome", "Home");
                 } else if (usuario.Empleado != null) {
-                    Session["EmpleadoId"] = usuario.Empleado.EmpleadoId;
                     Session["UsuarioRol"] = "EMPLEADO";
+                    return RedirectToAction("EmpleadoHome", "Home");
                 }
 
                 Session["UsuarioId"] = usuario.UsuarioId;

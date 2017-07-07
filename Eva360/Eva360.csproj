@@ -203,10 +203,12 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PeriodoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Filters\AccessAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\PasswordHelper.cs" />
+    <Compile Include="Helpers\PermisosHelper.cs" />
     <Compile Include="Models\Administrador.cs">
       <DependentUpon>Eva360Model.tt</DependentUpon>
     </Compile>
@@ -248,6 +250,7 @@
       <DependentUpon>Eva360Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PeriodoEstado.cs" />
+    <Compile Include="Models\Permisos.cs" />
     <Compile Include="Models\Proveedor.cs">
       <DependentUpon>Eva360Model.tt</DependentUpon>
     </Compile>
