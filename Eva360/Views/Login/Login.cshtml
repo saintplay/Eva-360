@@ -14,12 +14,7 @@
     </div>
 </body>
 </html>
-@Scripts.Render("~/node_modules/vue/dist/vue.min.js")
-<script>
-    const v = new Vue({
-        el: '#app',
-        data: {
-            message: 'Hello Vue.js!'
-        }
-    })
-</script>
+@{
+    var controllerName = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
+}
+@Scripts.Render("~/Scripts/app/" + controllerName + "/bundle.js")

@@ -194,7 +194,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -320,6 +319,7 @@
     <Content Include="Scripts\vue.js" />
     <Content Include="Scripts\vue.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="ViewModels\Login\main.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -360,11 +360,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="ViewModel\Evaluaciones\" />
-    <Folder Include="ViewModel\Home\" />
-    <Folder Include="ViewModel\Login\" />
-    <Folder Include="ViewModel\Periodos\" />
-    <Folder Include="ViewModel\User\" />
+    <Folder Include="ViewModels\Evaluaciones\" />
+    <Folder Include="ViewModels\Home\" />
+    <Folder Include="ViewModels\Periodos\" />
+    <Folder Include="ViewModels\User\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
