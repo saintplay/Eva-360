@@ -80,6 +80,12 @@
                     <input name="Apellido" class="input" type="text" v-model.trim="datos.usuario.Apellido">
                 </p>
             </div>
+            <div v-if="!datos.usuario.UsuarioId" class="field is-narrow">
+                <label class="label">Password</label>
+                <p class="control is-expanded">
+                    <input name="Password" class="input" type="password" v-model.trim="datos.usuario.Password">
+                </p>
+            </div>
             <div class="field is-narrow">
                 <label class="label">Codigo</label>
                 <p class="control is-expanded">
