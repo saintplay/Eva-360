@@ -282,11 +282,11 @@
     <Compile Include="Models\UsuarioEstado.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Forms\EvaluacionForm.cs" />
-    <Compile Include="Model\Forms\ComunicacionInternaForm.cs" />
-    <Compile Include="Model\Forms\LoginForm.cs" />
-    <Compile Include="Model\Forms\ObjetivoForm.cs" />
-    <Compile Include="Model\Forms\PeriodoForm.cs" />
-    <Compile Include="Model\Forms\UsuarioForm.cs" />
+    <Compile Include="Models\Forms\ComunicacionInternaForm.cs" />
+    <Compile Include="Models\Forms\LoginForm.cs" />
+    <Compile Include="Models\Forms\ObjetivoForm.cs" />
+    <Compile Include="Models\Forms\PeriodoForm.cs" />
+    <Compile Include="Models\Forms\UsuarioForm.cs" />
     <None Include="ViewModels\Login\checkbox.vue" />
   </ItemGroup>
   <ItemGroup>
@@ -388,7 +388,6 @@
     <Folder Include="ViewModels\User\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\ComunicacionInterna\" />
-    <Folder Include="Views\Login\" />
     <Folder Include="Views\Objetivo\" />
   </ItemGroup>
   <ItemGroup>
@@ -416,7 +415,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>2935</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

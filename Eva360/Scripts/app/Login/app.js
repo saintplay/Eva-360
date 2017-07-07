@@ -32,7 +32,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-511961f4", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-511961f4", __vue__options__)
+    hotAPI.reload("data-v-511961f4", __vue__options__)
   }
 })()}
 },{"vue":6,"vue-hot-reload-api":4}],2:[function(require,module,exports){
