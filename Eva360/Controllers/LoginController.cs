@@ -42,20 +42,16 @@ namespace Eva360.Controllers
 
                  if(usuario.Administrador != null) {
                     Session["AdministradorId"] = usuario.Administrador.AdministradorId;
-                }
-
-                if (usuario.Supervisor != null) {
+                    Session["UsuarioRol"] = "ADMIN";
+                } else if (usuario.Supervisor != null) {
                     Session["SupervisorId"] = usuario.Supervisor.SupervisorId;
-                }
-
-                if (usuario.Proveedor != null)
-                {
+                    Session["UsuarioRol"] = "SUPERVISOR";
+                } else if (usuario.Proveedor != null) {
                     Session["ProveedorId"] = usuario.Proveedor.ProveedorId;
-                }
-
-                if (usuario.Empleado != null)
-                {
+                    Session["UsuarioRol"] = "PROVEEDOR";
+                } else if (usuario.Empleado != null) {
                     Session["EmpleadoId"] = usuario.Empleado.EmpleadoId;
+                    Session["UsuarioRol"] = "EMPLEADO";
                 }
 
                 Session["UsuarioId"] = usuario.UsuarioId;
