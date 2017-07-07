@@ -116,7 +116,7 @@ namespace Eva360.Controllers
         [HttpPost]
         public ActionResult EliminarUsuario(Int32 UsuarioId)
         {
-            try{
+            try {
                 using(var transaction=new TransactionScope())
                 {
                     var context = new EVA360Entities();

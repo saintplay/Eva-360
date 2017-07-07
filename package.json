@@ -1,0 +1,32 @@
+{
+  "name": "eva360",
+  "version": "1.0.0",
+  "description": "Evaluaciones 360",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saintplay/Eva-360.git"
+  },
+  "keywords": [
+    "Vue",
+    "Bulma",
+    "SignalR",
+    "Websockets",
+    "Crud"
+  ],
+  "author": "Diego Jara",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/saintplay/Eva-360/issues"
+  },
+  "homepage": "https://github.com/saintplay/Eva-360#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.12",
+    "gulp-msbuild": "^0.5.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-serve-iis-express": "^1.0.0"
+  }
+}
