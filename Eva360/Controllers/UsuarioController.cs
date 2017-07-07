@@ -55,6 +55,7 @@ namespace Eva360.Controllers
                 usuario.Estado = UsuarioEstado.Activo;
                 usuario.Codigo = usuarioModel.Codigo;
                 usuario.Salt = PasswordHelper.GetSalt();
+                usuario.UsuarioCreacionId = (int)Session["UsuarioId"];//REVISAR <----
                 var aux = PasswordHelper.MD5Hash(usuarioModel.Password); //Encriptamos el password
                 usuario.Password = usuario.Salt + aux + usuario.Salt;
 

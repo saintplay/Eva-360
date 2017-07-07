@@ -12,7 +12,7 @@ namespace Eva360.ViewModel.Evaluacion
         public Int32? EvaluacionId { get; set; }
 
         [Required]
-        public String Nombre { get; set; }
+        public String Nombre { get; set; } = String.Empty;
 
         [Required]
         public Decimal PorcentajeAvance { get; set; }
@@ -28,6 +28,6 @@ namespace Eva360.ViewModel.Evaluacion
 
         public Int32 ProveedorId { get; set; }
 
-        public String RutaInforme { get; set; }
+        public String RutaInforme { get; set; } = String.Empty;
     }
 }

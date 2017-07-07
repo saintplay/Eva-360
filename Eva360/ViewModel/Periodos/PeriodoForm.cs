@@ -11,10 +11,10 @@ namespace Eva360.ViewModel.Periodos
         public Int32? PeriodoId { get; set; }
 
         [Required]
-        public string Nombre { get; set; }
+        public string Nombre { get; set; } = String.Empty;
 
         [Required]
-        public string Estado { get; set; }
+        public string Estado { get; set; } = String.Empty;
 
         [Required]
         public DateTime FechaInicio { get; set; }

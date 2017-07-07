@@ -76,6 +76,8 @@ namespace Eva360.Controllers
             if (!evaluacionModel.EvaluacionId.HasValue)
             {
                 evaluacion = new Evaluacion();
+                evaluacion.FechaCreacion = DateTime.Now;
+                evaluacion.UsuarioCreacionId = 1;//TO DO
                 context.Evaluacion.Add(evaluacion);
             }
             else

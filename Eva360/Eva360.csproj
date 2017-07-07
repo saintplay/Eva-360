@@ -201,6 +201,7 @@
     <Compile Include="Controllers\EvaluacionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ObjetivoController.cs" />
     <Compile Include="Controllers\PeriodoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Filters\AccessAttribute.cs" />
@@ -271,6 +272,7 @@
     <Compile Include="ViewModel\Evaluaciones\EvaluacionForm.cs" />
     <Compile Include="ViewModel\Home\IndexViewModel.cs" />
     <Compile Include="ViewModel\Login\LoginForm.cs" />
+    <Compile Include="ViewModel\Objetivo\ObjetivoForm.cs" />
     <Compile Include="ViewModel\Periodos\PeriodoForm.cs" />
     <Compile Include="ViewModel\User\UsuarioForm.cs" />
   </ItemGroup>
@@ -365,6 +367,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Login\" />
+    <Folder Include="Views\Objetivo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
