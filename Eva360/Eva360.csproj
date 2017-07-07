@@ -207,6 +207,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\PasswordHelper.cs" />
+    <Compile Include="Models\Adminstrador.cs">
+      <DependentUpon>Eva360Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ComunicacionInterna.cs">
       <DependentUpon>Eva360Model.tt</DependentUpon>
     </Compile>
@@ -356,7 +359,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\Evaluacion\" />
     <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>

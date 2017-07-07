@@ -4,7 +4,17 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EVA360Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EVA360Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Adminstrador">
+          <Key>
+            <PropertyRef Name="AdministradorId" />
+          </Key>
+          <Property Name="AdministradorId" Type="int" Nullable="false" />
+          <Property Name="UsuarioCreacionId" Type="int" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacionId" Type="int" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
         <EntityType Name="ComunicacionInterna">
           <Key>
             <PropertyRef Name="ComunicacionInterna" />
@@ -160,6 +170,18 @@
           <Property Name="UsuarioModificacionId" Type="int" />
           <Property Name="FechaModificacion" Type="datetime" />
         </EntityType>
+        <Association Name="FK_Adminstrador_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Adminstrador" Type="Self.Adminstrador" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Adminstrador">
+              <PropertyRef Name="AdministradorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ComunicacionInterna_Empleado">
           <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
           <End Role="ComunicacionInterna" Type="Self.ComunicacionInterna" Multiplicity="*" />
@@ -353,6 +375,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="EVA360ModelStoreContainer">
+          <EntitySet Name="Adminstrador" EntityType="Self.Adminstrador" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ComunicacionInterna" EntityType="Self.ComunicacionInterna" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpleadoPeriodo" EntityType="Self.EmpleadoPeriodo" Schema="dbo" store:Type="Tables" />
@@ -365,6 +388,10 @@
           <EntitySet Name="Tema" EntityType="Self.Tema" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Adminstrador_Usuario" Association="Self.FK_Adminstrador_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Adminstrador" EntitySet="Adminstrador" />
+          </AssociationSet>
           <AssociationSet Name="FK_ComunicacionInterna_Empleado" Association="Self.FK_ComunicacionInterna_Empleado">
             <End Role="Empleado" EntitySet="Empleado" />
             <End Role="ComunicacionInterna" EntitySet="ComunicacionInterna" />
@@ -430,23 +457,116 @@
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EVA360Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EVA360Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Adminstrador" EntityType="EVA360Model.Adminstrador" />
+          <EntitySet Name="ComunicacionInterna" EntityType="EVA360Model.ComunicacionInterna" />
+          <EntitySet Name="Empleado" EntityType="EVA360Model.Empleado" />
+          <EntitySet Name="EmpleadoPeriodo" EntityType="EVA360Model.EmpleadoPeriodo" />
+          <EntitySet Name="Evaluacion" EntityType="EVA360Model.Evaluacion" />
+          <EntitySet Name="EvalucionTema" EntityType="EVA360Model.EvalucionTema" />
+          <EntitySet Name="Objetivo" EntityType="EVA360Model.Objetivo" />
+          <EntitySet Name="Periodo" EntityType="EVA360Model.Periodo" />
+          <EntitySet Name="Proveedor" EntityType="EVA360Model.Proveedor" />
+          <EntitySet Name="Supervisor" EntityType="EVA360Model.Supervisor" />
+          <EntitySet Name="Tema" EntityType="EVA360Model.Tema" />
+          <EntitySet Name="TipoDocumento" EntityType="EVA360Model.TipoDocumento" />
+          <EntitySet Name="Usuario" EntityType="EVA360Model.Usuario" />
+          <AssociationSet Name="FK_Adminstrador_Usuario" Association="EVA360Model.FK_Adminstrador_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Adminstrador" EntitySet="Adminstrador" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComunicacionInterna_Empleado" Association="EVA360Model.FK_ComunicacionInterna_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="ComunicacionInterna" EntitySet="ComunicacionInterna" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_Usuario" Association="EVA360Model.FK_Empleado_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Empleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoPeriodo_Empleado" Association="EVA360Model.FK_EmpleadoPeriodo_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="EmpleadoPeriodo" EntitySet="EmpleadoPeriodo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evaluacion_Empleado" Association="EVA360Model.FK_Evaluacion_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Evaluacion" EntitySet="Evaluacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoPeriodo_Periodo" Association="EVA360Model.FK_EmpleadoPeriodo_Periodo">
+            <End Role="Periodo" EntitySet="Periodo" />
+            <End Role="EmpleadoPeriodo" EntitySet="EmpleadoPeriodo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoPeriodo_Supervisor" Association="EVA360Model.FK_EmpleadoPeriodo_Supervisor">
+            <End Role="Supervisor" EntitySet="Supervisor" />
+            <End Role="EmpleadoPeriodo" EntitySet="EmpleadoPeriodo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evaluacion_Periodo" Association="EVA360Model.FK_Evaluacion_Periodo">
+            <End Role="Periodo" EntitySet="Periodo" />
+            <End Role="Evaluacion" EntitySet="Evaluacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evaluacion_Proveedor" Association="EVA360Model.FK_Evaluacion_Proveedor">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="Evaluacion" EntitySet="Evaluacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evaluacion_Supervisor" Association="EVA360Model.FK_Evaluacion_Supervisor">
+            <End Role="Supervisor" EntitySet="Supervisor" />
+            <End Role="Evaluacion" EntitySet="Evaluacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EvalucionTema_Evaluacion" Association="EVA360Model.FK_EvalucionTema_Evaluacion">
+            <End Role="Evaluacion" EntitySet="Evaluacion" />
+            <End Role="EvalucionTema" EntitySet="EvalucionTema" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EvalucionTema_Tema" Association="EVA360Model.FK_EvalucionTema_Tema">
+            <End Role="Tema" EntitySet="Tema" />
+            <End Role="EvalucionTema" EntitySet="EvalucionTema" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Objetivo_Periodo" Association="EVA360Model.FK_Objetivo_Periodo">
+            <End Role="Periodo" EntitySet="Periodo" />
+            <End Role="Objetivo" EntitySet="Objetivo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tema_Objetivo" Association="EVA360Model.FK_Tema_Objetivo">
+            <End Role="Objetivo" EntitySet="Objetivo" />
+            <End Role="Tema" EntitySet="Tema" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedor_Usuario" Association="EVA360Model.FK_Proveedor_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Proveedor" EntitySet="Proveedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supervisor_Usuario" Association="EVA360Model.FK_Supervisor_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Supervisor" EntitySet="Supervisor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_TipoDocumento" Association="EVA360Model.FK_Usuario_TipoDocumento">
+            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Adminstrador">
+          <Key>
+            <PropertyRef Name="AdministradorId" />
+          </Key>
+          <Property Name="AdministradorId" Type="Int32" Nullable="false" />
+          <Property Name="UsuarioCreacionId" Type="Int32" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacionId" Type="Int32" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Usuario" Relationship="EVA360Model.FK_Adminstrador_Usuario" FromRole="Adminstrador" ToRole="Usuario" />
+        </EntityType>
         <EntityType Name="ComunicacionInterna">
           <Key>
             <PropertyRef Name="ComunicacionInterna1" />
           </Key>
           <Property Name="ComunicacionInterna1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EmpleadoId" Type="Int32" Nullable="false" />
-          <Property Name="Contenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contenido" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="UsuarioCreacionId" Type="Int32" Nullable="false" />
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UsuarioModificacionId" Type="Int32" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Empleado" Relationship="Self.FK_ComunicacionInterna_Empleado" FromRole="ComunicacionInterna" ToRole="Empleado" />
+          <NavigationProperty Name="Empleado" Relationship="EVA360Model.FK_ComunicacionInterna_Empleado" FromRole="ComunicacionInterna" ToRole="Empleado" />
         </EntityType>
         <EntityType Name="Empleado">
           <Key>
@@ -457,10 +577,10 @@
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UsuarioModificacionId" Type="Int32" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ComunicacionInterna" Relationship="Self.FK_ComunicacionInterna_Empleado" FromRole="Empleado" ToRole="ComunicacionInterna" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_Empleado_Usuario" FromRole="Empleado" ToRole="Usuario" />
-          <NavigationProperty Name="EmpleadoPeriodo" Relationship="Self.FK_EmpleadoPeriodo_Empleado" FromRole="Empleado" ToRole="EmpleadoPeriodo" />
-          <NavigationProperty Name="Evaluacion" Relationship="Self.FK_Evaluacion_Empleado" FromRole="Empleado" ToRole="Evaluacion" />
+          <NavigationProperty Name="ComunicacionInterna" Relationship="EVA360Model.FK_ComunicacionInterna_Empleado" FromRole="Empleado" ToRole="ComunicacionInterna" />
+          <NavigationProperty Name="Usuario" Relationship="EVA360Model.FK_Empleado_Usuario" FromRole="Empleado" ToRole="Usuario" />
+          <NavigationProperty Name="EmpleadoPeriodo" Relationship="EVA360Model.FK_EmpleadoPeriodo_Empleado" FromRole="Empleado" ToRole="EmpleadoPeriodo" />
+          <NavigationProperty Name="Evaluacion" Relationship="EVA360Model.FK_Evaluacion_Empleado" FromRole="Empleado" ToRole="Evaluacion" />
         </EntityType>
         <EntityType Name="EmpleadoPeriodo">
           <Key>
@@ -474,17 +594,17 @@
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UsuarioModificacionId" Type="Int32" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Empleado" Relationship="Self.FK_EmpleadoPeriodo_Empleado" FromRole="EmpleadoPeriodo" ToRole="Empleado" />
-          <NavigationProperty Name="Periodo" Relationship="Self.FK_EmpleadoPeriodo_Periodo" FromRole="EmpleadoPeriodo" ToRole="Periodo" />
-          <NavigationProperty Name="Supervisor" Relationship="Self.FK_EmpleadoPeriodo_Supervisor" FromRole="EmpleadoPeriodo" ToRole="Supervisor" />
+          <NavigationProperty Name="Empleado" Relationship="EVA360Model.FK_EmpleadoPeriodo_Empleado" FromRole="EmpleadoPeriodo" ToRole="Empleado" />
+          <NavigationProperty Name="Periodo" Relationship="EVA360Model.FK_EmpleadoPeriodo_Periodo" FromRole="EmpleadoPeriodo" ToRole="Periodo" />
+          <NavigationProperty Name="Supervisor" Relationship="EVA360Model.FK_EmpleadoPeriodo_Supervisor" FromRole="EmpleadoPeriodo" ToRole="Supervisor" />
         </EntityType>
         <EntityType Name="Evaluacion">
           <Key>
             <PropertyRef Name="EvaluacionId" />
           </Key>
           <Property Name="EvaluacionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PorcentajeAvance" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PorcentajeAvance" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="SupervisorId" Type="Int32" Nullable="false" />
           <Property Name="ProveedorId" Type="Int32" />
           <Property Name="RutaInforme" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
@@ -494,11 +614,11 @@
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UsuarioModificacionId" Type="Int32" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Empleado" Relationship="Self.FK_Evaluacion_Empleado" FromRole="Evaluacion" ToRole="Empleado" />
-          <NavigationProperty Name="Periodo" Relationship="Self.FK_Evaluacion_Periodo" FromRole="Evaluacion" ToRole="Periodo" />
-          <NavigationProperty Name="Proveedor" Relationship="Self.FK_Evaluacion_Proveedor" FromRole="Evaluacion" ToRole="Proveedor" />
-          <NavigationProperty Name="Supervisor" Relationship="Self.FK_Evaluacion_Supervisor" FromRole="Evaluacion" ToRole="Supervisor" />
-          <NavigationProperty Name="EvalucionTema" Relationship="Self.FK_EvalucionTema_Evaluacion" FromRole="Evaluacion" ToRole="EvalucionTema" />
+          <NavigationProperty Name="Empleado" Relationship="EVA360Model.FK_Evaluacion_Empleado" FromRole="Evaluacion" ToRole="Empleado" />
+          <NavigationProperty Name="Periodo" Relationship="EVA360Model.FK_Evaluacion_Periodo" FromRole="Evaluacion" ToRole="Periodo" />
+          <NavigationProperty Name="Proveedor" Relationship="EVA360Model.FK_Evaluacion_Proveedor" FromRole="Evaluacion" ToRole="Proveedor" />
+          <NavigationProperty Name="Supervisor" Relationship="EVA360Model.FK_Evaluacion_Supervisor" FromRole="Evaluacion" ToRole="Supervisor" />
+          <NavigationProperty Name="EvalucionTema" Relationship="EVA360Model.FK_EvalucionTema_Evaluacion" FromRole="Evaluacion" ToRole="EvalucionTema" />
         </EntityType>
         <EntityType Name="EvalucionTema">
           <Key>
@@ -512,24 +632,24 @@
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UsuarioModificacionId" Type="Int32" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Evaluacion" Relationship="Self.FK_EvalucionTema_Evaluacion" FromRole="EvalucionTema" ToRole="Evaluacion" />
-          <NavigationProperty Name="Tema" Relationship="Self.FK_EvalucionTema_Tema" FromRole="EvalucionTema" ToRole="Tema" />
+          <NavigationProperty Name="Evaluacion" Relationship="EVA360Model.FK_EvalucionTema_Evaluacion" FromRole="EvalucionTema" ToRole="Evaluacion" />
+          <NavigationProperty Name="Tema" Relationship="EVA360Model.FK_EvalucionTema_Tema" FromRole="EvalucionTema" ToRole="Tema" />
         </EntityType>
         <EntityType Name="Objetivo">
           <Key>
             <PropertyRef Name="ObjetivoId" />
           </Key>
           <Property Name="ObjetivoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PeriodoId" Type="Int32" Nullable="false" />
           <Property Name="Orden" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UsuarioCreacionId" Type="Int32" Nullable="false" />
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UsuarioModificacionId" Type="Int32" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Periodo" Relationship="Self.FK_Objetivo_Periodo" FromRole="Objetivo" ToRole="Periodo" />
-          <NavigationProperty Name="Tema" Relationship="Self.FK_Tema_Objetivo" FromRole="Objetivo" ToRole="Tema" />
+          <NavigationProperty Name="Periodo" Relationship="EVA360Model.FK_Objetivo_Periodo" FromRole="Objetivo" ToRole="Periodo" />
+          <NavigationProperty Name="Tema" Relationship="EVA360Model.FK_Tema_Objetivo" FromRole="Objetivo" ToRole="Tema" />
         </EntityType>
         <EntityType Name="Periodo">
           <Key>
@@ -538,15 +658,15 @@
           <Property Name="PeriodoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Estado" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
           <Property Name="UsuarioCreacionId" Type="Int32" Nullable="false" />
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UsuarioModificacionId" Type="Int32" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="EmpleadoPeriodo" Relationship="Self.FK_EmpleadoPeriodo_Periodo" FromRole="Periodo" ToRole="EmpleadoPeriodo" />
-          <NavigationProperty Name="Evaluacion" Relationship="Self.FK_Evaluacion_Periodo" FromRole="Periodo" ToRole="Evaluacion" />
-          <NavigationProperty Name="Objetivo" Relationship="Self.FK_Objetivo_Periodo" FromRole="Periodo" ToRole="Objetivo" />
+          <NavigationProperty Name="EmpleadoPeriodo" Relationship="EVA360Model.FK_EmpleadoPeriodo_Periodo" FromRole="Periodo" ToRole="EmpleadoPeriodo" />
+          <NavigationProperty Name="Evaluacion" Relationship="EVA360Model.FK_Evaluacion_Periodo" FromRole="Periodo" ToRole="Evaluacion" />
+          <NavigationProperty Name="Objetivo" Relationship="EVA360Model.FK_Objetivo_Periodo" FromRole="Periodo" ToRole="Objetivo" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
@@ -557,8 +677,8 @@
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UsuarioModificacionId" Type="Int32" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Evaluacion" Relationship="Self.FK_Evaluacion_Proveedor" FromRole="Proveedor" ToRole="Evaluacion" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_Proveedor_Usuario" FromRole="Proveedor" ToRole="Usuario" />
+          <NavigationProperty Name="Evaluacion" Relationship="EVA360Model.FK_Evaluacion_Proveedor" FromRole="Proveedor" ToRole="Evaluacion" />
+          <NavigationProperty Name="Usuario" Relationship="EVA360Model.FK_Proveedor_Usuario" FromRole="Proveedor" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Supervisor">
           <Key>
@@ -569,25 +689,25 @@
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UsuarioModificacionId" Type="Int32" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="EmpleadoPeriodo" Relationship="Self.FK_EmpleadoPeriodo_Supervisor" FromRole="Supervisor" ToRole="EmpleadoPeriodo" />
-          <NavigationProperty Name="Evaluacion" Relationship="Self.FK_Evaluacion_Supervisor" FromRole="Supervisor" ToRole="Evaluacion" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_Supervisor_Usuario" FromRole="Supervisor" ToRole="Usuario" />
+          <NavigationProperty Name="EmpleadoPeriodo" Relationship="EVA360Model.FK_EmpleadoPeriodo_Supervisor" FromRole="Supervisor" ToRole="EmpleadoPeriodo" />
+          <NavigationProperty Name="Evaluacion" Relationship="EVA360Model.FK_Evaluacion_Supervisor" FromRole="Supervisor" ToRole="Evaluacion" />
+          <NavigationProperty Name="Usuario" Relationship="EVA360Model.FK_Supervisor_Usuario" FromRole="Supervisor" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Tema">
           <Key>
             <PropertyRef Name="TemaId" />
           </Key>
           <Property Name="TemaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ObjetivoId" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Orden" Type="Int32" Nullable="false" />
           <Property Name="UsuarioCreacionId" Type="Int32" Nullable="false" />
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UsuarioModificacionId" Type="Int32" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="EvalucionTema" Relationship="Self.FK_EvalucionTema_Tema" FromRole="Tema" ToRole="EvalucionTema" />
-          <NavigationProperty Name="Objetivo" Relationship="Self.FK_Tema_Objetivo" FromRole="Tema" ToRole="Objetivo" />
+          <NavigationProperty Name="EvalucionTema" Relationship="EVA360Model.FK_EvalucionTema_Tema" FromRole="Tema" ToRole="EvalucionTema" />
+          <NavigationProperty Name="Objetivo" Relationship="EVA360Model.FK_Tema_Objetivo" FromRole="Tema" ToRole="Objetivo" />
         </EntityType>
         <EntityType Name="TipoDocumento">
           <Key>
@@ -595,36 +715,49 @@
           </Key>
           <Property Name="TipoDocumentoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Sigla" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_TipoDocumento" FromRole="TipoDocumento" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario" Relationship="EVA360Model.FK_Usuario_TipoDocumento" FromRole="TipoDocumento" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="UsuarioId" />
           </Key>
           <Property Name="UsuarioId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Sexo" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Estado" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="NroDocumento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sexo" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="NroDocumento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="TipoDocumentoId" Type="Int32" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Salt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Salt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UsuarioCreacionId" Type="Int32" />
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UsuarioModificacionId" Type="Int32" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Empleado" Relationship="Self.FK_Empleado_Usuario" FromRole="Usuario" ToRole="Empleado" />
-          <NavigationProperty Name="Proveedor" Relationship="Self.FK_Proveedor_Usuario" FromRole="Usuario" ToRole="Proveedor" />
-          <NavigationProperty Name="Supervisor" Relationship="Self.FK_Supervisor_Usuario" FromRole="Usuario" ToRole="Supervisor" />
-          <NavigationProperty Name="TipoDocumento" Relationship="Self.FK_Usuario_TipoDocumento" FromRole="Usuario" ToRole="TipoDocumento" />
+          <NavigationProperty Name="Adminstrador" Relationship="EVA360Model.FK_Adminstrador_Usuario" FromRole="Usuario" ToRole="Adminstrador" />
+          <NavigationProperty Name="Empleado" Relationship="EVA360Model.FK_Empleado_Usuario" FromRole="Usuario" ToRole="Empleado" />
+          <NavigationProperty Name="Proveedor" Relationship="EVA360Model.FK_Proveedor_Usuario" FromRole="Usuario" ToRole="Proveedor" />
+          <NavigationProperty Name="Supervisor" Relationship="EVA360Model.FK_Supervisor_Usuario" FromRole="Usuario" ToRole="Supervisor" />
+          <NavigationProperty Name="TipoDocumento" Relationship="EVA360Model.FK_Usuario_TipoDocumento" FromRole="Usuario" ToRole="TipoDocumento" />
         </EntityType>
+        <Association Name="FK_Adminstrador_Usuario">
+          <End Type="EVA360Model.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="EVA360Model.Adminstrador" Role="Adminstrador" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Adminstrador">
+              <PropertyRef Name="AdministradorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ComunicacionInterna_Empleado">
-          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
-          <End Role="ComunicacionInterna" Type="Self.ComunicacionInterna" Multiplicity="*" />
+          <End Type="EVA360Model.Empleado" Role="Empleado" Multiplicity="1" />
+          <End Type="EVA360Model.ComunicacionInterna" Role="ComunicacionInterna" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empleado">
               <PropertyRef Name="EmpleadoId" />
@@ -635,8 +768,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Empleado_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
+          <End Type="EVA360Model.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="EVA360Model.Empleado" Role="Empleado" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="UsuarioId" />
@@ -647,8 +780,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EmpleadoPeriodo_Empleado">
-          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
-          <End Role="EmpleadoPeriodo" Type="Self.EmpleadoPeriodo" Multiplicity="*" />
+          <End Type="EVA360Model.Empleado" Role="Empleado" Multiplicity="1" />
+          <End Type="EVA360Model.EmpleadoPeriodo" Role="EmpleadoPeriodo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empleado">
               <PropertyRef Name="EmpleadoId" />
@@ -659,8 +792,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Evaluacion_Empleado">
-          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
-          <End Role="Evaluacion" Type="Self.Evaluacion" Multiplicity="*" />
+          <End Type="EVA360Model.Empleado" Role="Empleado" Multiplicity="1" />
+          <End Type="EVA360Model.Evaluacion" Role="Evaluacion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empleado">
               <PropertyRef Name="EmpleadoId" />
@@ -671,8 +804,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EmpleadoPeriodo_Periodo">
-          <End Role="Periodo" Type="Self.Periodo" Multiplicity="1" />
-          <End Role="EmpleadoPeriodo" Type="Self.EmpleadoPeriodo" Multiplicity="*" />
+          <End Type="EVA360Model.Periodo" Role="Periodo" Multiplicity="1" />
+          <End Type="EVA360Model.EmpleadoPeriodo" Role="EmpleadoPeriodo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Periodo">
               <PropertyRef Name="PeriodoId" />
@@ -683,8 +816,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EmpleadoPeriodo_Supervisor">
-          <End Role="Supervisor" Type="Self.Supervisor" Multiplicity="0..1" />
-          <End Role="EmpleadoPeriodo" Type="Self.EmpleadoPeriodo" Multiplicity="*" />
+          <End Type="EVA360Model.Supervisor" Role="Supervisor" Multiplicity="0..1" />
+          <End Type="EVA360Model.EmpleadoPeriodo" Role="EmpleadoPeriodo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Supervisor">
               <PropertyRef Name="SupervisorId" />
@@ -695,8 +828,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Evaluacion_Periodo">
-          <End Role="Periodo" Type="Self.Periodo" Multiplicity="1" />
-          <End Role="Evaluacion" Type="Self.Evaluacion" Multiplicity="*" />
+          <End Type="EVA360Model.Periodo" Role="Periodo" Multiplicity="1" />
+          <End Type="EVA360Model.Evaluacion" Role="Evaluacion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Periodo">
               <PropertyRef Name="PeriodoId" />
@@ -707,8 +840,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Evaluacion_Proveedor">
-          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
-          <End Role="Evaluacion" Type="Self.Evaluacion" Multiplicity="*" />
+          <End Type="EVA360Model.Proveedor" Role="Proveedor" Multiplicity="0..1" />
+          <End Type="EVA360Model.Evaluacion" Role="Evaluacion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Proveedor">
               <PropertyRef Name="ProveedorId" />
@@ -719,8 +852,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Evaluacion_Supervisor">
-          <End Role="Supervisor" Type="Self.Supervisor" Multiplicity="1" />
-          <End Role="Evaluacion" Type="Self.Evaluacion" Multiplicity="*" />
+          <End Type="EVA360Model.Supervisor" Role="Supervisor" Multiplicity="1" />
+          <End Type="EVA360Model.Evaluacion" Role="Evaluacion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Supervisor">
               <PropertyRef Name="SupervisorId" />
@@ -731,8 +864,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EvalucionTema_Evaluacion">
-          <End Role="Evaluacion" Type="Self.Evaluacion" Multiplicity="1" />
-          <End Role="EvalucionTema" Type="Self.EvalucionTema" Multiplicity="*" />
+          <End Type="EVA360Model.Evaluacion" Role="Evaluacion" Multiplicity="1" />
+          <End Type="EVA360Model.EvalucionTema" Role="EvalucionTema" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Evaluacion">
               <PropertyRef Name="EvaluacionId" />
@@ -743,8 +876,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EvalucionTema_Tema">
-          <End Role="Tema" Type="Self.Tema" Multiplicity="1" />
-          <End Role="EvalucionTema" Type="Self.EvalucionTema" Multiplicity="*" />
+          <End Type="EVA360Model.Tema" Role="Tema" Multiplicity="1" />
+          <End Type="EVA360Model.EvalucionTema" Role="EvalucionTema" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tema">
               <PropertyRef Name="TemaId" />
@@ -755,8 +888,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Objetivo_Periodo">
-          <End Role="Periodo" Type="Self.Periodo" Multiplicity="1" />
-          <End Role="Objetivo" Type="Self.Objetivo" Multiplicity="*" />
+          <End Type="EVA360Model.Periodo" Role="Periodo" Multiplicity="1" />
+          <End Type="EVA360Model.Objetivo" Role="Objetivo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Periodo">
               <PropertyRef Name="PeriodoId" />
@@ -767,8 +900,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Tema_Objetivo">
-          <End Role="Objetivo" Type="Self.Objetivo" Multiplicity="1" />
-          <End Role="Tema" Type="Self.Tema" Multiplicity="*" />
+          <End Type="EVA360Model.Objetivo" Role="Objetivo" Multiplicity="1" />
+          <End Type="EVA360Model.Tema" Role="Tema" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Objetivo">
               <PropertyRef Name="ObjetivoId" />
@@ -779,8 +912,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Proveedor_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+          <End Type="EVA360Model.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="EVA360Model.Proveedor" Role="Proveedor" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="UsuarioId" />
@@ -791,8 +924,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Supervisor_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Supervisor" Type="Self.Supervisor" Multiplicity="0..1" />
+          <End Type="EVA360Model.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="EVA360Model.Supervisor" Role="Supervisor" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="UsuarioId" />
@@ -803,8 +936,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuario_TipoDocumento">
-          <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <End Type="EVA360Model.TipoDocumento" Role="TipoDocumento" Multiplicity="1" />
+          <End Type="EVA360Model.Usuario" Role="Usuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TipoDocumento">
               <PropertyRef Name="TipoDocumentoId" />
@@ -814,254 +947,187 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="EVA360Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ComunicacionInterna" EntityType="Self.ComunicacionInterna" />
-          <EntitySet Name="Empleado" EntityType="Self.Empleado" />
-          <EntitySet Name="EmpleadoPeriodo" EntityType="Self.EmpleadoPeriodo" />
-          <EntitySet Name="Evaluacion" EntityType="Self.Evaluacion" />
-          <EntitySet Name="EvalucionTema" EntityType="Self.EvalucionTema" />
-          <EntitySet Name="Objetivo" EntityType="Self.Objetivo" />
-          <EntitySet Name="Periodo" EntityType="Self.Periodo" />
-          <EntitySet Name="Proveedor" EntityType="Self.Proveedor" />
-          <EntitySet Name="Supervisor" EntityType="Self.Supervisor" />
-          <EntitySet Name="Tema" EntityType="Self.Tema" />
-          <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" />
-          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
-          <AssociationSet Name="FK_ComunicacionInterna_Empleado" Association="Self.FK_ComunicacionInterna_Empleado">
-            <End Role="Empleado" EntitySet="Empleado" />
-            <End Role="ComunicacionInterna" EntitySet="ComunicacionInterna" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Empleado_Usuario" Association="Self.FK_Empleado_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Empleado" EntitySet="Empleado" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmpleadoPeriodo_Empleado" Association="Self.FK_EmpleadoPeriodo_Empleado">
-            <End Role="Empleado" EntitySet="Empleado" />
-            <End Role="EmpleadoPeriodo" EntitySet="EmpleadoPeriodo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Evaluacion_Empleado" Association="Self.FK_Evaluacion_Empleado">
-            <End Role="Empleado" EntitySet="Empleado" />
-            <End Role="Evaluacion" EntitySet="Evaluacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmpleadoPeriodo_Periodo" Association="Self.FK_EmpleadoPeriodo_Periodo">
-            <End Role="Periodo" EntitySet="Periodo" />
-            <End Role="EmpleadoPeriodo" EntitySet="EmpleadoPeriodo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmpleadoPeriodo_Supervisor" Association="Self.FK_EmpleadoPeriodo_Supervisor">
-            <End Role="Supervisor" EntitySet="Supervisor" />
-            <End Role="EmpleadoPeriodo" EntitySet="EmpleadoPeriodo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Evaluacion_Periodo" Association="Self.FK_Evaluacion_Periodo">
-            <End Role="Periodo" EntitySet="Periodo" />
-            <End Role="Evaluacion" EntitySet="Evaluacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Evaluacion_Proveedor" Association="Self.FK_Evaluacion_Proveedor">
-            <End Role="Proveedor" EntitySet="Proveedor" />
-            <End Role="Evaluacion" EntitySet="Evaluacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Evaluacion_Supervisor" Association="Self.FK_Evaluacion_Supervisor">
-            <End Role="Supervisor" EntitySet="Supervisor" />
-            <End Role="Evaluacion" EntitySet="Evaluacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EvalucionTema_Evaluacion" Association="Self.FK_EvalucionTema_Evaluacion">
-            <End Role="Evaluacion" EntitySet="Evaluacion" />
-            <End Role="EvalucionTema" EntitySet="EvalucionTema" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EvalucionTema_Tema" Association="Self.FK_EvalucionTema_Tema">
-            <End Role="Tema" EntitySet="Tema" />
-            <End Role="EvalucionTema" EntitySet="EvalucionTema" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Objetivo_Periodo" Association="Self.FK_Objetivo_Periodo">
-            <End Role="Periodo" EntitySet="Periodo" />
-            <End Role="Objetivo" EntitySet="Objetivo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tema_Objetivo" Association="Self.FK_Tema_Objetivo">
-            <End Role="Objetivo" EntitySet="Objetivo" />
-            <End Role="Tema" EntitySet="Tema" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_Usuario" Association="Self.FK_Proveedor_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Proveedor" EntitySet="Proveedor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Supervisor_Usuario" Association="Self.FK_Supervisor_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Supervisor" EntitySet="Supervisor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario_TipoDocumento" Association="Self.FK_Usuario_TipoDocumento">
-            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
-            <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EVA360ModelStoreContainer" CdmEntityContainer="EVA360Entities">
+          <EntitySetMapping Name="Adminstrador">
+            <EntityTypeMapping TypeName="EVA360Model.Adminstrador">
+              <MappingFragment StoreEntitySet="Adminstrador">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacionId" ColumnName="UsuarioCreacionId" />
+                <ScalarProperty Name="AdministradorId" ColumnName="AdministradorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ComunicacionInterna">
             <EntityTypeMapping TypeName="EVA360Model.ComunicacionInterna">
               <MappingFragment StoreEntitySet="ComunicacionInterna">
-                <ScalarProperty Name="ComunicacionInterna1" ColumnName="ComunicacionInterna" />
-                <ScalarProperty Name="EmpleadoId" ColumnName="EmpleadoId" />
-                <ScalarProperty Name="Contenido" ColumnName="Contenido" />
-                <ScalarProperty Name="UsuarioCreacionId" ColumnName="UsuarioCreacionId" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacionId" ColumnName="UsuarioCreacionId" />
+                <ScalarProperty Name="Contenido" ColumnName="Contenido" />
+                <ScalarProperty Name="EmpleadoId" ColumnName="EmpleadoId" />
+                <ScalarProperty Name="ComunicacionInterna1" ColumnName="ComunicacionInterna" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Empleado">
             <EntityTypeMapping TypeName="EVA360Model.Empleado">
               <MappingFragment StoreEntitySet="Empleado">
-                <ScalarProperty Name="EmpleadoId" ColumnName="EmpleadoId" />
-                <ScalarProperty Name="UsuarioCreacionId" ColumnName="UsuarioCreacionId" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacionId" ColumnName="UsuarioCreacionId" />
+                <ScalarProperty Name="EmpleadoId" ColumnName="EmpleadoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EmpleadoPeriodo">
             <EntityTypeMapping TypeName="EVA360Model.EmpleadoPeriodo">
               <MappingFragment StoreEntitySet="EmpleadoPeriodo">
-                <ScalarProperty Name="EmpleadoPeriodoId" ColumnName="EmpleadoPeriodoId" />
-                <ScalarProperty Name="EmpleadoId" ColumnName="EmpleadoId" />
-                <ScalarProperty Name="SupervisorId" ColumnName="SupervisorId" />
-                <ScalarProperty Name="PeriodoId" ColumnName="PeriodoId" />
-                <ScalarProperty Name="UsuarioCreacionId" ColumnName="UsuarioCreacionId" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacionId" ColumnName="UsuarioCreacionId" />
+                <ScalarProperty Name="PeriodoId" ColumnName="PeriodoId" />
+                <ScalarProperty Name="SupervisorId" ColumnName="SupervisorId" />
+                <ScalarProperty Name="EmpleadoId" ColumnName="EmpleadoId" />
+                <ScalarProperty Name="EmpleadoPeriodoId" ColumnName="EmpleadoPeriodoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Evaluacion">
             <EntityTypeMapping TypeName="EVA360Model.Evaluacion">
               <MappingFragment StoreEntitySet="Evaluacion">
-                <ScalarProperty Name="EvaluacionId" ColumnName="EvaluacionId" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="PorcentajeAvance" ColumnName="PorcentajeAvance" />
-                <ScalarProperty Name="SupervisorId" ColumnName="SupervisorId" />
-                <ScalarProperty Name="ProveedorId" ColumnName="ProveedorId" />
-                <ScalarProperty Name="RutaInforme" ColumnName="RutaInforme" />
-                <ScalarProperty Name="EmpleadoId" ColumnName="EmpleadoId" />
-                <ScalarProperty Name="PeriodoId" ColumnName="PeriodoId" />
-                <ScalarProperty Name="UsuarioCreacionId" ColumnName="UsuarioCreacionId" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacionId" ColumnName="UsuarioCreacionId" />
+                <ScalarProperty Name="PeriodoId" ColumnName="PeriodoId" />
+                <ScalarProperty Name="EmpleadoId" ColumnName="EmpleadoId" />
+                <ScalarProperty Name="RutaInforme" ColumnName="RutaInforme" />
+                <ScalarProperty Name="ProveedorId" ColumnName="ProveedorId" />
+                <ScalarProperty Name="SupervisorId" ColumnName="SupervisorId" />
+                <ScalarProperty Name="PorcentajeAvance" ColumnName="PorcentajeAvance" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="EvaluacionId" ColumnName="EvaluacionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EvalucionTema">
             <EntityTypeMapping TypeName="EVA360Model.EvalucionTema">
               <MappingFragment StoreEntitySet="EvalucionTema">
-                <ScalarProperty Name="EvaluacionTemaId" ColumnName="EvaluacionTemaId" />
-                <ScalarProperty Name="EvaluacionId" ColumnName="EvaluacionId" />
-                <ScalarProperty Name="TemaId" ColumnName="TemaId" />
-                <ScalarProperty Name="Puntaje" ColumnName="Puntaje" />
-                <ScalarProperty Name="UsuarioCreacionId" ColumnName="UsuarioCreacionId" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacionId" ColumnName="UsuarioCreacionId" />
+                <ScalarProperty Name="Puntaje" ColumnName="Puntaje" />
+                <ScalarProperty Name="TemaId" ColumnName="TemaId" />
+                <ScalarProperty Name="EvaluacionId" ColumnName="EvaluacionId" />
+                <ScalarProperty Name="EvaluacionTemaId" ColumnName="EvaluacionTemaId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Objetivo">
             <EntityTypeMapping TypeName="EVA360Model.Objetivo">
               <MappingFragment StoreEntitySet="Objetivo">
-                <ScalarProperty Name="ObjetivoId" ColumnName="ObjetivoId" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="PeriodoId" ColumnName="PeriodoId" />
-                <ScalarProperty Name="Orden" ColumnName="Orden" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="UsuarioCreacionId" ColumnName="UsuarioCreacionId" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacionId" ColumnName="UsuarioCreacionId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="PeriodoId" ColumnName="PeriodoId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ObjetivoId" ColumnName="ObjetivoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Periodo">
             <EntityTypeMapping TypeName="EVA360Model.Periodo">
               <MappingFragment StoreEntitySet="Periodo">
-                <ScalarProperty Name="PeriodoId" ColumnName="PeriodoId" />
-                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="UsuarioCreacionId" ColumnName="UsuarioCreacionId" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacionId" ColumnName="UsuarioCreacionId" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="PeriodoId" ColumnName="PeriodoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Proveedor">
             <EntityTypeMapping TypeName="EVA360Model.Proveedor">
               <MappingFragment StoreEntitySet="Proveedor">
-                <ScalarProperty Name="ProveedorId" ColumnName="ProveedorId" />
-                <ScalarProperty Name="UsuarioCreacionId" ColumnName="UsuarioCreacionId" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacionId" ColumnName="UsuarioCreacionId" />
+                <ScalarProperty Name="ProveedorId" ColumnName="ProveedorId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Supervisor">
             <EntityTypeMapping TypeName="EVA360Model.Supervisor">
               <MappingFragment StoreEntitySet="Supervisor">
-                <ScalarProperty Name="SupervisorId" ColumnName="SupervisorId" />
-                <ScalarProperty Name="UsuarioCreacionId" ColumnName="UsuarioCreacionId" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacionId" ColumnName="UsuarioCreacionId" />
+                <ScalarProperty Name="SupervisorId" ColumnName="SupervisorId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tema">
             <EntityTypeMapping TypeName="EVA360Model.Tema">
               <MappingFragment StoreEntitySet="Tema">
-                <ScalarProperty Name="TemaId" ColumnName="TemaId" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="ObjetivoId" ColumnName="ObjetivoId" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Orden" ColumnName="Orden" />
-                <ScalarProperty Name="UsuarioCreacionId" ColumnName="UsuarioCreacionId" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacionId" ColumnName="UsuarioCreacionId" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ObjetivoId" ColumnName="ObjetivoId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="TemaId" ColumnName="TemaId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TipoDocumento">
             <EntityTypeMapping TypeName="EVA360Model.TipoDocumento">
               <MappingFragment StoreEntitySet="TipoDocumento">
-                <ScalarProperty Name="TipoDocumentoId" ColumnName="TipoDocumentoId" />
                 <ScalarProperty Name="Sigla" ColumnName="Sigla" />
+                <ScalarProperty Name="TipoDocumentoId" ColumnName="TipoDocumentoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="EVA360Model.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
-                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="NroDocumento" ColumnName="NroDocumento" />
-                <ScalarProperty Name="TipoDocumentoId" ColumnName="TipoDocumentoId" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Salt" ColumnName="Salt" />
-                <ScalarProperty Name="UsuarioCreacionId" ColumnName="UsuarioCreacionId" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacionId" ColumnName="UsuarioModificacionId" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacionId" ColumnName="UsuarioCreacionId" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="TipoDocumentoId" ColumnName="TipoDocumentoId" />
+                <ScalarProperty Name="NroDocumento" ColumnName="NroDocumento" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

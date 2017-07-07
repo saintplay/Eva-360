@@ -58,21 +58,6 @@ namespace Eva360.Controllers
                 var aux = PasswordHelper.MD5Hash(usuarioModel.Password); //Encriptamos el password
                 usuario.Password = usuario.Salt + aux + usuario.Salt;
 
-                String rol = usuarioModel.Rol;
-
-                switch (rol)
-                {
-                    case "ADMIN":
-                        
-                        break;
-                    case "SUPERVISOR":
-                        break;
-                    case "EMPLEADO":
-                        break;
-                    case "PROVEEDOR":
-                        break;
-                }
-
                 context.Usuario.Add(usuario);
             }
             else { // Editar exsistente 
@@ -93,6 +78,27 @@ namespace Eva360.Controllers
                     usuario.FechaCreacion = DateTime.Now;
 
                     context.SaveChanges();
+
+                    String rol = usuarioModel.Rol;
+
+                    if (!usuarioModel.UsuarioId.HasValue) {
+                        switch (rol)
+                        {
+                            case "ADMIN":
+                                Adminstrador admin = new Adminstrador();
+                                admin.AdministradorId = usuario.UsuarioId;
+                                admin.FechaCreacion = DateTime.Now;
+                                admin.UsuarioCreacionId = 1; // TO DO <-----
+                                break;
+                            case "SUPERVISOR":
+                                break;
+                            case "EMPLEADO":
+                                break;
+                            case "PROVEEDOR":
+                                break;
+                        }
+                    }
+
                     transaction.Complete();
                 }
             }
