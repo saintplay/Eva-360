@@ -289,6 +289,7 @@
       <DependentUpon>Eva360Model.edmx</DependentUpon>
       <LastGenOutput>Eva360Model.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\app\Login\bundle.js" />
     <Content Include="Scripts\axios.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -303,6 +304,7 @@
       <DependentUpon>Eva360Model.edmx</DependentUpon>
     </Content>
     <Content Include="package.json" />
+    <Content Include="Scripts\app\Login\bundle.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
