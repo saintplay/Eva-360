@@ -1,19 +1,18 @@
-'use strict';
-const path = require('path');
-const gulp = require('gulp');
-const plumber = require('gulp-plumber');
-const msbuild = require("gulp-msbuild");
-const iisexpress = require('gulp-serve-iis-express');
-const browserSync = require('browser-sync').create();
+var path = require('path');
+var gulp = require('gulp');
+var plumber = require('gulp-plumber');
+var msbuild = require("gulp-msbuild");
+var iisexpress = require('gulp-serve-iis-express');
+var browserSync = require('browser-sync').create();
 
-const PORT = '2935';
-const sources = [
-    'Eva360/Controllers/*.cs',
-    'Eva360/Helpers/*.cs',
-    'Eva360/ViewModel/**/*.cs'
+var PORT = '2935';
+var sources = [
+    'Controllers/*.cs',
+    'Helpers/*.cs',
+    'ViewModel/**/*.cs'
 ];
-const views = [
-    'Eva360/Views/**/*.cshtml',
+var views = [
+    'Views/**/*.cshtml',
 ];
 
 gulp.task('default', ['server', 'build'], function() {
@@ -31,7 +30,7 @@ gulp.task('reload', function() {
 });
 
 gulp.task('build', function() {
-    return gulp.src("./Eva360.sln")
+    return gulp.src("../Eva360.sln")
         .pipe(plumber())
         .pipe(msbuild({
             toolsVersion: 'auto',
@@ -40,7 +39,7 @@ gulp.task('build', function() {
 });
 
 gulp.task('server', function() {
-    let configPath = path.join(__dirname, '.vs\\config\\applicationhost.config');
+    var configPath = path.join(__dirname, '..\\.vs\\config\\applicationhost.config');
     iisexpress({
         siteNames: ['Eva360'],
         configFile: configPath,

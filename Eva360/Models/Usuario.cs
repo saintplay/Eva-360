@@ -31,7 +31,7 @@ namespace Eva360.Models
         public Nullable<int> UsuarioModificacionId { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
     
-        public virtual Adminstrador Adminstrador { get; set; }
+        public virtual Administrador Administrador { get; set; }
         public virtual Empleado Empleado { get; set; }
         public virtual Proveedor Proveedor { get; set; }
         public virtual Supervisor Supervisor { get; set; }

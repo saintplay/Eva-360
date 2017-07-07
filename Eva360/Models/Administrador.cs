@@ -12,7 +12,7 @@ namespace Eva360.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Adminstrador
+    public partial class Administrador
     {
         public int AdministradorId { get; set; }
         public int UsuarioCreacionId { get; set; }

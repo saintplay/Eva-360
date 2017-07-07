@@ -25,7 +25,7 @@ namespace Eva360.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Adminstrador> Adminstrador { get; set; }
+        public virtual DbSet<Administrador> Administrador { get; set; }
         public virtual DbSet<ComunicacionInterna> ComunicacionInterna { get; set; }
         public virtual DbSet<Empleado> Empleado { get; set; }
         public virtual DbSet<EmpleadoPeriodo> EmpleadoPeriodo { get; set; }
