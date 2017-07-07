@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Eva360.Models;
-using Eva360.ViewModel.Evaluacion;
+using Eva360.Models.Forms;
 using System.Transactions;
 using System.Data.Entity.Validation;
 using System.Net;

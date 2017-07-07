@@ -1,11 +1,4 @@
-﻿    using Eva360.Models;
-using Eva360.ViewModel.Home;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Data.Entity;
+﻿using System.Web.Mvc;
 
 namespace Eva360.Controllers
 {
@@ -13,8 +6,7 @@ namespace Eva360.Controllers
     {
         public ActionResult Index()
         {
-            var viewModel = new IndexViewModel();
-            return View(viewModel);
+            return View();
         }
 
         public ActionResult About()

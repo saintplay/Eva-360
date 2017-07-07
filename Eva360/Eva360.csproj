@@ -265,11 +265,10 @@
     </Compile>
     <Compile Include="Models\UsuarioEstado.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModel\Evaluaciones\EvaluacionForm.cs" />
-    <Compile Include="ViewModel\Home\IndexViewModel.cs" />
-    <Compile Include="ViewModel\Login\LoginForm.cs" />
-    <Compile Include="ViewModel\Periodos\PeriodoForm.cs" />
-    <Compile Include="ViewModel\User\UsuarioForm.cs" />
+    <Compile Include="Models\Forms\EvaluacionForm.cs" />
+    <Compile Include="Models\Forms\LoginForm.cs" />
+    <Compile Include="Models\Forms\PeriodoForm.cs" />
+    <Compile Include="Models\Forms\UsuarioForm.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -357,11 +356,16 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Periodo\Index.cshtml" />
     <Content Include="Views\Evaluacion\Index.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ViewModel\Evaluaciones\" />
+    <Folder Include="ViewModel\Home\" />
+    <Folder Include="ViewModel\Login\" />
+    <Folder Include="ViewModel\Periodos\" />
+    <Folder Include="ViewModel\User\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

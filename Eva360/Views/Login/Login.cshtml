@@ -1,0 +1,25 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "Logearse";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <div id="app">
+        {{ message }}
+    </div>
+</body>
+</html>
+@Scripts.Render("~/node_modules/vue/dist/vue.min.js")
+<script>
+    const v = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue.js!'
+        }
+    })
+</script>

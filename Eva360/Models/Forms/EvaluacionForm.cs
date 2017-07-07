@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.ComponentModel.DataAnnotations;
-using Eva360.Models;
 
-namespace Eva360.ViewModel.Evaluacion
+namespace Eva360.Models.Forms
 {
     public class EvaluacionForm
     {

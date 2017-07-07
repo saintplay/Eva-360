@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
-namespace Eva360.ViewModel.User
-{
+namespace Eva360.Models.Forms {
     public class UsuarioForm
     {
         public Int32 ? UsuarioId { get; set; }

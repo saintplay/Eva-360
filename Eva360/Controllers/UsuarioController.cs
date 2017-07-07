@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Eva360.Models;
 using System.Web.Mvc;
-using Eva360.ViewModel.User;
+using Eva360.Models.Forms;
 using System.Transactions;
 using System;
 using System.Net;

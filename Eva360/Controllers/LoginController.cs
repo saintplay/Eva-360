@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
-using Eva360.ViewModel.Login;
+using Eva360.Models.Forms;
 using Eva360.Models;
 using Eva360.Helpers;
 

@@ -6,7 +6,7 @@ using System.Data.Entity.Validation;
 using System.Transactions;
 using Eva360.Models;
 using System.Net;
-using Eva360.ViewModel.Periodos;
+using Eva360.Models.Forms;
 
 namespace Eva360.Controllers
 {
