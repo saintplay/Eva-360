@@ -27,7 +27,7 @@ namespace Eva360.Controllers
                 x.Sigla
             }).ToList();
 
-            var LstRoles = ModeloTipo.Roles;
+            List<String> LstRoles = ModeloTipo.Roles;
 
             return Json(new
             {
@@ -79,16 +79,16 @@ namespace Eva360.Controllers
 
                     context.SaveChanges();
 
-                    String rol = usuarioModel.Rol;
-
                     if (!usuarioModel.UsuarioId.HasValue) {
-                        switch (rol)
-                        {
+                        String rol = usuarioModel.Rol;
+
+                        switch (rol) {
                             case "ADMIN":
                                 Administrador admin = new Administrador();
                                 admin.AdministradorId = usuario.UsuarioId;
                                 admin.FechaCreacion = DateTime.Now;
-                                admin.UsuarioCreacionId = 1; // TO DO <-----
+                                admin.UsuarioCreacionId = 1; // TO DO
+                                context.Administrador.Add(admin);
                                 break;
                             //case "SUPERVISOR":
                             //    Supervisor supervisor = new Supervisor();
@@ -109,6 +109,7 @@ namespace Eva360.Controllers
                             //    proveedor.UsuarioCreacionId = 1;
                             //    break;
                         }
+                        context.SaveChanges();
                     }
 
                     transaction.Complete();
