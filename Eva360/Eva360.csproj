@@ -287,8 +287,13 @@
     <Compile Include="Models\Forms\ObjetivoForm.cs" />
     <Compile Include="Models\Forms\PeriodoForm.cs" />
     <Compile Include="Models\Forms\UsuarioForm.cs" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Scripts\app\Login\app.js.map" />
-    <None Include="ViewModels\Login\checkbox.vue" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Views\Home\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
