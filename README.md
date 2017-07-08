@@ -1,5 +1,5 @@
 <div align="center">
- <img src="https://user-images.githubusercontent.com/9372893/27985191-829732e2-63ac-11e7-940a-8e543ce95d82.png" alt="eva360">
+ <img src="https://cdn.rawgit.com/saintplay/Eva-360/master/Eva360/Content/logo.svg" alt="eva360" width="300">
 </div>
 
 # Eva-360
