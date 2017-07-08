@@ -1,4 +1,6 @@
 ﻿using System.Web.Mvc;
+using Eva360.Helpers;
+using Eva360.Attributes;
 
 namespace Eva360.Controllers
 {
@@ -12,9 +14,10 @@ namespace Eva360.Controllers
             else if ((string)Session["UsuarioRol"] == "ADMIN") {
                 return RedirectToAction("AdminHome", "Home");
             }
-            return View();
+            return RedirectToAction("Index", "Login");
         }
 
+        [Access(PermisosHelper.PERMISOS.LISTAR_USUARIOS)]
         public ActionResult AdminHome()
         {
             return View("Admin");

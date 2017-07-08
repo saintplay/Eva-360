@@ -1,0 +1,7 @@
+.level-item {
+    display: block;
+}
+
+.level-item p.heading {
+    font-weight: 400;
+}

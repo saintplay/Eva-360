@@ -5,14 +5,14 @@ using System.Web;
 using System.Web.Mvc;
 using Eva360.Helpers;
 
-namespace Eva360.Filters
+namespace Eva360.Attributes
 {
-    public class AccesAttribute : ActionFilterAttribute
+    public class AccessAttribute : ActionFilterAttribute
     {
-        public String[] _permiso { get; set; }
-        public AccesAttribute(params String[] permiso)
+        public String[] _permisos { get; set; }
+        public AccessAttribute(params String[] permisos)
         {
-            _permiso = permiso;
+            _permisos = permisos;
         }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)

@@ -1,1 +1,66 @@
-﻿HOLA ADMINISTRADOR
+﻿@section styles {
+        @Styles.Render("~/Content/Home/admin.css")
+}
+<div class="column is-12">
+    <section class="hero is-small">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Hola <strong>@Session["Nombre"]</strong>!
+                </h1>
+                <h2 class="subtitle">
+                    Bienvenido al sistema de Gestión de Evaluaciones EVA 360
+                </h2>
+            </div>
+        </div>
+        <div class="hero-foot">
+            <nav class="level">
+                <div class="level-item has-text-centered">
+                    <p class="heading">Usuarios</p>
+                    <p class="title">3,456</p>
+                </div>
+                <div class="level-item has-text-centered">
+                    <p class="heading">Informes 360</p>
+                    <p class="title">123</p>
+                </div>
+                <div class="level-item has-text-centered">
+                    <p class="heading">Periodos</p>
+                    <p class="title">456K</p>
+                </div>
+                <div class="level-item has-text-centered">
+                    <p class="heading">Posts</p>
+                    <p class="title">789</p>
+                </div>
+            </nav>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-4">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title has-text-centered">
+                                Usuarios
+                            </p>
+                            <span class="card-header-icon">
+                            <span class="icon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            </span>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                                Administra lista de Usuarios.
+                            </div>
+                        </div>
+                        <footer class="card-footer">
+                            <a class="card-footer-item">Administrar</a>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -37,7 +37,7 @@ namespace Eva360.Controllers
             if (usuario != null) {
                 Session["UsuarioId"] = usuario.UsuarioId;
                 Session["Nombre"] = usuario.Nombre;
-                Session["NombreCompleto"] = usuario.Apellido + usuario.Nombre;
+                Session["NombreCompleto"] = usuario.Apellido + " " + usuario.Nombre;
 
                 if (usuario.Administrador != null) {
                     Session["UsuarioRol"] = "ADMIN";

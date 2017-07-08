@@ -216,12 +216,12 @@
     <Compile Include="Controllers\ObjetivoController.cs" />
     <Compile Include="Controllers\PeriodoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
-    <Compile Include="Filters\AccessAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Helpers\PermisosHelper.cs" />
+    <Compile Include="Attributes\AccessAttribute.cs" />
     <Compile Include="Models\Administrador.cs">
       <DependentUpon>Eva360Model.tt</DependentUpon>
     </Compile>
@@ -410,6 +410,10 @@
     <Content Include="ViewModels\General\main.js" />
     <Content Include="ViewModels\General\QuickForm.vue" />
     <Content Include="Scripts\app\General\app.js" />
+    <Content Include="Views\Shared\_PermisosInsuficientes.cshtml" />
+    <Content Include="Views\Usuario\Crud.chtml" />
+    <Content Include="Views\Usuario\Crud.cshtml" />
+    <Content Include="Content\Home\admin.css" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

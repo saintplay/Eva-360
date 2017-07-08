@@ -7,6 +7,7 @@
     @Styles.Render("~/Content/font-awesome.min.css")
     @Styles.Render("~/Content/bulma.min.css")
     @Styles.Render("~/Content/Site.css")
+    @RenderSection("styles", required: false)
 </head>
 <body>
     <nav id="navbar-vue" class="nav has-shadow">
@@ -50,13 +51,25 @@
         </div>
     </aside>
 
-    <div class="container body-content">
+    <div class="columns body-content">
         @RenderBody()
-        <hr />
-        <footer class="footer">
-            <p>&copy; @DateTime.Now.Year - Eva360 - UPC 2017</p>
-        </footer>
     </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="has-text-centered">
+                <p>
+                    <strong>EVA360</strong>
+                    <span class="fw-400">Proyecto hecho por Diego Jara y Francis Marquez.</span>
+                </p>
+                <p>
+                <a class="icon" href="https://github.com/saintplay/EVA-360">
+                    <i class="fa fa-github"></i>
+                </a>
+                </p>
+            </div>
+        </div>
+    </footer>
 
     @Scripts.Render("~/Scripts/vue.js")
     @Scripts.Render("~/Scripts/axios.min.js")
