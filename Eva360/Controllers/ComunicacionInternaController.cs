@@ -34,14 +34,15 @@ namespace Eva360.Controllers
         public ActionResult ListarMensajes()
         {
             var context = new EVA360Entities();
-            var viewModel = new ListarMensajesViewModel();
+            var viewModel = new ComunicacionInternaForm();
             viewModel.LstCom = context.ComunicacionInterna
                                       .OrderByDescending(c=>c.FechaCreacion).ToList();
             return View(viewModel);
         }
 
+        [ValidateInput(false)]
         [HttpPost]
-        public ActionResult CrearComunicacion(ComunicacionInternaForm comunicacionModel)
+        public ActionResult CrearMensaje(ComunicacionInternaForm comunicacionModel)
         {
             var context = new EVA360Entities();
             ComunicacionInterna comunicacion;
@@ -52,7 +53,7 @@ namespace Eva360.Controllers
             try {
                 using(var transaction = new TransactionScope())
                 {
-                    comunicacion.EmpleadoId = comunicacionModel.EmpleadoId;
+                    comunicacion.EmpleadoId = 1;
                     comunicacion.Contenido = comunicacionModel.Contenido;
                     comunicacion.FechaCreacion = DateTime.Now;
                     comunicacion.UsuarioCreacionId = comunicacion.EmpleadoId;
@@ -75,7 +76,7 @@ namespace Eva360.Controllers
                 return Json(new { errores = errores });
             }
 
-            return getData();
+            return RedirectToAction("ListarMensajes");
         }
     }
 }

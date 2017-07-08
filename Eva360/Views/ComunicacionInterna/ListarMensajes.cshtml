@@ -1,4 +1,4 @@
-﻿@model Eva360.ViewModels.ComunicacionesInternas.ListarMensajesViewModel
+﻿@model Eva360.Models.Forms.ComunicacionInternaForm
 @{
     ViewBag.Title = "Comunicacion Interna";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,18 +9,20 @@
         <div class="columns">
             <div class="column is-3"></div>
             <div class="column is-6">
-                <div class="media-content">
+                <form method="post" class="media-content" action="@Url.Action("CrearMensaje","ComunicacionInterna")">
+                    @Html.HiddenFor(x => x.EmpleadoId)
                     <div class="field">
                         <p class="control">
-                            <textarea class="textarea" placeholder="Add a comment..."></textarea>
+                            @Html.LabelFor(x=>x.Contenido)
+                            <textarea name="Contenido" class="textarea" placeholder="Add a comment..."></textarea>
                         </p>
                     </div>
                     <div class="field">
                         <p class="control">
-                            <button class="button">Post comment</button>
+                            <button class="button" type="submit">Post comment</button>
                         </p>
                     </div>
-                </div>
+                </form>
                 <div class="box" style="margin-top:20px;">
                     @foreach (var com in Model.LstCom)
                     {
