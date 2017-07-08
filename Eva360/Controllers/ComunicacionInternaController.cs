@@ -6,8 +6,9 @@ using System.Web.Mvc;
 using System.Data.Entity.Validation;
 using System.Net;
 using Eva360.Models;
-using Eva360.ViewModel.ComunicacionInterna;
+using Eva360.Models.Forms;
 using System.Transactions;
+using Eva360.ViewModels.ComunicacionesInternas;
 
 namespace Eva360.Controllers
 {
@@ -29,10 +30,14 @@ namespace Eva360.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
+        
         public ActionResult ListarMensajes()
         {
-            return getData();
+            var context = new EVA360Entities();
+            var viewModel = new ListarMensajesViewModel();
+            viewModel.LstCom = context.ComunicacionInterna
+                                      .OrderByDescending(c=>c.FechaCreacion).ToList();
+            return View(viewModel);
         }
 
         [HttpPost]

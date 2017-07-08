@@ -287,7 +287,9 @@
     <Compile Include="Models\Forms\ObjetivoForm.cs" />
     <Compile Include="Models\Forms\PeriodoForm.cs" />
     <Compile Include="Models\Forms\UsuarioForm.cs" />
+    <Compile Include="ViewModels\ComunicacionesInternas\ListarMensajesViewModel.cs" />
     <None Include="ViewModels\Login\checkbox.vue" />
+    <Content Include="Views\ComunicacionInterna\ListarMensajes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -387,7 +389,6 @@
     <Folder Include="ViewModels\Periodos\" />
     <Folder Include="ViewModels\User\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\ComunicacionInterna\" />
     <Folder Include="Views\Objetivo\" />
   </ItemGroup>
   <ItemGroup>

@@ -5,10 +5,10 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using Eva360.Models;
 
-namespace Eva360.ViewModel.ComunicacionInterna
+namespace Eva360.Models.Forms
 {
     public class ComunicacionInternaForm
-    {
+    {        
         [Required]
         public Int32 EmpleadoId { get; set; }
 

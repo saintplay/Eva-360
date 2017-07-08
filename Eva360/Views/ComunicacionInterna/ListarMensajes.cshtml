@@ -1,0 +1,57 @@
+﻿@model Eva360.ViewModels.ComunicacionesInternas.ListarMensajesViewModel
+@{
+    ViewBag.Title = "Comunicacion Interna";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="section main">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3"></div>
+            <div class="column is-6">
+                <div class="media-content">
+                    <div class="field">
+                        <p class="control">
+                            <textarea class="textarea" placeholder="Add a comment..."></textarea>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control">
+                            <button class="button">Post comment</button>
+                        </p>
+                    </div>
+                </div>
+                <div class="box" style="margin-top:20px;">
+                    @foreach (var com in Model.LstCom)
+                    {
+                        <article class="media">
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <strong>@com.Empleado.Usuario.Nombre @com.Empleado.Usuario.Apellido</strong>
+                                        <br>
+                                        @com.Contenido
+                                    </p>
+                                </div>
+                                <nav class="level">
+                                    <div class="level-left">
+                                        <a class="level-item">
+                                            <span class="icon is-small"><i class="fa fa-reply"></i></span>
+                                        </a>
+                                        <a class="level-item">
+                                            <span class="icon is-small"><i class="fa fa-retweet"></i></span>
+                                        </a>
+                                        <a class="level-item">
+                                            <span class="icon is-small"><i class="fa fa-heart"></i></span>
+                                        </a>
+                                    </div>
+                                </nav>
+                            </div>
+                        </article>
+                    }                    
+                </div>                
+            </div>
+            <div class="column is-3"></div>
+        </div>
+    </div>
+</section>
