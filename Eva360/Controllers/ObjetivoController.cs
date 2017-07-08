@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Eva360.ViewModel.Objetivo;
 using Eva360.Models;
 using System.Transactions;
 using System.Net;
 using System.Data.Entity.Validation;
+using Eva360.Models.Forms;
 
 namespace Eva360.Controllers
 {

@@ -6,8 +6,9 @@ using System.Web.Mvc;
 using System.Data.Entity.Validation;
 using System.Net;
 using Eva360.Models;
-using Eva360.ViewModel.ComunicacionInterna;
+using Eva360.Models.Forms;
 using System.Transactions;
+using Eva360.ViewModels.ComunicacionesInternas;
 
 namespace Eva360.Controllers
 {
@@ -29,14 +30,19 @@ namespace Eva360.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
+        
         public ActionResult ListarMensajes()
         {
-            return getData();
+            var context = new EVA360Entities();
+            var viewModel = new ComunicacionInternaForm();
+            viewModel.LstCom = context.ComunicacionInterna
+                                      .OrderByDescending(c=>c.FechaCreacion).ToList();
+            return View(viewModel);
         }
 
+        [ValidateInput(false)]
         [HttpPost]
-        public ActionResult CrearComunicacion(ComunicacionInternaForm comunicacionModel)
+        public ActionResult CrearMensaje(ComunicacionInternaForm comunicacionModel)
         {
             var context = new EVA360Entities();
             ComunicacionInterna comunicacion;
@@ -47,7 +53,7 @@ namespace Eva360.Controllers
             try {
                 using(var transaction = new TransactionScope())
                 {
-                    comunicacion.EmpleadoId = comunicacionModel.EmpleadoId;
+                    comunicacion.EmpleadoId = 1;
                     comunicacion.Contenido = comunicacionModel.Contenido;
                     comunicacion.FechaCreacion = DateTime.Now;
                     comunicacion.UsuarioCreacionId = comunicacion.EmpleadoId;
@@ -70,7 +76,7 @@ namespace Eva360.Controllers
                 return Json(new { errores = errores });
             }
 
-            return getData();
+            return RedirectToAction("ListarMensajes");
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using Eva360.Models;
 
-namespace Eva360.ViewModel.Objetivo
+namespace Eva360.Models.Forms
 {
     public class ObjetivoForm
     {

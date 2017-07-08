@@ -1,7 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Eva360.Models.Forms {
+namespace Eva360.Models.Forms
+{
     public class UsuarioForm
     {
         public Int32 ? UsuarioId { get; set; }
