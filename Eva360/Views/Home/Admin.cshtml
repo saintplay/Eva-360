@@ -64,3 +64,11 @@
         </div>
     </section>
 </div>
+@{
+    var controllerName = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
+    var serverUrlScheme = Request.Url.Scheme;
+    var serverUrlBody = Request.Url.Authority + Request.ApplicationPath;
+}
+@section scripts {
+    @Scripts.Render("~/Scripts/app/" + controllerName + "/admin.js")
+}

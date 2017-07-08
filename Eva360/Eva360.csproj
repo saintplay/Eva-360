@@ -317,7 +317,6 @@
       <DependentUpon>Eva360Model.edmx</DependentUpon>
       <LastGenOutput>Eva360Model.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\app\Login\app.js" />
     <Content Include="Scripts\axios.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -414,6 +413,10 @@
     <Content Include="Views\Usuario\Crud.chtml" />
     <Content Include="Views\Usuario\Crud.cshtml" />
     <Content Include="Content\Home\admin.css" />
+    <Content Include="ViewModels\Home\admin.js" />
+    <Content Include="Scripts\app\Login\main.js" />
+    <Content Include="Scripts\app\General\general.js" />
+    <Content Include="Scripts\app\General\main.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

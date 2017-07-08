@@ -41,12 +41,6 @@ const content = [
 
 const bundles = ['ViewModels/**/*.{vue,js}'];
 
-const vueViews = [
-    process.env.INIT_CWD + '\\ViewModels\\Login',
-    // process.env.INIT_CWD + '\\ViewModels\\home\\components',
-    // process.env.INIT_CWD + '\\ViewModels\\common\\components'
-];
-
 function getFolders(dir) {
     return fs.readdirSync(dir)
     .filter(function (file) {
@@ -54,35 +48,17 @@ function getFolders(dir) {
     });
 }
 
-const bundlePath = 'ViewModels';
-
-function watchFolder(input, output) {
-    var b = browserify({
-        entries: [input],
-        plugin: [watchify],
-        basedir: process.env.INIT_CWD,
-        paths: vueViews
+function getFiles(dir) {
+    return fs.readdirSync(dir)
+    .filter(function (file) {
+        return fs.statSync(path.join(dir, file)).isFile();
     });
-
-    function bundle() {
-        b.transform(aliasify, aliasifyConfig)
-        .transform(vueify)
-        .bundle()
-        .pipe(source('bundle.js'))
-        .pipe(buffer())
-        .pipe(sourcemaps.init({ loadMaps: true }))
-        .pipe(babel({ compact: false, presets: ['es2015'] }))
-        .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest(output));
-
-        gutil.log("Bundle rebuilt!");
-    }
-    b.on('update', bundle);
-    bundle();
 }
 
-function buildBundle(folder) {
-    let entry = bundlePath + "//" + folder + "//main.js";
+const bundlePath = 'ViewModels';
+
+function buildBundle(folder, file) {
+    let entry = bundlePath + "//" + folder + "//" + file;
     let output = "Scripts//app//" + folder;
 
     console.log(`Building ${entry}`);
@@ -93,7 +69,7 @@ function buildBundle(folder) {
     })
     .transform(vueify)
     .bundle()
-    .pipe(source('app.js'))
+    .pipe(source(file))
     .pipe(buffer())
     //.pipe(uglify())
     .pipe(gulp.dest(output));
@@ -114,14 +90,6 @@ gulp.task('go', ['build', 'serve', 'build-bundles'], function () {
     gulp.watch(content, ['reload']);
 });
 
-gulp.task('watch-bundles', function () {
-    let folders = getFolders(bundlePath);
-    gutil.log(folders);
-    folders.map(function (folder) {
-        watchFolder(bundlePath + "//" + folder + "//main.js");
-    });
-});
-
 gulp.task('reload', function () {
     browserSync.reload();
 });
@@ -139,9 +107,14 @@ gulp.task('build-bundles', function () {
     let folders = getFolders(bundlePath);
 
     folders.map(function (folder) {
-        if (fileExists.sync(bundlePath + "//" + folder + "//main.js")) {
-            buildBundle(folder);
-        }
+        var folder_path = bundlePath + "//" + folder;
+        let files = getFiles(folder_path);
+
+        files.map(function(file) {
+            if (file.split('.').pop() == "js") {
+                buildBundle(folder, file);
+            }
+        });
     });
 });
 
