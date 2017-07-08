@@ -51,7 +51,7 @@
         </div>
     </aside>
 
-    <div class="columns body-content">
+    <div id="eva-route" class="columns body-content">
         @RenderBody()
     </div>
 
@@ -71,12 +71,10 @@
         </div>
     </footer>
 
-    @Scripts.Render("~/Scripts/vue.js")
     @Scripts.Render("~/Scripts/axios.min.js")
     @Scripts.Render("~/Scripts/moment.min.js")
     @Scripts.Render("~/Scripts/lodash.min.js")
     @Scripts.Render("~/Scripts/jquery-1.10.2.min.js")
-    @Scripts.Render("~/Scripts/app/General/general.js")
     @RenderSection("scripts", required: false)
     <script>
 

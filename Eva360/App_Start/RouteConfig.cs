@@ -26,6 +26,13 @@ namespace Eva360
                 url: "{controller}/{action}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Vue Routing",
+                url: "{controller}/{*.}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                constraints: new { controller = "Home|Administrador" } 
+            );
         }
     }
 }

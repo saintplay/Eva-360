@@ -8,7 +8,7 @@
     data() {
       return {
         url: '',
-        data: []
+        datos: []
       }
     },
     methods: {

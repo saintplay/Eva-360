@@ -216,6 +216,7 @@
     <Compile Include="Controllers\ObjetivoController.cs" />
     <Compile Include="Controllers\PeriodoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\AdministradorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -294,7 +295,6 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="Views\Home\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -417,6 +417,11 @@
     <Content Include="Scripts\app\Login\main.js" />
     <Content Include="Scripts\app\General\general.js" />
     <Content Include="Scripts\app\General\main.js" />
+    <Content Include="ViewModels\User\Crud.vue" />
+    <Content Include="Views\Administrador\Admin.cshtml" />
+    <Content Include="ViewModels\Admin\admin.js" />
+    <Content Include="ViewModels\Admin\AdminDash.vue" />
+    <Content Include="ViewModels\Partials\RegexSamples.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

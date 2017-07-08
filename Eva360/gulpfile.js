@@ -39,7 +39,11 @@ const content = [
     'Scripts/app/**/*.js',
 ];
 
-const bundles = ['ViewModels/**/*.{vue,js}'];
+const bundles = [
+    'ViewModels/Home/*.{vue,js}',
+    'ViewModels/Admin/*.{vue,js}',
+    'ViewModels/Login/*.{vue,js}'
+];
 
 function getFolders(dir) {
     return fs.readdirSync(dir)
@@ -69,6 +73,10 @@ function buildBundle(folder, file) {
     })
     .transform(vueify)
     .bundle()
+    .on('error', function (err) {
+        console.log(err.toString());
+        this.emit("end");
+    })
     .pipe(source(file))
     .pipe(buffer())
     //.pipe(uglify())
@@ -85,7 +93,10 @@ gulp.task('go', ['build', 'serve', 'build-bundles'], function () {
     });
     gulp.watch(sources, ['build']);
     gulp.watch(bundles).on('change', function (e) {
-        buildBundle(path.dirname(e.path).split(path.sep).pop());
+        let filename = e.path.replace(/^.*[\\\/]/, '');
+        if (filename.split('.').pop() == "js")  {
+            buildBundle(path.dirname(e.path).split(path.sep).pop(), filename);
+        }
     });
     gulp.watch(content, ['reload']);
 });
@@ -107,14 +118,16 @@ gulp.task('build-bundles', function () {
     let folders = getFolders(bundlePath);
 
     folders.map(function (folder) {
-        var folder_path = bundlePath + "//" + folder;
-        let files = getFiles(folder_path);
+         if (folder != "Partials") {
+            var folder_path = bundlePath + "//" + folder;
+            let files = getFiles(folder_path);
 
-        files.map(function(file) {
-            if (file.split('.').pop() == "js") {
-                buildBundle(folder, file);
-            }
-        });
+            files.map(function(file) {
+                if (file.split('.').pop() == "js") {
+                    buildBundle(folder, file);
+                }
+            });
+        }
     });
 });
 

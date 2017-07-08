@@ -41,18 +41,15 @@ namespace Eva360.Controllers
 
                 if (usuario.Administrador != null) {
                     Session["UsuarioRol"] = "ADMIN";
-                    return RedirectToAction("AdminHome","Home");
                 } else if (usuario.Supervisor != null) {
                     Session["UsuarioRol"] = "SUPERVISOR";
-                    return RedirectToAction("SupervisorHome", "Home");
                 } else if (usuario.Proveedor != null) {
                     Session["UsuarioRol"] = "PROVEEDOR";
-                    return RedirectToAction("ProveedorHome", "Home");
                 } else if (usuario.Empleado != null) {
                     Session["UsuarioRol"] = "EMPLEADO";
-                    return RedirectToAction("EmpleadoHome", "Home");
                 }
 
+                return RedirectToAction("Index", "Home");
             }
 
             TempData["ErrorMessage"] = "Datos Incorrectos";
