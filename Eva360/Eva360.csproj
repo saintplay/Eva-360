@@ -289,7 +289,7 @@
     <Compile Include="Models\Forms\PeriodoForm.cs" />
     <Compile Include="Models\Forms\UsuarioForm.cs" />
     <Content Include="fonts\fontawesome-webfont.svg" />
-    <Content Include="Scripts\app\Login\app.js.map" />
+    <Content Include="Scripts\app\Admin\admin.js" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
@@ -388,10 +388,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\app\Home\" />
+    <Folder Include="Scripts\app\User\" />
     <Folder Include="ViewModels\Evaluaciones\" />
     <Folder Include="ViewModels\Home\" />
     <Folder Include="ViewModels\Periodos\" />
-    <Folder Include="ViewModels\User\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\ComunicacionInterna\" />
     <Folder Include="Views\Objetivo\" />
@@ -408,12 +409,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
     <Content Include="ViewModels\General\main.js" />
     <Content Include="ViewModels\General\QuickForm.vue" />
-    <Content Include="Scripts\app\General\app.js" />
     <Content Include="Views\Shared\_PermisosInsuficientes.cshtml" />
     <Content Include="Views\Usuario\Crud.chtml" />
     <Content Include="Views\Usuario\Crud.cshtml" />
     <Content Include="Content\Home\admin.css" />
-    <Content Include="ViewModels\Home\admin.js" />
     <Content Include="Scripts\app\Login\main.js" />
     <Content Include="Scripts\app\General\general.js" />
     <Content Include="Scripts\app\General\main.js" />
