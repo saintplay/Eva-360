@@ -9,7 +9,7 @@
     @Styles.Render("~/Content/Site.css")
 </head>
 <body>
-    <nav class="nav has-shadow">
+    <nav id="navbar-vue" class="nav has-shadow">
         <div class="nav-left">
             @Html.ActionLink("EVA360", "Index", "Home", new { @class = "nav-item" })
         </div>
@@ -63,7 +63,7 @@
     @Scripts.Render("~/Scripts/moment.min.js")
     @Scripts.Render("~/Scripts/lodash.min.js")
     @Scripts.Render("~/Scripts/jquery-1.10.2.min.js")
-
+    @Scripts.Render("~/Scripts/app/General/app.js")
     @RenderSection("scripts", required: false)
     <script>
 

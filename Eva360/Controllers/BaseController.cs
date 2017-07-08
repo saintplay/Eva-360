@@ -16,7 +16,7 @@ namespace Eva360.Controllers
         }
         public void PostMessage(MessageType type, String message)
         {
-            TempData["FlashMessage"] = message;
+            TempData["ErrorMessage"] = message;
             switch (type)
             {
                 case MessageType.Success: TempData["FlashMessageType"] = "alert alert-success"; break;

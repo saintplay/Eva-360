@@ -1,21 +1,85 @@
 ﻿@{
     Layout = null;
-    ViewBag.Title = "Logearse";
 }
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Login</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ingresar</title>
+    @Styles.Render("~/Content/font-awesome.min.css")
+    @Styles.Render("~/Content/bulma.min.css")
+    @Styles.Render("~/Content/login.css")
 </head>
 <body>
-    <div id="app">
-        {{ message }}
-        <my-checkbox></my-checkbox>
+    <div id="app" class="login-wrapper columns">
+        <div class="column is-8 is-hidden-mobile hero-banner">
+            <section class="hero is-fullheight is-dark">
+                <div class="hero-body">
+                    <div class="container section">
+                        <div class="has-text-right">
+                            <h1 class="title is-1">EVA 360</h1> <br>
+                            <p class="title is-3">Sistema de Evaluaciones</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-footer">
+                    <p class="has-text-centered">Imagen gracias a Unsplash</p>
+                </div>
+            </section>
+        </div>
+        <div class="column is-4">
+            <section class="hero is-fullheight">
+                <div class="hero-heading">
+                    <div class="section has-text-centered">
+                        <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma logo" width="150">
+                    </div>
+                </div>
+                <div class="hero-body">
+                    <div class="container">
+                        <div class="columns">
+                            <div class="column is-8 is-offset-2">
+                                <h1 class="avatar has-text-centered section">
+                                    <img src="https://placehold.it/128x128">
+                                </h1>
+                                <form class="login-form" method="post" action="/Login/LoginPost">
+                                    <p class="control has-icon has-icon-right">
+                                        <input class="input email-input" type="text" name="Usuario" v-model="Usuario" placeholder="Usuario" autofocus required>
+                                        <span class="icon user">
+                                            <i class="fa fa-user"></i>
+                                        </span>
+                                    </p>
+                                    <p v-if="Error" class="help is-danger">{{ Error }}</p>
+                                    <p class="control has-icon has-icon-right">
+                                        <input class="input password-input" type="password" name="Password" v-model="Password" placeholder="Contraseña" required>
+                                        <span class="icon user">
+                                            <i class="fa fa-lock"></i>
+                                        </span>
+                                    </p>
+                                    <p v-if="Error" class="help is-danger">{{ Error }}</p>
+                                    <p class="control login">
+                                        <button class="button is-success is-outlined is-large is-fullwidth" type="submit">Ingresar</button>
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
+    @{
+        var controllerName = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
+        var serverUrlScheme = Request.Url.Scheme;
+        var serverUrlBody = Request.Url.Authority + Request.ApplicationPath;
+    }
+    <script>
+        window.errorfromcontroller = '@TempData["ErrorMessage"]'
+        var ServerUrlScheme = '@Html.Raw(@serverUrlScheme)';
+        var ServerUrlBody = '@Html.Raw(@serverUrlBody)';
+        window.serverurl = ServerUrlScheme + ':' + ServerUrlBody;
+    </script>
+    @Scripts.Render("~/Scripts/app/" + controllerName + "/app.js")
 </body>
 </html>
-@{
-    var controllerName = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
-}
-@Scripts.Render("~/Scripts/app/" + controllerName + "/app.js")

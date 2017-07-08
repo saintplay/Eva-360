@@ -11,33 +11,35 @@ namespace Eva360.Controllers
         public ActionResult Logout()
         {
             Session.Clear();
-            return RedirectToAction("Login");
+            return RedirectToAction("Index");
         }
 
-        public ActionResult Login()
+        public ViewResult Index()
         {
-            var viewModel = new LoginForm();
-            return View(viewModel);
+            return View("Login");
         }
 
         [HttpPost]
-        public ActionResult Login(LoginForm loginModel)
+        public ActionResult LoginPost(LoginForm loginModel)
         {
             if (!ModelState.IsValid) {
-                PostMessage(MessageType.Warning, "Debe completar todos los campos");
-                return View(loginModel);    
+                TempData["ErrorMessage"] = "Debe completar todos los campos";
+                return RedirectToAction("Index");   
             }
+
+            string saltedPassword = PasswordHelper.MD5Hash(loginModel.Password);
 
             var context = new EVA360Entities();
             var usuario = context.Usuario
                           .FirstOrDefault(u => u.Codigo == loginModel.Usuario &&
-                            u.Password == u.Salt + (PasswordHelper.MD5Hash(loginModel.Password) + u.Salt));
+                            u.Password == u.Salt + saltedPassword + u.Salt);
 
             if (usuario != null) {
-                //Login exitoso
-                PostMessage(MessageType.Success, "Bienvenido" + usuario.Nombre);
+                Session["UsuarioId"] = usuario.UsuarioId;
+                Session["Nombre"] = usuario.Nombre;
+                Session["NombreCompleto"] = usuario.Apellido + usuario.Nombre;
 
-                 if(usuario.Administrador != null) {
+                if (usuario.Administrador != null) {
                     Session["UsuarioRol"] = "ADMIN";
                     return RedirectToAction("AdminHome","Home");
                 } else if (usuario.Supervisor != null) {
@@ -51,15 +53,10 @@ namespace Eva360.Controllers
                     return RedirectToAction("EmpleadoHome", "Home");
                 }
 
-                Session["UsuarioId"] = usuario.UsuarioId;
-                Session["Nombre"] = usuario.Nombre;
-                Session["NombreCompleto"] = usuario.Apellido + usuario.Nombre;
-            }
-            else {
-                PostMessage(MessageType.Error, "Usuario/Contraseña incorrectos");
             }
 
-            return View(loginModel);
+            TempData["ErrorMessage"] = "Datos Incorrectos";
+            return RedirectToAction("Index");
         }
 
       

@@ -1,36 +1,29 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
+@if (Session["UsuarioRol"] != null)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-    @Html.AntiForgeryToken()
-
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
-    }
+    <div class="nav-item">
+        <div class="field is-grouped">
+            <p class="control">
+                <a class="button" id="registerLink" href="@Url.Action("Logout", "Login")">
+                    <span class="icon">
+                        <i class="fa fa-sign-out"></i>
+                    </span>
+                    <span>Cerrar Sesión</span>
+                </a>
+            </p>
+        </div>
+    </div>
 }
 else
 {
     <div class="nav-item">
         <div class="field is-grouped">
             <p class="control">
-                <a class="button" id="registerLink" href="@Url.Action("Login", "Account")>">
+                <a class="button" id="registerLink" href="@Url.Action("Index", "Login")>">
                     <span class="icon">
                         <i class="fa fa-user"></i>
                     </span>
                     <span>Ingresa</span>
-                </a>
-            </p>
-            <p class="control">
-                <a class="button is-primary" href="@Url.Action("Register", "Account")>">
-                    <span class="icon">
-                        <i class="fa fa-user-plus"></i>
-                    </span>
-                    <span>Registrate</span>
                 </a>
             </p>
         </div>

@@ -287,13 +287,16 @@
     <Compile Include="Models\Forms\ObjetivoForm.cs" />
     <Compile Include="Models\Forms\PeriodoForm.cs" />
     <Compile Include="Models\Forms\UsuarioForm.cs" />
+    <Content Include="Scripts\app\Login\app.js.map" />
     <None Include="ViewModels\Login\checkbox.vue" />
+    <Content Include="Views\Home\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bulma.min.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\login.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -309,7 +312,7 @@
       <DependentUpon>Eva360Model.edmx</DependentUpon>
       <LastGenOutput>Eva360Model.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\app\Login\bundle.js" />
+    <Content Include="Scripts\app\Login\app.js" />
     <Content Include="Scripts\axios.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -324,7 +327,6 @@
       <DependentUpon>Eva360Model.edmx</DependentUpon>
     </Content>
     <Content Include="package.json" />
-    <Content Include="Scripts\app\Login\bundle.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -400,6 +402,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="ViewModels\General\main.js" />
+    <Content Include="ViewModels\General\QuickForm.vue" />
+    <Content Include="Scripts\app\General\app.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
