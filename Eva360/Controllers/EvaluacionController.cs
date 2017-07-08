@@ -97,6 +97,13 @@ namespace Eva360.Controllers
                     evaluacion.ProveedorId = evaluacionModel.ProveedorId;
                     evaluacion.RutaInforme = evaluacionModel.RutaInforme;
 
+                    if (Request.Files["Informe360"] != null) {
+                        var filename = "360_" + DateTime.Now.Ticks + "_" + Request.Files["Informe360"].FileName;
+                        var filepath = Server.MapPath("~/Content/360/" + filename);
+                        Request.Files["Informe360"].SaveAs(filepath);
+                        evaluacion.RutaInforme = filename;
+                    }
+
                     context.SaveChanges();
                     transaction.Complete();
                 }
