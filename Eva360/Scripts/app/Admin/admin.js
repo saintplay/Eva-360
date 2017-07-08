@@ -31,7 +31,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-8470b398", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-8470b398", __vue__options__)
+    hotAPI.reload("data-v-8470b398", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":32}],2:[function(require,module,exports){
@@ -164,7 +164,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-c0824f22", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-c0824f22", __vue__options__)
+    hotAPI.reload("data-v-c0824f22", __vue__options__)
   }
 })()}
 },{"./../Partials/RegexSamples":3,"axios":5,"moment":36,"vue":35,"vue-hot-reload-api":32}],5:[function(require,module,exports){

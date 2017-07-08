@@ -422,6 +422,7 @@
     <Content Include="ViewModels\Admin\admin.js" />
     <Content Include="ViewModels\Admin\AdminDash.vue" />
     <Content Include="ViewModels\Partials\RegexSamples.js" />
+    <Content Include="Content\logo.svg" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
