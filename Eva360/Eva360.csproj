@@ -289,7 +289,6 @@
     <Compile Include="Models\Forms\PeriodoForm.cs" />
     <Compile Include="Models\Forms\UsuarioForm.cs" />
     <Content Include="fonts\fontawesome-webfont.svg" />
-    <Content Include="Scripts\app\Admin\admin.js" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
@@ -419,10 +418,14 @@
     <Content Include="Scripts\app\General\main.js" />
     <Content Include="ViewModels\User\Crud.vue" />
     <Content Include="Views\Administrador\Admin.cshtml" />
-    <Content Include="ViewModels\Admin\admin.js" />
-    <Content Include="ViewModels\Admin\AdminDash.vue" />
     <Content Include="ViewModels\Partials\RegexSamples.js" />
     <Content Include="Content\logo.svg" />
+    <Content Include="ViewModels\Administrador\AdminDash.vue" />
+    <Content Include="ViewModels\Administrador\admin.js" />
+    <Content Include="ViewModels\Periodos\Crud.vue" />
+    <Content Include="ViewModels\Usuarios\Crud.vue" />
+    <Content Include="ViewModels\Helpers\NetParsing.js" />
+    <Content Include="Scripts\app\Administrador\admin.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

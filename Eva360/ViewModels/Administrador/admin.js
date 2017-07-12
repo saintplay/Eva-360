@@ -3,7 +3,8 @@ const VueRouter = require("vue-router");
 Vue.use(VueRouter);
 
 var Dashboard = require("./AdminDash.vue");
-var Crud = require("./../User/Crud.vue");
+var CrudUsuarios = require("./../Usuarios/Crud.vue");
+var CrudPeriodos = require("./../Periodos/Crud.vue");
 
 var router = new VueRouter({
     history: true,
@@ -15,7 +16,12 @@ var router = new VueRouter({
         {
             path: '/Usuarios',
             props: true,
-            component: Crud
+            component: CrudUsuarios
+        },
+        {
+            path: '/Periodos',
+            props: true,
+            component: CrudPeriodos
         }
     ]
 });

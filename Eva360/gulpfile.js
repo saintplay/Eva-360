@@ -41,7 +41,7 @@ const content = [
 
 const bundles = [
     'ViewModels/Home/*.{vue,js}',
-    'ViewModels/Admin/*.{vue,js}',
+    'ViewModels/Administrador/*.{vue,js}',
     'ViewModels/Login/*.{vue,js}'
 ];
 
@@ -118,7 +118,7 @@ gulp.task('build-bundles', function () {
     let folders = getFolders(bundlePath);
 
     folders.map(function (folder) {
-         if (folder != "Partials") {
+         if (folder != "Partials" && folder != "Helpers") {
             var folder_path = bundlePath + "//" + folder;
             let files = getFiles(folder_path);
 

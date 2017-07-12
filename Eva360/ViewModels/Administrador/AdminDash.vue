@@ -58,6 +58,28 @@
                             </footer>
                         </div>
                     </div>
+                    <div class="column is-4">
+                        <div class="card">
+                            <header class="card-header">
+                                <p class="card-header-title has-text-centered">
+                                    Periodos
+                                </p>
+                                <span class="card-header-icon">
+                                <span class="icon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                                </span>
+                            </header>
+                            <div class="card-content">
+                                <div class="content">
+                                    Periodos de proyectos y evaluaciones.
+                                </div>
+                            </div>
+                            <footer class="card-footer">
+                                <router-link to="/Periodos" class="card-footer-item">Administrar</router-link>
+                            </footer>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

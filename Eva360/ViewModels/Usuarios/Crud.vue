@@ -40,9 +40,9 @@
 </template>
 
 <script>
-    const netdate = require("./../Partials/RegexSamples").netdate;
-    const moment = require("moment");
     const axios = require("axios");
+    const parseDate = require('./../Helpers/NetParsing').parseDate;
+    const parseFormatDate = require('./../Helpers/NetParsing').parseFormatDate;
 
     export default {
         data: function() {
@@ -110,14 +110,8 @@
             ocultarError: function(index) {
                 this.errores.splice(index, 1);
             },
-            parseNetDate: function (date) {
-                var timestamp = date.replace(netdate, "$1");
-                return moment(parseInt(timestamp)).format("YYYY-MM-DD");
-            },
-            parseFormatNetDate: function (date) {
-                var timestamp = date.replace(netdate, "$1");
-                return moment(parseInt(timestamp)).format("DD-MM-YYYY");
-            }
+            parseNetDate: parseDate,
+            parseFormatNetDate: parseFormatDate
         }
     }
 </script>

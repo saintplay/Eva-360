@@ -40,7 +40,9 @@
         </nav>
 
         <div class="columns body-content">
+            <transition name="fade" appear>
             <router-view></router-view>
+            </transition>
         </div>
 
         <footer class="footer">
@@ -68,6 +70,6 @@
         window.ServerUrl = '@serverUrl';
         window.VueRouterUrl = '@controllerUrl';
     </script>
-    @Scripts.Render("~/Scripts/app/Admin/admin.js")
+    @Scripts.Render("~/Scripts/app/Administrador/admin.js")
 </body>
 </html>

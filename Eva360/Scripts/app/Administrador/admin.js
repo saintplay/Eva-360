@@ -22,25 +22,26 @@ exports.default = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"column is-12"},[_c('section',{staticClass:"hero is-small"},[_c('div',{staticClass:"hero-body"},[_c('div',{staticClass:"container"},[_c('h1',{staticClass:"title"},[_vm._v("\n                    Hola "),_c('strong',[_vm._v(_vm._s(_vm.usuario_nombre))]),_vm._v("!\n                ")]),_vm._v(" "),_c('h2',{staticClass:"subtitle"},[_vm._v("\n                    Bienvenido al sistema de Gestión de Evaluaciones EVA 360\n                ")])])]),_vm._v(" "),_c('div',{staticClass:"hero-foot"},[_c('nav',{staticClass:"level"},[_c('div',{staticClass:"level-item has-text-centered"},[_c('p',{staticClass:"heading"},[_vm._v("Usuarios")]),_vm._v(" "),_c('p',{staticClass:"title"},[_vm._v(_vm._s(_vm.stats.usuarios))])]),_vm._v(" "),_c('div',{staticClass:"level-item has-text-centered"},[_c('p',{staticClass:"heading"},[_vm._v("Informes 360")]),_vm._v(" "),_c('p',{staticClass:"title"},[_vm._v(_vm._s(_vm.stats.usuarios))])]),_vm._v(" "),_c('div',{staticClass:"level-item has-text-centered"},[_c('p',{staticClass:"heading"},[_vm._v("Periodos")]),_vm._v(" "),_c('p',{staticClass:"title"},[_vm._v(_vm._s(_vm.stats.periodos))])]),_vm._v(" "),_c('div',{staticClass:"level-item has-text-centered"},[_c('p',{staticClass:"heading"},[_vm._v("Posts")]),_vm._v(" "),_c('p',{staticClass:"title"},[_vm._v(_vm._s(_vm.stats.posts))])])])])]),_vm._v(" "),_c('section',{staticClass:"section"},[_c('div',{staticClass:"container"},[_c('div',{staticClass:"columns"},[_c('div',{staticClass:"column is-4"},[_c('div',{staticClass:"card"},[_vm._m(0),_vm._v(" "),_vm._m(1),_vm._v(" "),_c('footer',{staticClass:"card-footer"},[_c('router-link',{staticClass:"card-footer-item",attrs:{"to":"/Usuarios"}},[_vm._v("Administrar")])],1)])])])])])])}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('header',{staticClass:"card-header"},[_c('p',{staticClass:"card-header-title has-text-centered"},[_vm._v("\n                                Usuarios\n                            ")]),_vm._v(" "),_c('span',{staticClass:"card-header-icon"},[_c('span',{staticClass:"icon"},[_c('i',{staticClass:"fa fa-user"})])])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"card-content"},[_c('div',{staticClass:"content"},[_vm._v("\n                                Administra lista de Usuarios.\n                            ")])])}]
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"column is-12"},[_c('section',{staticClass:"hero is-small"},[_c('div',{staticClass:"hero-body"},[_c('div',{staticClass:"container"},[_c('h1',{staticClass:"title"},[_vm._v("\n                    Hola "),_c('strong',[_vm._v(_vm._s(_vm.usuario_nombre))]),_vm._v("!\n                ")]),_vm._v(" "),_c('h2',{staticClass:"subtitle"},[_vm._v("\n                    Bienvenido al sistema de Gestión de Evaluaciones EVA 360\n                ")])])]),_vm._v(" "),_c('div',{staticClass:"hero-foot"},[_c('nav',{staticClass:"level"},[_c('div',{staticClass:"level-item has-text-centered"},[_c('p',{staticClass:"heading"},[_vm._v("Usuarios")]),_vm._v(" "),_c('p',{staticClass:"title"},[_vm._v(_vm._s(_vm.stats.usuarios))])]),_vm._v(" "),_c('div',{staticClass:"level-item has-text-centered"},[_c('p',{staticClass:"heading"},[_vm._v("Informes 360")]),_vm._v(" "),_c('p',{staticClass:"title"},[_vm._v(_vm._s(_vm.stats.usuarios))])]),_vm._v(" "),_c('div',{staticClass:"level-item has-text-centered"},[_c('p',{staticClass:"heading"},[_vm._v("Periodos")]),_vm._v(" "),_c('p',{staticClass:"title"},[_vm._v(_vm._s(_vm.stats.periodos))])]),_vm._v(" "),_c('div',{staticClass:"level-item has-text-centered"},[_c('p',{staticClass:"heading"},[_vm._v("Posts")]),_vm._v(" "),_c('p',{staticClass:"title"},[_vm._v(_vm._s(_vm.stats.posts))])])])])]),_vm._v(" "),_c('section',{staticClass:"section"},[_c('div',{staticClass:"container"},[_c('div',{staticClass:"columns"},[_c('div',{staticClass:"column is-4"},[_c('div',{staticClass:"card"},[_vm._m(0),_vm._v(" "),_vm._m(1),_vm._v(" "),_c('footer',{staticClass:"card-footer"},[_c('router-link',{staticClass:"card-footer-item",attrs:{"to":"/Usuarios"}},[_vm._v("Administrar")])],1)])]),_vm._v(" "),_c('div',{staticClass:"column is-4"},[_c('div',{staticClass:"card"},[_vm._m(2),_vm._v(" "),_vm._m(3),_vm._v(" "),_c('footer',{staticClass:"card-footer"},[_c('router-link',{staticClass:"card-footer-item",attrs:{"to":"/Periodos"}},[_vm._v("Administrar")])],1)])])])])])])}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('header',{staticClass:"card-header"},[_c('p',{staticClass:"card-header-title has-text-centered"},[_vm._v("\n                                Usuarios\n                            ")]),_vm._v(" "),_c('span',{staticClass:"card-header-icon"},[_c('span',{staticClass:"icon"},[_c('i',{staticClass:"fa fa-user"})])])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"card-content"},[_c('div',{staticClass:"content"},[_vm._v("\n                                Administra lista de Usuarios.\n                            ")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('header',{staticClass:"card-header"},[_c('p',{staticClass:"card-header-title has-text-centered"},[_vm._v("\n                                Periodos\n                            ")]),_vm._v(" "),_c('span',{staticClass:"card-header-icon"},[_c('span',{staticClass:"icon"},[_c('i',{staticClass:"fa fa-calendar"})])])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"card-content"},[_c('div',{staticClass:"content"},[_vm._v("\n                                Periodos de proyectos y evaluaciones.\n                            ")])])}]
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-8470b398", __vue__options__)
+    hotAPI.createRecord("data-v-5f7eedbc", __vue__options__)
   } else {
-    hotAPI.reload("data-v-8470b398", __vue__options__)
+    hotAPI.rerender("data-v-5f7eedbc", __vue__options__)
   }
 })()}
-},{"vue":35,"vue-hot-reload-api":32}],2:[function(require,module,exports){
+},{"vue":37,"vue-hot-reload-api":34}],2:[function(require,module,exports){
 var Vue = require('vue/dist/vue.js');
 const VueRouter = require("vue-router");
 Vue.use(VueRouter);
 
 var Dashboard = require("./AdminDash.vue");
-var Crud = require("./../User/Crud.vue");
+var CrudUsuarios = require("./../Usuarios/Crud.vue");
+var CrudPeriodos = require("./../Periodos/Crud.vue");
 
 var router = new VueRouter({
     history: true,
@@ -52,7 +53,12 @@ var router = new VueRouter({
         {
             path: '/Usuarios',
             props: true,
-            component: Crud
+            component: CrudUsuarios
+        },
+        {
+            path: '/Periodos',
+            props: true,
+            component: CrudPeriodos
         }
     ]
 });
@@ -60,22 +66,99 @@ var router = new VueRouter({
 window.eva360 = new Vue({
     router
 }).$mount('#app')
-},{"./../User/Crud.vue":4,"./AdminDash.vue":1,"vue-router":33,"vue/dist/vue.js":34}],3:[function(require,module,exports){
+},{"./../Periodos/Crud.vue":5,"./../Usuarios/Crud.vue":6,"./AdminDash.vue":1,"vue-router":35,"vue/dist/vue.js":36}],3:[function(require,module,exports){
+var moment = require('moment');
+var netdate = require('./../Partials/RegexSamples').netdate;
+
+function parseDate(date) {
+    var timestamp = date.replace(netdate, "$1");
+    return moment(parseInt(timestamp)).format("YYYY-MM-DD");
+}
+
+function parseFormatDate(date) {
+    var timestamp = date.replace(netdate, "$1");
+    return moment(parseInt(timestamp)).format("DD-MM-YYYY");
+}
+
+
+module.exports.parseDate = parseDate;
+module.exports.parseFormatDate = parseFormatDate;
+},{"./../Partials/RegexSamples":4,"moment":38}],4:[function(require,module,exports){
 var netdate = /\/Date\((.*)\)\//;
 
 module.exports.netdate = netdate;
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 ;(function(){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
 
-var netdate = require("./../Partials/RegexSamples").netdate;
-var moment = require("moment");
+var axios = require('axios');
+var parseDate = require('./../Helpers/NetParsing').parseDate;
+var parseFormatDate = require('./../Helpers/NetParsing').parseFormatDate;
+
+exports.default = {
+    data: function data() {
+        return {
+            errores: [],
+            periodos: []
+        };
+    },
+    created: function created() {
+        this.fetchData();
+    },
+    methods: {
+        fetchData: function fetchData() {
+            var vm = this;
+            axios.get('/Periodo/ListarPeriodos').then(function (response) {
+                vm.periodos = response.data.periodos;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        getEstadoPeriodo: function getEstadoPeriodo(estado) {
+            switch (estado) {
+                case 'ACT':
+                    return "Activo";
+                case 'INA':
+                    return "Inactivo";
+            }
+        },
+        parseNetDate: parseDate,
+        parseFormatNetDate: parseFormatDate
+    }
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"column is-10 is-offset-1 padding-20"},[_c('div',{staticClass:"columns"},[_vm._m(0),_vm._v(" "),_c('div',{staticClass:"column"},[_c('button',{staticClass:"button is-success is-pulled-right",on:{"click":function($event){_vm.nuevo()}}},[_vm._v("Agregar")])])]),_vm._v(" "),_c('div',{staticClass:"columns"},[_c('div',{staticClass:"column"},[_c('table',{staticClass:"table"},[_vm._m(1),_vm._v(" "),_vm._l((_vm.periodos),function(periodo,index){return _c('tr',{key:periodo.PeriodoId},[_c('td',[_vm._v(_vm._s(periodo.Nombre))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(_vm.getEstadoPeriodo(periodo.Estado)))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(_vm.parseFormatNetDate(periodo.FechaInicio)))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(_vm.parseFormatNetDate(periodo.FechaFin)))]),_vm._v(" "),_c('td',[_c('button',{staticClass:"button is-warning",on:{"click":function($event){_vm.editar(periodo)}}},[_vm._v("Editar")])]),_vm._v(" "),_vm._m(2,true)])})],2)])])])}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"column"},[_c('h2',{staticClass:"title is-3"},[_vm._v("Lista de Periodos")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('tr',[_c('th',[_vm._v("Nombre")]),_vm._v(" "),_c('th',[_vm._v("Estado")]),_vm._v(" "),_c('th',[_vm._v("Fecha Inicio")]),_vm._v(" "),_c('th',[_vm._v("Fecha Fin")]),_vm._v(" "),_c('th',{attrs:{"colspan":"2"}},[_vm._v("Acciones")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('td',[_c('button',{staticClass:"button is-danger"},[_vm._v("Eliminar")])])}]
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4adf9615", __vue__options__)
+  } else {
+    hotAPI.rerender("data-v-4adf9615", __vue__options__)
+  }
+})()}
+},{"./../Helpers/NetParsing":3,"axios":7,"vue":37,"vue-hot-reload-api":34}],6:[function(require,module,exports){
+;(function(){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+
 var axios = require("axios");
+var parseDate = require('./../Helpers/NetParsing').parseDate;
+var parseFormatDate = require('./../Helpers/NetParsing').parseFormatDate;
 
 exports.default = {
     data: function data() {
@@ -141,14 +224,8 @@ exports.default = {
         ocultarError: function ocultarError(index) {
             this.errores.splice(index, 1);
         },
-        parseNetDate: function parseNetDate(date) {
-            var timestamp = date.replace(netdate, "$1");
-            return moment(parseInt(timestamp)).format("YYYY-MM-DD");
-        },
-        parseFormatNetDate: function parseFormatNetDate(date) {
-            var timestamp = date.replace(netdate, "$1");
-            return moment(parseInt(timestamp)).format("DD-MM-YYYY");
-        }
+        parseNetDate: parseDate,
+        parseFormatNetDate: parseFormatDate
     }
 };
 })()
@@ -162,14 +239,14 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c0824f22", __vue__options__)
+    hotAPI.createRecord("data-v-24d04e75", __vue__options__)
   } else {
-    hotAPI.reload("data-v-c0824f22", __vue__options__)
+    hotAPI.reload("data-v-24d04e75", __vue__options__)
   }
 })()}
-},{"./../Partials/RegexSamples":3,"axios":5,"moment":36,"vue":35,"vue-hot-reload-api":32}],5:[function(require,module,exports){
+},{"./../Helpers/NetParsing":3,"axios":7,"vue":37,"vue-hot-reload-api":34}],7:[function(require,module,exports){
 module.exports = require('./lib/axios');
-},{"./lib/axios":7}],6:[function(require,module,exports){
+},{"./lib/axios":9}],8:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -353,7 +430,7 @@ module.exports = function xhrAdapter(config) {
 };
 
 }).call(this,require('_process'))
-},{"../core/createError":13,"./../core/settle":16,"./../helpers/btoa":20,"./../helpers/buildURL":21,"./../helpers/cookies":23,"./../helpers/isURLSameOrigin":25,"./../helpers/parseHeaders":27,"./../utils":29,"_process":30}],7:[function(require,module,exports){
+},{"../core/createError":15,"./../core/settle":18,"./../helpers/btoa":22,"./../helpers/buildURL":23,"./../helpers/cookies":25,"./../helpers/isURLSameOrigin":27,"./../helpers/parseHeaders":29,"./../utils":31,"_process":32}],9:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -407,7 +484,7 @@ module.exports = axios;
 // Allow use of default import syntax in TypeScript
 module.exports.default = axios;
 
-},{"./cancel/Cancel":8,"./cancel/CancelToken":9,"./cancel/isCancel":10,"./core/Axios":11,"./defaults":18,"./helpers/bind":19,"./helpers/spread":28,"./utils":29}],8:[function(require,module,exports){
+},{"./cancel/Cancel":10,"./cancel/CancelToken":11,"./cancel/isCancel":12,"./core/Axios":13,"./defaults":20,"./helpers/bind":21,"./helpers/spread":30,"./utils":31}],10:[function(require,module,exports){
 'use strict';
 
 /**
@@ -428,7 +505,7 @@ Cancel.prototype.__CANCEL__ = true;
 
 module.exports = Cancel;
 
-},{}],9:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 var Cancel = require('./Cancel');
@@ -487,14 +564,14 @@ CancelToken.source = function source() {
 
 module.exports = CancelToken;
 
-},{"./Cancel":8}],10:[function(require,module,exports){
+},{"./Cancel":10}],12:[function(require,module,exports){
 'use strict';
 
 module.exports = function isCancel(value) {
   return !!(value && value.__CANCEL__);
 };
 
-},{}],11:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 'use strict';
 
 var defaults = require('./../defaults');
@@ -582,7 +659,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = Axios;
 
-},{"./../defaults":18,"./../helpers/combineURLs":22,"./../helpers/isAbsoluteURL":24,"./../utils":29,"./InterceptorManager":12,"./dispatchRequest":14}],12:[function(require,module,exports){
+},{"./../defaults":20,"./../helpers/combineURLs":24,"./../helpers/isAbsoluteURL":26,"./../utils":31,"./InterceptorManager":14,"./dispatchRequest":16}],14:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -636,7 +713,7 @@ InterceptorManager.prototype.forEach = function forEach(fn) {
 
 module.exports = InterceptorManager;
 
-},{"./../utils":29}],13:[function(require,module,exports){
+},{"./../utils":31}],15:[function(require,module,exports){
 'use strict';
 
 var enhanceError = require('./enhanceError');
@@ -656,7 +733,7 @@ module.exports = function createError(message, config, code, request, response) 
   return enhanceError(error, config, code, request, response);
 };
 
-},{"./enhanceError":15}],14:[function(require,module,exports){
+},{"./enhanceError":17}],16:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -737,7 +814,7 @@ module.exports = function dispatchRequest(config) {
   });
 };
 
-},{"../cancel/isCancel":10,"../defaults":18,"./../utils":29,"./transformData":17}],15:[function(require,module,exports){
+},{"../cancel/isCancel":12,"../defaults":20,"./../utils":31,"./transformData":19}],17:[function(require,module,exports){
 'use strict';
 
 /**
@@ -760,7 +837,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
   return error;
 };
 
-},{}],16:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 'use strict';
 
 var createError = require('./createError');
@@ -788,7 +865,7 @@ module.exports = function settle(resolve, reject, response) {
   }
 };
 
-},{"./createError":13}],17:[function(require,module,exports){
+},{"./createError":15}],19:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -810,7 +887,7 @@ module.exports = function transformData(data, headers, fns) {
   return data;
 };
 
-},{"./../utils":29}],18:[function(require,module,exports){
+},{"./../utils":31}],20:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -906,7 +983,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 }).call(this,require('_process'))
-},{"./adapters/http":6,"./adapters/xhr":6,"./helpers/normalizeHeaderName":26,"./utils":29,"_process":30}],19:[function(require,module,exports){
+},{"./adapters/http":8,"./adapters/xhr":8,"./helpers/normalizeHeaderName":28,"./utils":31,"_process":32}],21:[function(require,module,exports){
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -919,7 +996,7 @@ module.exports = function bind(fn, thisArg) {
   };
 };
 
-},{}],20:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 'use strict';
 
 // btoa polyfill for IE<10 courtesy https://github.com/davidchambers/Base64.js
@@ -957,7 +1034,7 @@ function btoa(input) {
 
 module.exports = btoa;
 
-},{}],21:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -1027,7 +1104,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
   return url;
 };
 
-},{"./../utils":29}],22:[function(require,module,exports){
+},{"./../utils":31}],24:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1043,7 +1120,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
     : baseURL;
 };
 
-},{}],23:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -1098,7 +1175,7 @@ module.exports = (
   })()
 );
 
-},{"./../utils":29}],24:[function(require,module,exports){
+},{"./../utils":31}],26:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1114,7 +1191,7 @@ module.exports = function isAbsoluteURL(url) {
   return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
 };
 
-},{}],25:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -1184,7 +1261,7 @@ module.exports = (
   })()
 );
 
-},{"./../utils":29}],26:[function(require,module,exports){
+},{"./../utils":31}],28:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -1198,7 +1275,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
   });
 };
 
-},{"../utils":29}],27:[function(require,module,exports){
+},{"../utils":31}],29:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -1237,7 +1314,7 @@ module.exports = function parseHeaders(headers) {
   return parsed;
 };
 
-},{"./../utils":29}],28:[function(require,module,exports){
+},{"./../utils":31}],30:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1266,7 +1343,7 @@ module.exports = function spread(callback) {
   };
 };
 
-},{}],29:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 'use strict';
 
 var bind = require('./helpers/bind');
@@ -1571,7 +1648,7 @@ module.exports = {
   trim: trim
 };
 
-},{"./helpers/bind":19,"is-buffer":31}],30:[function(require,module,exports){
+},{"./helpers/bind":21,"is-buffer":33}],32:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -1757,7 +1834,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],31:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 /*!
  * Determine if an object is a Buffer
  *
@@ -1780,7 +1857,7 @@ function isSlowBuffer (obj) {
   return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
 }
 
-},{}],32:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 var Vue // late bind
 var version
 var map = window.__VUE_HOT_MAP__ = Object.create(null)
@@ -1926,7 +2003,7 @@ exports.reload = tryWrap(function (id, options) {
   })
 })
 
-},{}],33:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 (function (process){
 /**
   * vue-router v2.7.0
@@ -4437,7 +4514,7 @@ if (inBrowser && window.Vue) {
 module.exports = VueRouter;
 
 }).call(this,require('_process'))
-},{"_process":30}],34:[function(require,module,exports){
+},{"_process":32}],36:[function(require,module,exports){
 (function (global){
 /*!
  * Vue.js v2.3.4
@@ -14126,7 +14203,7 @@ return Vue$3;
 })));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],35:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 (function (process,global){
 /*!
  * Vue.js v2.3.4
@@ -21268,7 +21345,7 @@ setTimeout(function () {
 module.exports = Vue$3;
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":30}],36:[function(require,module,exports){
+},{"_process":32}],38:[function(require,module,exports){
 //! moment.js
 //! version : 2.18.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
