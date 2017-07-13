@@ -430,6 +430,7 @@
     <Content Include="ViewModels\Usuarios\Form.vue" />
     <Content Include="ViewModels\Partials\Rightbar.vue" />
     <Content Include="ViewModels\Helpers\Converters.js" />
+    <Content Include="ViewModels\Mixins\RightBarForm.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

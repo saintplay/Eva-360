@@ -118,7 +118,7 @@ gulp.task('build-bundles', function () {
     let folders = getFolders(bundlePath);
 
     folders.map(function (folder) {
-         if (folder != "Partials" && folder != "Helpers") {
+         if (folder != "Partials" && folder != "Helpers" && folder != "Mixins") {
             var folder_path = bundlePath + "//" + folder;
             let files = getFiles(folder_path);
 

@@ -112,14 +112,12 @@ function cargarDatosPorDefecto() {
     }
 }
 
-
 export default {
     props: ['roles', 'tipodocumentos'],
     data: function() {
         return cargarDatosPorDefecto();
     },
     created: function(){
-        let vm = this;
         bus.$on('RegistrarUsuario', this.cargarDatosPorDefecto);
         bus.$on('EditarUsuario', this.cargarDatosUsuario);
     },

@@ -33,6 +33,8 @@ export default {
         bus.$on('FinRegistroEdicion', this.cerrar);
         bus.$on('RegistrarUsuario', this.mostrar);
         bus.$on('EditarUsuario', this.mostrar);
+        bus.$on('RegistrarPeriodo', this.mostrar);
+        bus.$on('EditarPeriodo', this.mostrar);
     }
 }
 </script>
