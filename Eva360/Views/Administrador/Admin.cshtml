@@ -17,7 +17,7 @@
             </div>
 
             <div class="nav-center">
-                <a class="nav-item">
+                <a href="https://github.com/saintplay/Eva-360" class="nav-item">
                     <span class="icon">
                         <i class="fa fa-github"></i>
                     </span>
@@ -31,9 +31,9 @@
             </span>
 
             <div class="nav-right nav-menu">
-                @Html.ActionLink("Inicio", "Index", "Home", new { @class = "nav-item" })
-                @Html.ActionLink("Usuarios", "About", "Home", new { @class = "nav-item" })
-                @Html.ActionLink("Acerca De", "About", "Home", new { @class = "nav-item" })
+                <router-link to="/" class="nav-item">Inicio</router-link>
+                <router-link to="/Usuarios" class="nav-item">Usuarios</router-link>
+                <a href="https://github.com/saintplay/Eva-360" class="nav-item">Acerca De</a>
                 @Html.Partial("_LoginPartial")
                 
             </div>

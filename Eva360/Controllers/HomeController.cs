@@ -13,6 +13,9 @@ namespace Eva360.Controllers
             else if ((string)Session["UsuarioRol"] == "ADMIN") {
                 return RedirectToAction("Index", "Administrador");
             }
+            else if ((string)Session["UsuarioRol"] == "EMPLEADO") {
+                return RedirectToAction("ListarMensajes", "ComunicacionInterna");
+            }
             return RedirectToAction("Index", "Login");
         }
 

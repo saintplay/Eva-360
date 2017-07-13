@@ -88,27 +88,30 @@ namespace Eva360.Controllers
                                 Administrador admin = new Administrador();
                                 admin.AdministradorId = usuario.UsuarioId;
                                 admin.FechaCreacion = DateTime.Now;
-                                admin.UsuarioCreacionId = 1; // TO DO
+                                admin.UsuarioCreacionId = (int)Session["UsuarioId"];
                                 context.Administrador.Add(admin);
                                 break;
-                            //case "SUPERVISOR":
-                            //    Supervisor supervisor = new Supervisor();
-                            //    supervisor.SupervisorId = usuario.UsuarioId;
-                            //    supervisor.FechaCreacion = DateTime.Now;
-                            //    supervisor.UsuarioCreacionId = 1;
-                            //    break;
-                            //case "EMPLEADO":
-                            //    Empleado empleado = new Empleado();
-                            //    empleado.EmpleadoId = usuario.UsuarioId;
-                            //    empleado.FechaCreacion = DateTime.Now;
-                            //    empleado.UsuarioCreacionId = 1;
-                            //    break;
-                            //case "PROVEEDOR":
-                            //    Proveedor proveedor = new Proveedor();
-                            //    proveedor.ProveedorId = usuario.UsuarioId;
-                            //    proveedor.FechaCreacion = DateTime.Now;
-                            //    proveedor.UsuarioCreacionId = 1;
-                            //    break;
+                            case "SUPERVISOR":
+                                Supervisor supervisor = new Supervisor();
+                                supervisor.SupervisorId = usuario.UsuarioId;
+                                supervisor.FechaCreacion = DateTime.Now;
+                                supervisor.UsuarioCreacionId = (int)Session["UsuarioId"];
+                                context.Supervisor.Add(supervisor);
+                                break;
+                            case "EMPLEADO":
+                                Empleado empleado = new Empleado();
+                                empleado.EmpleadoId = usuario.UsuarioId;
+                                empleado.FechaCreacion = DateTime.Now;
+                                empleado.UsuarioCreacionId = (int)Session["UsuarioId"];
+                                context.Empleado.Add(empleado);
+                                break;
+                            case "PROVEEDOR":
+                                Proveedor proveedor = new Proveedor();
+                                proveedor.ProveedorId = usuario.UsuarioId;
+                                proveedor.FechaCreacion = DateTime.Now;
+                                proveedor.UsuarioCreacionId = (int)Session["UsuarioId"];
+                                context.Proveedor.Add(proveedor);
+                                break;
                         }
                         context.SaveChanges();
                     }

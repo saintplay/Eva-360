@@ -23,7 +23,6 @@ namespace Eva360.Controllers
 
             var LstCInterna = context.ComunicacionInterna.ToList();
 
-
             return Json(new
             {
                 comunicaciones = LstCInterna
