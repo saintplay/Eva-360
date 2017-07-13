@@ -426,6 +426,10 @@
     <Content Include="ViewModels\Usuarios\Crud.vue" />
     <Content Include="ViewModels\Helpers\NetParsing.js" />
     <Content Include="Scripts\app\Administrador\admin.js" />
+    <Content Include="ViewModels\Periodos\Form.vue" />
+    <Content Include="ViewModels\Usuarios\Form.vue" />
+    <Content Include="ViewModels\Partials\Rightbar.vue" />
+    <Content Include="ViewModels\Helpers\Converters.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

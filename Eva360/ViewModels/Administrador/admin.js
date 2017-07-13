@@ -26,6 +26,9 @@ var router = new VueRouter({
     ]
 });
 
+// Componente central para comunicaciones no-padre-hijo
+window.bus = new Vue();
+
 window.eva360 = new Vue({
     router
 }).$mount('#app')
