@@ -1,0 +1,1 @@
+web: cd $HOME/heroku_output/Eva360 && dotnet ./Eva360.dll --server.urls http://+:$PORT ${CORE_ENVIRONMENT}
