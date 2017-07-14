@@ -5,7 +5,6 @@ const msbuild = require("gulp-msbuild");
 const iisexpress = require('gulp-serve-iis-express');
 var vueify = require('vueify');
 const gutil = require('gulp-util');
-const babel = require('gulp-babel');
 const sourcemaps = require('gulp-sourcemaps');
 const fs = require('fs');
 const browserify = require('browserify');
@@ -15,7 +14,6 @@ const fileExists = require('file-exists');
 
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
-const es2015 = require('babel-preset-es2015');
 
 const browserSync = require('browser-sync').create();
 
@@ -63,7 +61,7 @@ const bundlePath = 'ViewModels';
 
 function buildBundle(folder, file) {
     let entry = bundlePath + "//" + folder + "//" + file;
-    let output = "Scripts//app//" + folder;
+    let output = "wwwroot//js//app//" + folder;
 
     console.log(`Building ${entry}`);
 

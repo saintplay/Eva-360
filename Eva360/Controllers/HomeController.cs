@@ -1,19 +1,23 @@
-﻿using System.Web.Mvc;
-using Eva360.Helpers;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Eva360.Controllers
-{
+{   
     public class HomeController : BaseController
     {
         public ActionResult Index()
         {
-            if (Session["UsuarioRol"] == null) {
+            if (HttpContext.Session.GetString("UsuarioRol") == null) {
                 return RedirectToAction("Index", "Login");
             }
-            else if ((string)Session["UsuarioRol"] == "ADMIN") {
+            else if (HttpContext.Session.GetString("UsuarioRol") == "ADMIN") {
                 return RedirectToAction("Index", "Administrador");
             }
-            else if ((string)Session["UsuarioRol"] == "EMPLEADO") {
+            else if (HttpContext.Session.GetString("UsuarioRol") == "EMPLEADO") {
                 return RedirectToAction("ListarMensajes", "ComunicacionInterna");
             }
             return RedirectToAction("Index", "Login");

@@ -1,18 +1,17 @@
-﻿using Eva360.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Eva360.Controllers
 {
     public class BaseController : Controller
     {
-        public EVA360Entities context { get; set; }
+        // public EVA360Entities context { get; set; }
         public BaseController()
         {
-            context = new EVA360Entities();
+            // context = new EVA360Entities();
         }
         public void PostMessage(MessageType type, String message)
         {
