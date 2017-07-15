@@ -4,6 +4,14 @@
 
 # Eva-360
 
+**Live Demo:** <https://eva-360.herokuapp.com>
+
+## Arquitectura ##
+
+<div align="center">
+ <img src="https://user-images.githubusercontent.com/9372893/28237718-d758b9ae-690b-11e7-9649-bb96bd86dfe0.png" alt="eva360">
+</div>
+
 ## Notas Importantes
 
 - Antes de abrir el proyecto en Visual Studio, crear una variable de entorno con el nombre **NOMBRESQLSERVER** y el valor tiene que ser el nombre de tu SQL Server.
