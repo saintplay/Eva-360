@@ -3,7 +3,7 @@
 This Project isn't Up to Date. Live Demo is broken too :(
 
 <div align="center">
- <img src="https://cdn.rawgit.com/saintplay/Eva-360/master/Eva360/Content/logo.svg" alt="eva360" width="300">
+ <img src="https://user-images.githubusercontent.com/9372893/40866937-1fef04ea-65c6-11e8-95a5-5f5737b237df.png" width="400">
 </div>
 
 # Eva-360
